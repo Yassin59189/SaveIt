@@ -12,5 +12,5 @@ Collaboration with Sponsors: Our partnerships with leading brands and retailers 
 
 Technology Stack
 -----------------
-Flutter
-Firebase
+-Flutter
+-Firebase
