@@ -39,7 +39,6 @@ class OnBoardingScreen extends StatelessWidget {
             width: 150,
             child: ElevatedButton(onPressed: (){}, child: Text("Next", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
             )
-          
         ],
       ),
     );
