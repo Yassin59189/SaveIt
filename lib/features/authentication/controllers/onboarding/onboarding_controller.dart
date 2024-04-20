@@ -5,13 +5,27 @@ class OnBoardingController extends GetxController {
   static OnBoardingController get instance => Get.find();
 
   final pageController = PageController();
-  final currentPageIndex = 0.obs;
+  Rx<int> currentPageIndex = 0.obs;
 
-  void updatePageIndicator(index) {}
+  // update index when page change
+  void updatePageIndicator(index) {
+    currentPageIndex.value = index;
+  }
 
+  // jump to specific selected dot page
+  void dotNavigationClick(index) {
+    currentPageIndex.value = index;
+    pageController.jumpToPage(index);
+  }
 
-  void dotNavigationClick(index) {}
-
-
-  void nextPage(index) {}
+  // update current index and  jump to the next page
+  void nextPage() {
+    if(currentPageIndex.value==2){
+      /* Get.to(LoginScreen()); */
+    }
+    else{
+      int page = currentPageIndex.value +1;
+      pageController.jumpToPage(page);
+    }
+  }
 }

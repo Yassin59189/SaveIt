@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:saveit/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
@@ -23,6 +22,8 @@ class OnBoardingScreen extends StatelessWidget {
         children:  [
           /// horizontal scroll
           PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
             children: [
             OnBoardingPage(image: TImage.onBoardImage1, text: TText.onBoardText1),
             OnBoardingPage(image: TImage.onBoardImage2, text: TText.onBoardText2),
@@ -33,12 +34,22 @@ class OnBoardingScreen extends StatelessWidget {
           const OnBoardingDotNavigation(),
 
           /// buttons
+          
+          // Next button
           Positioned(
-            bottom: TDeviceUtils.getBottomNavigationBarHeight()+20,
+            bottom: TDeviceUtils.getBottomNavigationBarHeight()+100,
             left: 135,
             width: 150,
-            child: ElevatedButton(onPressed: (){}, child: Text("Next", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
-            )
+            child: ElevatedButton(onPressed: ()=>OnBoardingController.instance.nextPage(), child: Text("Next", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
+            ),
+
+            //Sign Up button
+            Positioned(
+            bottom: TDeviceUtils.getBottomNavigationBarHeight()+40,
+            left: 135,
+            width: 150,
+            child: ElevatedButton(onPressed: (){}, child: Text("Sign up", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
+            ),
         ],
       ),
     );
