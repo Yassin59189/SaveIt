@@ -1,4 +1,5 @@
 SaveIt: Your Financial Companion
+---------------------------------
 
 Introduction
 SaveIt is a feature-rich financial app designed to empower users in managing their finances effectively. Whether you’re a budget-conscious student, a savvy investor, or simply someone who wants to make smarter financial decisions, SaveIt has got you covered.
