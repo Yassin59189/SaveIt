@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:saveit/features/authentication/screens/login/login.dart';
+import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -18,7 +22,9 @@ class SignupScreen extends StatelessWidget {
               Stack(
                 children:[ Column(
                   children: [
-                    Image(image: AssetImage("assets/images/login_image/signup.png")),
+                    Container(
+                      width: 150,
+                      child: Image(image: AssetImage("assets/images/login_image/signup.png"))),
                     Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -73,11 +79,26 @@ class SignupScreen extends StatelessWidget {
                   ],
                 )),
               ),
+              const SizedBox(height: 20,),
               //Sign up button
               Container(
                         width: 214,
                         height: 56,
-                        child: ElevatedButton(onPressed: (){}, child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),)),
+                        child: ElevatedButton(onPressed: (){
+                          Get.to(CodeVerifyScreen());
+                        }, child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),)),
+              //Create account
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Already have an account ?", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300, fontFamily: 'Nunito'),),
+                            TextButton(onPressed: (){
+                              Get.to(LoginScreen());
+                            }, child: Text("Sign in", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300, fontFamily: 'Nunito'),))
+                          ],
+                        ),
+                      )
             ],
           ),
         ),
