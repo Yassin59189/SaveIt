@@ -19,10 +19,6 @@ class question1 extends StatelessWidget {
       appBar: AppBar(),
       body: Stack(
         children: [
-          SizedBox(
-                    height: THelperFunctions.screenHeight()*0.15,
-                  ),
-          IconButton(onPressed:(){}, icon: Icon(Icons.arrow_back_rounded)),
           PageView(
             children: [
               Column(

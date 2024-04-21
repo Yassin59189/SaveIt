@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:saveit/features/authentication/screens/questions/question_1.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -22,12 +23,7 @@ class Welcome extends StatelessWidget {
         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/welcome_images/bg_welcome.png"),
         fit: BoxFit.cover,)),
         child: Stack(
-          children: [
-         
-            SizedBox(
-              
-              child:
-              IconButton(onPressed:(){}, icon: Icon(Icons.arrow_back_rounded),)),
+          children: [ 
             PageView(
               children: [
                 Column(
@@ -52,7 +48,9 @@ class Welcome extends StatelessWidget {
                       width: 206.35,
                       height: 54.04,
                     child:ElevatedButton(
-                      onPressed:() {},
+                      onPressed:() {
+                         Get.to(question1());
+                      },
                       style: buttonPrimary,
                       child: Text("Continue",style:TextStyle(color:TColors.white ),)))
                     
