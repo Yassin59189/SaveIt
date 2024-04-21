@@ -15,9 +15,14 @@ class TSizes {
   static const double iconLg = 32.0;
 
   // Font sizes
+  static const double fontexSm = 11.0;
   static const double fontSm = 14.0;
   static const double fontMd = 16.0;
   static const double fontLg = 18.0;
   
+  //space bettwen sections
+   static const double defaultSpace = 24.0;
+  static const double spaceBtwitems = 16.0;
+  static const double spaceBtsections = 32.0;
 
 }
