@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -16,13 +17,17 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+   
       body: Container(
         decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/welcome_images/bg_welcome.png"),
         fit: BoxFit.cover,)),
         child: Stack(
           children: [
-            SizedBox(height: 500),
-            IconButton(onPressed:(){}, icon: Icon(Icons.arrow_back_rounded)),
+         
+            SizedBox(
+              
+              child:
+              IconButton(onPressed:(){}, icon: Icon(Icons.arrow_back_rounded),)),
             PageView(
               children: [
                 Column(
