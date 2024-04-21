@@ -16,19 +16,23 @@ class OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageView(
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              width: THelperFunctions.screenWidth() * 0.8,
-              height: THelperFunctions.screenHeight() * 0.4,
-              image: AssetImage(image)
-              ),
-              Container(
+        Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            
+            children: [
+              Image(
                 width: THelperFunctions.screenWidth() * 0.8,
-                child: Text(text, style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700, fontSize: TSizes.fontMd, color: TColors.primary),textAlign: TextAlign.center,)
-                )
-          ],
+                height: THelperFunctions.screenHeight() * 0.4,
+                image: AssetImage(image)
+                ),
+                Container(
+                  width: THelperFunctions.screenWidth() * 0.8,
+                  child: Text(text, style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w700, fontSize: TSizes.fontMd, color: TColors.primary),textAlign: TextAlign.center,)
+                  ),
+                  
+            ],
+          ),
         )
       ],
     );
