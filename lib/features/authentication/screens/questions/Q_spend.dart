@@ -5,6 +5,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_dependencies%20.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_habits.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
@@ -15,14 +17,14 @@ import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
-class question1 extends StatefulWidget {
-  question1({super.key});
+class QuestionSpend extends StatefulWidget {
+  QuestionSpend({super.key});
 
   @override
-  State<question1> createState() => _question1State();
+  State<QuestionSpend> createState() => _QuestionSpendState();
 }
 
-class _question1State extends State<question1> {
+class _QuestionSpendState extends State<QuestionSpend> {
   bool isPressed1 = false;
   bool isPressed2 = false;
   bool isPressed3 = false;
@@ -40,10 +42,8 @@ class _question1State extends State<question1> {
               child: IconButton(
                   hoverColor: TColors.secondary,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionRegion()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => QuestionDep()));
                   },
                   icon: Icon(Icons.arrow_back_rounded)),
             ),
@@ -56,7 +56,7 @@ class _question1State extends State<question1> {
                   alignment: Alignment.topCenter,
                   width: THelperFunctions.screenWidth() * 0.8,
                   child: const Text(
-                    TText.question1_headline,
+                    "how much do you spend monthly ?",
                     style: TextStyle(
                         fontFamily: "poppins",
                         fontWeight: FontWeight.w600,
@@ -69,73 +69,64 @@ class _question1State extends State<question1> {
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed1 = !isPressed1;
-                          });
-                        },
-                        style: isPressed1
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: Text(
-                          TText.answer1,
-                          style: TextStyle(color: TColors.white),
-                        ))),
+                  width: 334.06,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Rent",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                ),
                 SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed2 = !isPressed2;
-                            if (isPressed2 == true) {}
-                          });
-                        },
-                        style: isPressed2
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: Text(
-                          TText.answer2,
-                          style: TextStyle(color: TColors.white),
-                        ))),
+                  width: 334.06,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "bills ",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                ),
                 SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed3 = !isPressed3;
-                          });
-                        },
-                        style: isPressed3
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: Text(
-                          TText.answer3,
-                          style: TextStyle(color: TColors.white),
-                        ))),
+                  width: 334.06,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Groceries",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                ),
                 SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed4 = !isPressed4;
-                          });
-                        },
-                        style: isPressed4
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: Text(
-                          TText.answer4,
-                          style: TextStyle(color: TColors.white),
-                        ))),
+                  width: 334.06,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Entertainment",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                ),
                 SizedBox(
                   height: TSizes.spaceBtwitems,
+                ),
+                SizedBox(
+                  width: 334.06,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Loans",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30))),
+                  ),
+                ),
+                SizedBox(
+                  height: TSizes.spaceBtsections,
                 ),
                 SizedBox(
                     child: ElevatedButton(
@@ -143,7 +134,7 @@ class _question1State extends State<question1> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Question3()));
+                                  builder: (context) => QuestionHabits()));
                         },
                         style: buttonanContinueSecondary,
                         child: Text(

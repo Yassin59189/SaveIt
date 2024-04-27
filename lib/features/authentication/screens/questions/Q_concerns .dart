@@ -5,6 +5,10 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_habits.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_savings.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_spend.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_yacoubi.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
@@ -15,14 +19,14 @@ import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
-class question1 extends StatefulWidget {
-  question1({super.key});
+class QuestionConcerns extends StatefulWidget {
+  QuestionConcerns({super.key});
 
   @override
-  State<question1> createState() => _question1State();
+  State<QuestionConcerns> createState() => _QuestionConcernsState();
 }
 
-class _question1State extends State<question1> {
+class _QuestionConcernsState extends State<QuestionConcerns> {
   bool isPressed1 = false;
   bool isPressed2 = false;
   bool isPressed3 = false;
@@ -43,7 +47,7 @@ class _question1State extends State<question1> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuestionRegion()));
+                            builder: (context) => QuestionHabits()));
                   },
                   icon: Icon(Icons.arrow_back_rounded)),
             ),
@@ -56,7 +60,7 @@ class _question1State extends State<question1> {
                   alignment: Alignment.topCenter,
                   width: THelperFunctions.screenWidth() * 0.8,
                   child: const Text(
-                    TText.question1_headline,
+                    "What are some of your biggest financial concerns right now ?",
                     style: TextStyle(
                         fontFamily: "poppins",
                         fontWeight: FontWeight.w600,
@@ -79,7 +83,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer1,
+                          "Reducing monthly expenses",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -97,24 +101,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer2,
-                          style: TextStyle(color: TColors.white),
-                        ))),
-                SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed3 = !isPressed3;
-                          });
-                        },
-                        style: isPressed3
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: Text(
-                          TText.answer3,
+                          "Saving for a large purchase",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -131,7 +118,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer4,
+                          "Paying off debt",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -143,7 +130,7 @@ class _question1State extends State<question1> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Question3()));
+                                  builder: (context) => QuestionYacoubi()));
                         },
                         style: buttonanContinueSecondary,
                         child: Text(

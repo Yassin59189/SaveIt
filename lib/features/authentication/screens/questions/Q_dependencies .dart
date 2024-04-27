@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
+import 'package:saveit/features/authentication/screens/questions/Q_spend.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
@@ -15,14 +16,14 @@ import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
-class question1 extends StatefulWidget {
-  question1({super.key});
+class QuestionDep extends StatefulWidget {
+  QuestionDep({super.key});
 
   @override
-  State<question1> createState() => _question1State();
+  State<QuestionDep> createState() => _QuestionDepState();
 }
 
-class _question1State extends State<question1> {
+class _QuestionDepState extends State<QuestionDep> {
   bool isPressed1 = false;
   bool isPressed2 = false;
   bool isPressed3 = false;
@@ -40,10 +41,8 @@ class _question1State extends State<question1> {
               child: IconButton(
                   hoverColor: TColors.secondary,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionRegion()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Question3()));
                   },
                   icon: Icon(Icons.arrow_back_rounded)),
             ),
@@ -56,7 +55,7 @@ class _question1State extends State<question1> {
                   alignment: Alignment.topCenter,
                   width: THelperFunctions.screenWidth() * 0.8,
                   child: const Text(
-                    TText.question1_headline,
+                    "do you have any dependencies ?",
                     style: TextStyle(
                         fontFamily: "poppins",
                         fontWeight: FontWeight.w600,
@@ -79,7 +78,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer1,
+                          "Elderly parents",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -97,7 +96,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer2,
+                          "Cousins ",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -114,7 +113,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer3,
+                          "Children",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -131,7 +130,7 @@ class _question1State extends State<question1> {
                             ? buttonquestionSelected
                             : buttonquestions,
                         child: Text(
-                          TText.answer4,
+                          "Siblings",
                           style: TextStyle(color: TColors.white),
                         ))),
                 SizedBox(
@@ -143,7 +142,7 @@ class _question1State extends State<question1> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Question3()));
+                                  builder: (context) => QuestionSpend()));
                         },
                         style: buttonanContinueSecondary,
                         child: Text(
