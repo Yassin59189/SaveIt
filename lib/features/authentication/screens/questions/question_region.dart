@@ -47,10 +47,16 @@ class QuestionRegion extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            height: THelperFunctions.screenHeight() * 0.15,
+            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            child: SizedBox(
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => question1()));
+                  },
+                  icon: Icon(Icons.arrow_back_rounded)),
+            ),
           ),
-          IconButton(
-              onPressed: () {}, icon: const Icon(Icons.arrow_back_rounded)),
           PageView(
             children: [
               Column(
@@ -109,10 +115,10 @@ class QuestionRegion extends StatelessWidget {
                     decoration: const BoxDecoration(
                       border: Border(),
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25.0),
-                        topRight: Radius.circular(25.0),
-                        bottomLeft: Radius.circular(25.0),
-                        bottomRight: Radius.circular(25.0),
+                        topLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0),
+                        bottomLeft: Radius.circular(5.0),
+                        bottomRight: Radius.circular(5.0),
                       ),
                       boxShadow: [
                         BoxShadow(

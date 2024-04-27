@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
+import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -23,24 +25,24 @@ class _question1State extends State<question1> {
   bool isPressed2 = false;
   bool isPressed3 = false;
   bool isPressed4 = false;
+  bool active = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-<<<<<<< HEAD
-          SizedBox(
-            height: THelperFunctions.screenHeight() * 0.15,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            width: 40,
+            height: 40,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Welcome()));
+                },
+                icon: Icon(Icons.arrow_back_rounded)),
           ),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => QuestionRegion()));
-              },
-              icon: Icon(Icons.arrow_back_rounded)),
-=======
->>>>>>> 47f6b1696fbbc86f1b9f6ff35aaa3ff16f3f632c
           PageView(
             children: [
               Column(
@@ -84,6 +86,7 @@ class _question1State extends State<question1> {
                           onPressed: () {
                             setState(() {
                               isPressed2 = !isPressed2;
+                              if (isPressed2 == true) {}
                             });
                           },
                           style: isPressed2

@@ -9,7 +9,6 @@ import 'package:saveit/features/authentication/controllers/welcome_controller.da
 import 'package:saveit/features/authentication/screens/Welcome/welcome.dart';
 import 'package:saveit/features/authentication/screens/onboarding.dart';
 
-
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -17,11 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
       home: QuestionRegion(),
-=======
-      home: OnBoardingScreen(),
->>>>>>> 47f6b1696fbbc86f1b9f6ff35aaa3ff16f3f632c
     );
   }
 }
