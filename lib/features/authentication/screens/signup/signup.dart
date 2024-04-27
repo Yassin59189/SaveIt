@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
-import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
+import 'package:saveit/features/authentication/screens/signup/phone_registration.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -85,7 +85,7 @@ class SignupScreen extends StatelessWidget {
                         width: 214,
                         height: 56,
                         child: ElevatedButton(onPressed: (){
-                          Get.to(CodeVerifyScreen());
+                          Get.to(PhoneRegistrationScreen());
                         }, child: Text("Sign up", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w300),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),)),
               //Create account
                       Container(
@@ -98,11 +98,12 @@ class SignupScreen extends StatelessWidget {
                             }, child: Text("Sign in", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300, fontFamily: 'Nunito'),))
                           ],
                         ),
-                      )
+                      ),
             ],
           ),
         ),
       ),
     );
   }
+  
 }

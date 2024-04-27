@@ -29,6 +29,7 @@ class _question1State extends State<question1> {
     return Scaffold(
       body: Stack(
         children: [
+<<<<<<< HEAD
           SizedBox(
             height: THelperFunctions.screenHeight() * 0.15,
           ),
@@ -38,6 +39,8 @@ class _question1State extends State<question1> {
                     MaterialPageRoute(builder: (context) => QuestionRegion()));
               },
               icon: Icon(Icons.arrow_back_rounded)),
+=======
+>>>>>>> 47f6b1696fbbc86f1b9f6ff35aaa3ff16f3f632c
           PageView(
             children: [
               Column(
