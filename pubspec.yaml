@@ -51,6 +51,8 @@ flutter:
     - assets/images/welcome_images/
     - assets/logos/
     - assets/images/login_image/
+    - assets/images/recomanded/
+    - assets/images/recomanded/header/
     
     
     

@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:saveit/features/authentication/screens/questions/question_1.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
