@@ -28,6 +28,7 @@ dependencies:
   flutter_native_splash: ^2.4.0
   smooth_page_indicator: ^1.1.0
   intl_phone_field: ^3.2.0
+  curved_navigation_bar: ^1.0.3
 
   # state managment
 
@@ -51,7 +52,8 @@ flutter:
     - assets/images/welcome_images/
     - assets/logos/
     - assets/images/login_image/
-    
+    - assets/images/home/
+    - assets/icons/
     
     
 

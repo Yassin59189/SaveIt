@@ -10,6 +10,7 @@ import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/features/authentication/controllers/welcome_controller.dart';
 import 'package:saveit/features/authentication/screens/onboarding.dart';
+import 'package:saveit/navigation_menu.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -18,7 +19,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Welcome(),
+      home: NavigationMenu(),
     );
   }
 }
