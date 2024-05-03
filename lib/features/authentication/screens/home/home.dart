@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     Future NotificationBottomSheet(BuildContext context){
     return showModalBottomSheet(context: context,
     builder: (context) => Container(
-      height: 200,
+      height: 500,
       child: test(),
     ));
   }
