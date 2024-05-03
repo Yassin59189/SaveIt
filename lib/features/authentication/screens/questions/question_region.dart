@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/questions/question_1.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
@@ -18,7 +16,6 @@ class QuestionRegion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _dropdownvalue = "";
     List<String> dropdownItems = [
       'tunis',
       'Bizerte',

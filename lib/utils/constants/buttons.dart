@@ -38,3 +38,6 @@ final ButtonStyle buttonanContinueSecondary = ElevatedButton.styleFrom(
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontMd,
         color: TColors.white));
+final ButtonStyle logostore = ElevatedButton.styleFrom(
+  minimumSize: Size(203.34, 53.26),
+);

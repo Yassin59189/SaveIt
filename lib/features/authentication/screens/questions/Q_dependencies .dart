@@ -1,17 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:http/http.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_spend.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
-import 'package:saveit/features/authentication/screens/questions/question_region.dart';
-import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';

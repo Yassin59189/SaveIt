@@ -29,6 +29,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   intl_phone_field: ^3.2.0
   curved_navigation_bar: ^1.0.3
+  flutter_slidable: ^3.1.0
 
   # state managment
 
@@ -54,6 +55,9 @@ flutter:
     - assets/images/login_image/
     - assets/images/home/
     - assets/icons/
+    - assets/images/recomanded/
+    - assets/images/recomanded/header/
+    
     
     
 
