@@ -14,6 +14,9 @@ class TImage {
   static const String stshirt = "assets/images/recomanded/shirt.png";
   static const String stveg = "assets/images/recomanded/veg.png";
   static const String sthead = "assets/images/recomanded/header/headerpart.png";
-  static const String stwasher = "assets/images/recomanded/washer";
-  static const String stlogoz = "assets/images/recomanded/washer";
+  static const String stwasher = "assets/images/recomanded/washer.png";
+
+  static const String shopingcart =
+      "assets/images/recomanded/header/shopinglist.png";
+  static const String sclock = "assets/images/recomanded/clock.png";
 }
