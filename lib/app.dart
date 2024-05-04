@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/Store/mainpage.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';

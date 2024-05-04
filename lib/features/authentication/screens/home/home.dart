@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +19,32 @@ class HomeScreen extends StatelessWidget {
     ));
   }
     return Scaffold(
-      
+      endDrawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: TColors.primary,
+                ),
+                child: Text("my Menu bar"),
+              ),
+              ListTile(
+                title: const Text("wallet"),
+                onTap: () {
+                  Get.to(Wallet());
+                },
+              ),
+              ListTile(
+                title: const Text("coupon"),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text("settings"),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -30,12 +57,20 @@ class HomeScreen extends StatelessWidget {
                     title: Column(
                       children: [
                         Container( width: 90, child: Image(image: AssetImage("assets/images/home/logo1.png"))),
-                        
                       ],
                     ),
                     actions: [
-                      IconButton(onPressed: (){}, icon: const Icon(Iconsax.menu_14, color: Colors.white,))
-                    ],
+                  Builder(builder: (context) {
+                    return IconButton(
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        icon: const Icon(
+                          Iconsax.menu_14,
+                          color: Colors.white,
+                        ));
+                  })
+                ],
                   ),
                   const SizedBox(height: 20,),
                   Padding(
@@ -89,7 +124,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              
               ),
               
             ),
