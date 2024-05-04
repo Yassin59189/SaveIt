@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/Store/clothstore.dart';
 import 'package:saveit/features/authentication/screens/Store/mainpage.dart';
 import 'package:saveit/features/authentication/screens/Store/payment.dart';
+import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/Store/recomanded.dart';
 import 'package:saveit/features/authentication/screens/Store/vig.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnBoardingScreen(),
+      home: paymentdone(),
     );
   }
 }
