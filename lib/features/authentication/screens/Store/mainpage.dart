@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -33,6 +35,27 @@ class _mainStoreState extends State<mainStore> {
         body: SingleChildScrollView(
           child: Column(children: [
             Container(
+              color: TColors.primary,
+              height: 120,
+              child: SAppBar(
+                title: Column(children: [
+                  Container(
+                      width: 90,
+                      child: Image(
+                          image: AssetImage("assets/images/home/logo1.png"))),
+                ]),
+                actions: [
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Iconsax.menu_14,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
+            ),
+            Image(image: AssetImage("assets/images/home/Vector.png")),
+            /* Container(
               width: THelperFunctions.screenWidth(),
               height: THelperFunctions.screenHeight() * 0.15,
               decoration: const BoxDecoration(
@@ -104,7 +127,7 @@ class _mainStoreState extends State<mainStore> {
                   ))
                 ],
               ),
-            ),
+            ), */
             const SizedBox(
               height: TSizes.spaceBtwitems,
             ),

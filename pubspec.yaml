@@ -40,6 +40,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  carousel_slider: ^4.2.1
 
   flutter_lints: ^3.0.0
 
@@ -57,6 +58,10 @@ flutter:
     - assets/icons/
     - assets/images/recomanded/
     - assets/images/recomanded/header/
+    - assets/images/vigitabs/
+    - assets/images/storecloths/
+    - assets/images/recomanded/recomnd/
+    
     
     
     
