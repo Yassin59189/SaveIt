@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(image: AssetImage("assets/logos/logo_colors.png")),
+                Image(image: AssetImage("../logo_colors.png")),
                 Stack(
                   children:[ 
                     Container(

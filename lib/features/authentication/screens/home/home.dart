@@ -20,29 +20,43 @@ class HomeScreen extends StatelessWidget {
   }
     return Scaffold(
       endDrawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: TColors.primary,
+          child: Expanded(
+            child: ListView(
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: TColors.primary,
+                  ),
+                  child: Column(
+                    children: [
+                      const Image(
+                          image: AssetImage("assets/images/home/logo1.png"))
+                    ],
+                  ),
                 ),
-                child: Text("my Menu bar"),
-              ),
-              ListTile(
-                title: const Text("wallet"),
-                onTap: () {
-                  Get.to(Wallet());
-                },
-              ),
-              ListTile(
-                title: const Text("coupon"),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text("settings"),
-                onTap: () {},
-              ),
-            ],
+                ListTile(
+                  title: const Text(
+                    "wallet",
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {Get.to(Wallet());},
+                ),
+                ListTile(
+                  title: const Text(
+                    "coupon",
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: const Text(
+                    "settings",
+                    textAlign: TextAlign.center,
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
         ),
       body: SingleChildScrollView(

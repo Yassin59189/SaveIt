@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/Store/mainpage.dart';
+import 'package:saveit/features/authentication/screens/Store/recomanded.dart';
 import 'package:saveit/features/authentication/screens/home/home.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
@@ -55,5 +56,5 @@ class NavigationMenu extends StatelessWidget {
 }
 class NavigationController extends GetxController{
   final Rx<int> selectedIndex = 1.obs;  
-  final screens = [mainStore(),HomeScreen(),Container(color: const Color.fromARGB(255, 206, 10, 10),)];
+  final screens = [mainStore(),HomeScreen(),recomanded()];
 }

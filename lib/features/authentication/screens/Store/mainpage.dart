@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/screens/Store/clothstore.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -303,10 +304,10 @@ class _mainStoreState extends State<mainStore> {
                             ),
                             ElevatedButton(
                                 onPressed: () {
-                                  /* Navigator.push(
+                                   Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => "QuestionDep"())); */
+                            builder: (context) => clothsstore())); 
                                 },
                                 style: vistSecondary,
                                 child: const Text(

@@ -35,6 +35,16 @@ class _EditWalletState extends State<EditWallet> {
               height: 600,
               
               decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+              child: Column(
+                children: [
+                  Form(child: 
+                  Column(
+                    children: [
+                      
+                    ],
+                  ))
+                ],
+              ),
             ),
           ),
         ),

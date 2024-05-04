@@ -3,8 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
@@ -42,7 +44,7 @@ class _mainStoreState extends State<recomanded> {
                     "wallet",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {Get.to(Wallet());},
                 ),
                 ListTile(
                   title: const Text(

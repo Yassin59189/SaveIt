@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:saveit/features/authentication/screens/home/home.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_savings.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
+import 'package:saveit/navigation_menu.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -122,7 +124,7 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Welcome()));
+                                  builder: (context) => NavigationMenu()));
                         },
                         style: buttonanContinueSecondary,
                         child: Text(
