@@ -3,14 +3,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
-
+  bool isPressed4 = false;
 class claimcode extends StatefulWidget {
   const claimcode({super.key});
 
@@ -42,7 +44,8 @@ class _mainStoreState extends State<claimcode> {
                     "wallet",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(Wallet());                 },
                 ),
                 ListTile(
                   title: const Text(
@@ -186,6 +189,23 @@ class _mainStoreState extends State<claimcode> {
                           image: AssetImage(
                               "assets/images/recomanded/recomnd/stars.png")),
                     ),
+                    SizedBox(
+                      height: TSizes.spaceBtwitems,
+                    ),f
+                    SizedBox(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isPressed4 = !isPressed4;
+                          });
+                        },
+                        style: isPressed4
+                            ? buttonanContinueSecondary
+                            : buttonquestionSelected,
+                        child: Text(
+                        "Claim code",
+                          style: TextStyle(color: TColors.white),
+                        ))),
                   ],
                 ),
               ),

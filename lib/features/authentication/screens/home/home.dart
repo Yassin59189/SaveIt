@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     "coupon",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {Get.to(claimcode());},
                 ),
                 ListTile(
                   title: const Text(

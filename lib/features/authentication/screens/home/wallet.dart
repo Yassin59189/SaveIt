@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/edit_wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
@@ -43,7 +44,7 @@ class _WalletState extends State<Wallet> {
                     "coupon",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {},
+                  onTap: () {Get.to(claimcode());},
                 ),
                 ListTile(
                   title: const Text(
