@@ -191,7 +191,7 @@ class _mainStoreState extends State<claimcode> {
                     ),
                     SizedBox(
                       height: TSizes.spaceBtwitems,
-                    ),f
+                    ),
                     SizedBox(
                     child: ElevatedButton(
                         onPressed: () {
