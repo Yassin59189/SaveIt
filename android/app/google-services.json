@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "784458115422",
+    "project_id": "saveit-ef6ec",
+    "storage_bucket": "saveit-ef6ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784458115422:android:946cb079d21fcfbc0847cf",
+        "android_client_info": {
+          "package_name": "com.example.saveit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUzScQ08XBHRU_-Auaj_2KxgvmdTZ1anw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
