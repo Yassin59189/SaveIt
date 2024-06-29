@@ -10,6 +10,7 @@ import 'package:saveit/features/authentication/screens/onboarding/widgets/onboar
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
+import 'package:saveit/features/authentication/screens/settings/settings.dart';
 import 'package:saveit/features/authentication/screens/signup/signup.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
@@ -17,6 +18,7 @@ import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/features/authentication/controllers/welcome_controller.dart';
 import 'package:saveit/features/authentication/screens/onboarding.dart';
 import 'package:saveit/navigation_menu.dart';
+import 'package:saveit/features/authentication/screens/settings/profile.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
