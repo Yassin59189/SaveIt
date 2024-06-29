@@ -17,6 +17,7 @@ class _ProfileState extends State<Profile> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -26,7 +27,12 @@ class _ProfileState extends State<Profile> {
             Navigator.pop(context);
           },
         ),
-        actions: [Image(image: AssetImage("assets/logos/logo_horizontal.png"))],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Image(image: AssetImage("assets/logos/logo_horizontal.png")),
+          )
+        ],
       ),
       body: Center(
         child: Padding(
