@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/Store/clothstore.dart';
+import 'package:saveit/features/authentication/screens/Store/clothStorre.dart';
 import 'package:saveit/features/authentication/screens/Store/vig2.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -308,7 +309,8 @@ class _mainStoreState extends State<mainStore> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => clothsstore()));
+                                          builder: (context) =>
+                                              Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
@@ -366,10 +368,11 @@ class _mainStoreState extends State<mainStore> {
                             ),
                             ElevatedButton(
                                 onPressed: () {
-                                  /* Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => "QuestionDep"())); */
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
@@ -426,7 +429,8 @@ class _mainStoreState extends State<mainStore> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => clothsstore()));
+                                          builder: (context) =>
+                                              Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
