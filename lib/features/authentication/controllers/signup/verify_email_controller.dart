@@ -13,7 +13,7 @@ class verifyEmailController extends GetxController {
 
 sendEmailVerification() async {
   try {
-    await AuthenticationRepository.instance.sendEmailVerification();
+/*     await AuthenticationRepository.instance.sendEmailVerification(); */
     Get.snackbar(
       "email sent",
       "please check your index and verify you mail !",
