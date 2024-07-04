@@ -23,13 +23,7 @@ class TImage {
   static const String geant = "assets/images/vigitabs/geant.png";
   static const String mg = "assets/images/vigitabs/mg.png";
 //banner vigi
-  static const String bannervigi = "assets/images/vigitabs/vigibanner.png";
-//items vigi
-  static const String Apple = "assets/images/vigitabs/apple.png";
-  static const String Tomato = "assets/images/vigitabs/Tomato.png";
-  static const String Latus = "assets/images/vigitabs/Latus.png";
-  static const String Banana = "assets/images/vigitabs/banan.png";
-  static const String Cherry = "assets/images/vigitabs/cherry.png";
+  static const String bannervigi = "assets/images/productsfood/vigibanner.png";
 
   static const String shopingcart =
       "assets/images/recomanded/header/shopinglist.png";

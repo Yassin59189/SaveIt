@@ -60,7 +60,10 @@ flutter:
     - assets/icons/
     - assets/images/recomanded/
     - assets/images/recomanded/header/
-    - assets/images/vigitabs/
+    - assets/images/productsfood/fruits/
+    - assets/images/productsfood/sponsors/
+    - assets/images/productsfood/vegis/
+    - assets/images/productsfood/
     - assets/images/storecloths/
     - assets/images/recomanded/recomnd/
 
