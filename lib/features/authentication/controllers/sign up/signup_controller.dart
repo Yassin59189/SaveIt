@@ -21,7 +21,7 @@ class SignupController extends GetxController {
       // Loading
       print('Signup called');
       FullScreenLoader.openLoadingDialog(
-          'We are processing your information...', TImage.Banana);
+          'We are processing your information...', TImage.colorLogo);
       // Check Internet
       /* final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

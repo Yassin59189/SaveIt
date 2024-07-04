@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+
 import 'package:saveit/utils/constants/colors.dart';
 
 class verifyEmailController extends GetxController {
@@ -11,7 +12,7 @@ class verifyEmailController extends GetxController {
   }
 }
 
-sendEmailVerification() async {
+Future<void> sendEmailVerification() async {
   try {
     await AuthenticationRepository.instance.sendEmailVerification();
     Get.snackbar(
