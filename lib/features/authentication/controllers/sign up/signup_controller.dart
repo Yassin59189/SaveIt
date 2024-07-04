@@ -52,6 +52,9 @@ class SignupController extends GetxController {
       Loaders.successSnackBar(
           title: 'Congratulations',
           message: 'Your account has been created! verify email to continue');
+
+      // Move to vrify email
+      /* Get.to(() => const esmklpage()); */
     } catch (e) {
       Loaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     } finally {
