@@ -1,13 +1,12 @@
 name: saveit
 description: "SaveIt App"
 
-publish_to: 'none' 
-
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.2 <4.0.0'
+  sdk: ">=3.3.2 <4.0.0"
 
 #------------------ PACKAGES ------------------#
 dependencies:
@@ -15,7 +14,7 @@ dependencies:
     sdk: flutter
 
   # icons
-  
+
   cupertino_icons: ^1.0.6
   iconsax: ^0.0.8
 
@@ -36,8 +35,10 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   firebase_core: ^3.0.0
+  connectivity_plus: ^6.0.3
+  lottie: ^3.1.2
   firebase_auth: ^5.1.1
-
+  cloud_firestore: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -47,7 +48,6 @@ dev_dependencies:
   flutter_lints: ^3.0.0
 
 flutter:
-
   uses-material-design: true
 
   #------------------ LOCAL ASSETS ------------------#
@@ -66,11 +66,6 @@ flutter:
     - assets/images/productsfood/
     - assets/images/storecloths/
     - assets/images/recomanded/recomnd/
-    
-    
-    
-    
-    
 
   #------------------ LOCAL FONTS ------------------#
   fonts:

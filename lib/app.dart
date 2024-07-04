@@ -24,8 +24,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      /* initialBinding: GeneralBindings(), */
       home: const Scaffold(
         backgroundColor: TColors.secondary,
         body: Center(
