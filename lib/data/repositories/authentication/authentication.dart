@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,6 +9,7 @@ class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
 
   final deviceStorage = GetStorage();
+  final _auth = FirebaseAuth.instance;
 
   @override
   void onReady() {
@@ -20,5 +22,16 @@ class AuthenticationRepository extends GetxController {
     deviceStorage.read('isFirstTime') != true
         ? Get.offAll(() => const LoginScreen())
         : Get.offAll(const OnBoardingScreen());
+  }
+
+  // Register
+  Future<UserCredential> registerWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
   }
 }
