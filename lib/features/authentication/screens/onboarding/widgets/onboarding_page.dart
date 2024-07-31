@@ -24,11 +24,11 @@ class OnBoardingPage extends StatelessWidget {
                   width: THelperFunctions.screenWidth() * 0.8,
                   height: THelperFunctions.screenHeight() * 0.4,
                   image: AssetImage(image)),
-              Container(
+              SizedBox(
                   width: THelperFunctions.screenWidth() * 0.8,
                   child: Text(
                     text,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w700,
                         fontSize: TSizes.fontMd,

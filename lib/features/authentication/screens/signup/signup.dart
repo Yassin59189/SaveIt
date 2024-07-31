@@ -13,7 +13,7 @@ class SignupScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,11 +22,11 @@ class SignupScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                           width: 150,
                           child: Image.asset(
                               "assets/images/login_image/signup.png")),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -57,7 +57,7 @@ class SignupScreen extends StatelessWidget {
                 height: 30,
               ),
               // Form
-              SignupForm(),
+              const SignupForm(),
               const SizedBox(
                 height: 20,
               ),
@@ -67,7 +67,7 @@ class SignupScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Already have an account?",
                       style: TextStyle(
                           fontSize: 13,
@@ -76,9 +76,9 @@ class SignupScreen extends StatelessWidget {
                     ),
                     TextButton(
                         onPressed: () {
-                          Get.to(LoginScreen());
+                          Get.to(const LoginScreen());
                         },
-                        child: Text(
+                        child: const Text(
                           "Sign in",
                           style: TextStyle(
                               fontSize: 13,
@@ -104,7 +104,7 @@ class SignupForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 60,
       child: Form(
           key: controller.signupFormKey,
@@ -163,7 +163,7 @@ class SignupForm extends StatelessWidget {
                 height: 20,
               ),
               // Sign up button
-              Container(
+              SizedBox(
                 width: 214,
                 height: 56,
                 child: ElevatedButton(
@@ -173,15 +173,15 @@ class SignupForm extends StatelessWidget {
                         'Current State: ${controller.signupFormKey.currentState}');
                     controller.signup();
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: TColors.primary),
+                  child: const Text(
                     "Sign up",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w300),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: TColors.primary),
                 ),
               ),
             ],

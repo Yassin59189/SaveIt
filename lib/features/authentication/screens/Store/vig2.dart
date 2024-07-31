@@ -1,17 +1,12 @@
 // ignore_for_file: unnecessary_const
 
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
-import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -52,7 +47,7 @@ class _mainStoreState extends State<VigStore2> {
                     textAlign: TextAlign.center,
                   ),
                   onTap: () {
-                    Get.to(Wallet());
+                    Get.to(const Wallet());
                   },
                 ),
                 ListTile(
@@ -61,7 +56,7 @@ class _mainStoreState extends State<VigStore2> {
                     textAlign: TextAlign.center,
                   ),
                   onTap: () {
-                    Get.to(claimcode());
+                    Get.to(const claimcode());
                   },
                 ),
                 ListTile(
@@ -81,10 +76,10 @@ class _mainStoreState extends State<VigStore2> {
             color: TColors.primary,
             height: 120,
             child: SAppBar(
-              title: Column(children: [
-                Container(
+              title: const Column(children: [
+                SizedBox(
                     width: 90,
-                    child: const Image(
+                    child: Image(
                         image: AssetImage("assets/images/home/logo1.png"))),
               ]),
               actions: [
@@ -145,7 +140,7 @@ class _mainStoreState extends State<VigStore2> {
                 cursorWidth: 1,
                 minLines: 1,
                 maxLines: 1,
-                style: TextStyle(color: Colors.white, fontSize: TSizes.fontMd),
+                style: const TextStyle(color: Colors.white, fontSize: TSizes.fontMd),
                 decoration: const InputDecoration(
                   fillColor: TColors.secondary,
                   filled: true,
@@ -172,13 +167,13 @@ class _mainStoreState extends State<VigStore2> {
                 ),
               ),
             )),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Container(
               width: double.infinity,
               height: 40,
-              decoration: BoxDecoration(color: TColors.primary),
+              decoration: const BoxDecoration(color: TColors.primary),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -204,12 +199,12 @@ class _mainStoreState extends State<VigStore2> {
                     image: DecorationImage(
                         image: AssetImage(TImage.bannervigi),
                         fit: BoxFit.contain))),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems * 0.5,
             ),
             SizedBox(
               width: THelperFunctions.screenWidth() * 0.9,
-              child: Text(
+              child: const Text(
                 "Seasonal Vegetables",
                 style: TextStyle(
                     fontFamily: "poppins",
@@ -219,15 +214,15 @@ class _mainStoreState extends State<VigStore2> {
                 textAlign: TextAlign.start,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems * 0.5,
             ),
             CarouselSlider(
               options: CarouselOptions(
                 height: 200.0,
                 autoPlay: false,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration: Duration(milliseconds: 500),
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 500),
                 autoPlayCurve: Curves.easeInSine,
                 viewportFraction: 0.48,
                 aspectRatio: 9 / 16,
@@ -240,7 +235,7 @@ class _mainStoreState extends State<VigStore2> {
                       child: Container(
                           height: 150.0,
                           width: MediaQuery.of(context).size.width * 0.53,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromARGB(64, 36, 36, 36),
@@ -251,7 +246,7 @@ class _mainStoreState extends State<VigStore2> {
                             ],
                             color: TColors.primary,
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(30)),
+                                BorderRadius.all(Radius.circular(30)),
                           ),
                           child: Column(
                             children: [
@@ -287,8 +282,8 @@ class _mainStoreState extends State<VigStore2> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "${i.name}",
-                                            style: TextStyle(
+                                            i.name,
+                                            style: const TextStyle(
                                                 fontFamily: "poppins",
                                                 fontWeight: FontWeight.bold,
                                                 color: TColors.white),
@@ -302,11 +297,11 @@ class _mainStoreState extends State<VigStore2> {
                                       ),
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.43,
-                                      child: Text("${i.description}",
-                                          style: TextStyle(
+                                      child: Text(i.description,
+                                          style: const TextStyle(
                                               fontFamily: "poppins",
                                               fontWeight: FontWeight.w400,
                                               fontSize: TSizes.fontMd,
@@ -321,12 +316,12 @@ class _mainStoreState extends State<VigStore2> {
                 );
               }).toList(),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems * 0.5,
             ),
             SizedBox(
               width: THelperFunctions.screenWidth() * 0.9,
-              child: Text(
+              child: const Text(
                 "Seasonal Fruits",
                 style: TextStyle(
                     fontFamily: "poppins",
@@ -336,15 +331,15 @@ class _mainStoreState extends State<VigStore2> {
                 textAlign: TextAlign.start,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems * 0.5,
             ),
             CarouselSlider(
               options: CarouselOptions(
                 height: 200.0,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 5),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayInterval: const Duration(seconds: 5),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 autoPlayCurve: Curves.easeInSine,
                 viewportFraction: 0.48,
                 aspectRatio: 9 / 16,
@@ -357,7 +352,7 @@ class _mainStoreState extends State<VigStore2> {
                       child: Container(
                           height: 150.0,
                           width: MediaQuery.of(context).size.width * 0.53,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                 color: Color.fromARGB(64, 36, 36, 36),
@@ -368,7 +363,7 @@ class _mainStoreState extends State<VigStore2> {
                             ],
                             color: TColors.primary,
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(30)),
+                                BorderRadius.all(Radius.circular(30)),
                           ),
                           child: Column(
                             children: [
@@ -404,8 +399,8 @@ class _mainStoreState extends State<VigStore2> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "${i.name}",
-                                            style: TextStyle(
+                                            i.name,
+                                            style: const TextStyle(
                                                 fontFamily: "poppins",
                                                 fontWeight: FontWeight.bold,
                                                 color: TColors.white),
@@ -419,11 +414,11 @@ class _mainStoreState extends State<VigStore2> {
                                       ),
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                       width: MediaQuery.of(context).size.width *
                                           0.43,
-                                      child: Text("${i.description}",
-                                          style: TextStyle(
+                                      child: Text(i.description,
+                                          style: const TextStyle(
                                               fontFamily: "poppins",
                                               fontWeight: FontWeight.w400,
                                               fontSize: TSizes.fontMd,
@@ -438,7 +433,7 @@ class _mainStoreState extends State<VigStore2> {
                 );
               }).toList(),
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtsections,
             ),
           ]),

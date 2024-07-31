@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:saveit/features/authentication/controllers/signup/verify_email_controller.dart';
-import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:saveit/features/authentication/screens/login/login.dart';
 
 class EnterEmailOnForgetPassword extends StatefulWidget {
   const EnterEmailOnForgetPassword({super.key});
@@ -27,11 +21,11 @@ class _EnterEmailOnForgetPasswordState
         child: Padding(
           padding: const EdgeInsets.only(top: 100),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width - 50,
               child: Column(
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
@@ -57,10 +51,10 @@ class _EnterEmailOnForgetPasswordState
                               )
                             ],
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 40,
                           ),
-                          Container(
+                          SizedBox(
                               width: 244,
                               child: Text(
                                   'to find any existant accounts with that email'))
@@ -88,20 +82,22 @@ class _EnterEmailOnForgetPasswordState
                         height: 5,
                       ),
                       //Send code button
-                      Container(
+                      SizedBox(
                           width: 214,
                           height: 56,
                           child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
+                            onPressed: () {
+                              /*     PasswordRest, */
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: TColors.primary),
+                            child: const Text(
                               "Reset Password",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w300),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: TColors.primary),
                           )),
                     ],
                   ))

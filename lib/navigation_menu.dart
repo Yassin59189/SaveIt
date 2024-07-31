@@ -36,9 +36,9 @@ class NavigationMenu extends StatelessWidget {
             },
             
             backgroundColor: Colors.transparent,
-            color: Color(0xFFF8F7FB),
-            animationDuration: Duration(milliseconds: 300),
-            items: [
+            color: const Color(0xFFF8F7FB),
+            animationDuration: const Duration(milliseconds: 300),
+            items: const [
             Icon(Icons.percent,
             color: TColors.secondary,),
             Icon(Icons.person,
@@ -56,5 +56,5 @@ class NavigationMenu extends StatelessWidget {
 }
 class NavigationController extends GetxController{
   final Rx<int> selectedIndex = 1.obs;  
-  final screens = [mainStore(),HomeScreen(),recomanded()];
+  final screens = [const mainStore(),const HomeScreen(),const recomanded()];
 }

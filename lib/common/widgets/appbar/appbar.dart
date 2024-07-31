@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/device/device_utility.dart';
 
 class SAppBar extends StatelessWidget implements PreferredSizeWidget{
@@ -20,7 +18,7 @@ class SAppBar extends StatelessWidget implements PreferredSizeWidget{
     final List<Widget>? actions;
   @override
   Widget build(BuildContext context){
-    return Padding(padding: EdgeInsets.only(top: 15, left: 5, right: 5),
+    return Padding(padding: const EdgeInsets.only(top: 15, left: 5, right: 5),
     child: AppBar(
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
