@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:saveit/features/authentication/screens/login/forgotPassword.dart';
 import 'package:saveit/features/authentication/screens/signup/signup.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -13,16 +11,16 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage("assets/logos/logo_colors.png")),
+              const Image(image: AssetImage("assets/logos/logo_colors.png")),
               Stack(children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 60,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
@@ -46,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
+                      SizedBox(
                           width: 100,
                           child: Image(
                             image: AssetImage(
@@ -59,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ]),
               //Form
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width - 60,
                 child: Form(
                     child: Column(
@@ -92,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                             Checkbox(
                               value: false,
                               onChanged: (value) {},
-                              shape: CircleBorder(),
+                              shape: const CircleBorder(),
                             ),
                             const Text(
                               "Remember me",
@@ -104,9 +102,9 @@ class LoginScreen extends StatelessWidget {
                         //Forget password
                         TextButton(
                             onPressed: () {
-                              Get.to(EnterEmailOnForgetPassword());
+                              Get.to(const EnterEmailOnForgetPassword());
                             },
-                            child: Text(
+                            child: const Text(
                               "Forget password?",
                               style: TextStyle(
                                   fontSize: 13,
@@ -119,27 +117,27 @@ class LoginScreen extends StatelessWidget {
                       height: 20,
                     ),
                     //Sign in
-                    Container(
+                    SizedBox(
                         width: 214,
                         height: 56,
                         child: ElevatedButton(
                           onPressed: () {},
-                          child: Text(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: TColors.primary),
+                          child: const Text(
                             "Sign in",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w300),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: TColors.primary),
                         )),
                     //Create account
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "You don't have an account?",
                             style: TextStyle(
                                 fontSize: 13,
@@ -148,9 +146,9 @@ class LoginScreen extends StatelessWidget {
                           ),
                           TextButton(
                               onPressed: () {
-                                Get.to(SignupScreen());
+                                Get.to(const SignupScreen());
                               },
-                              child: Text(
+                              child: const Text(
                                 "Create one",
                                 style: TextStyle(
                                     fontSize: 13,

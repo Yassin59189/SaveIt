@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_concerns%20.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_dependencies%20.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -30,7 +26,7 @@ class _QuestionSavingsState extends State<QuestionSavings> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
@@ -38,9 +34,9 @@ class _QuestionSavingsState extends State<QuestionSavings> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuestionConcerns()));
+                            builder: (context) => const QuestionConcerns()));
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
           ),
           Center(
@@ -60,7 +56,7 @@ class _QuestionSavingsState extends State<QuestionSavings> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -72,7 +68,7 @@ class _QuestionSavingsState extends State<QuestionSavings> {
                             borderRadius: BorderRadius.circular(30))),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -81,10 +77,10 @@ class _QuestionSavingsState extends State<QuestionSavings> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QuestionDep()));
+                                  builder: (context) => const QuestionDep()));
                         },
                         style: buttonanContinueSecondary,
-                        child: Text(
+                        child: const Text(
                           TText.Continue,
                           style: TextStyle(color: TColors.white),
                         ))),

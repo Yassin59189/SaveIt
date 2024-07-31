@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
 class Profile extends StatefulWidget {
@@ -19,7 +18,7 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: TColors.primary,
           ),
@@ -27,9 +26,9 @@ class _ProfileState extends State<Profile> {
             Navigator.pop(context);
           },
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10),
             child: Image(image: AssetImage("assets/logos/logo_horizontal.png")),
           )
         ],
@@ -40,7 +39,7 @@ class _ProfileState extends State<Profile> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Profile",
                 style: TextStyle(
                     fontFamily: 'Poppins',
@@ -51,7 +50,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(
                 height: 40,
               ),
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 40,
                 backgroundColor: TColors.primary,
                 child: Icon(
@@ -64,8 +63,8 @@ class _ProfileState extends State<Profile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 15),
                     child: Text(
                       'Your Name',
                       style: TextStyle(
@@ -76,7 +75,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Iconsax.edit_2, color: TColors.primary),
+                    icon: const Icon(Iconsax.edit_2, color: TColors.primary),
                     onPressed: () {},
                   ),
                 ],
@@ -128,7 +127,7 @@ class _ProfileState extends State<Profile> {
                 children: [
                   InkWell(
                     onTap: () {},
-                    customBorder: CircleBorder(),
+                    customBorder: const CircleBorder(),
                     child: CircleAvatar(
                       radius: 30,
                       backgroundColor: Colors.transparent,
@@ -137,7 +136,7 @@ class _ProfileState extends State<Profile> {
                             shape: BoxShape.circle,
                             border:
                                 Border.all(color: TColors.accent, width: 1)),
-                        child: Center(
+                        child: const Center(
                           child: Icon(
                             Iconsax.trash,
                             color: TColors.accent,
@@ -147,8 +146,8 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 8), // Space between the icon and text
-                  Text("Delete Account",
+                  const SizedBox(height: 8), // Space between the icon and text
+                  const Text("Delete Account",
                       style: TextStyle(
                         color: TColors.accent,
                         fontSize: 16,
@@ -159,7 +158,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
     );
   }
 }
@@ -179,20 +178,20 @@ class settings_button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: ElevatedButton(
           onPressed: () {},
           style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.transparent),
-              elevation: MaterialStateProperty.all<double>(0),
-              side: MaterialStateProperty.all<BorderSide>(
-                  BorderSide(color: TColors.secondary, width: 1)),
-              padding: MaterialStateProperty.all<EdgeInsets>(
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  WidgetStateProperty.all<Color>(Colors.transparent),
+              elevation: WidgetStateProperty.all<double>(0),
+              side: WidgetStateProperty.all<BorderSide>(
+                  const BorderSide(color: TColors.secondary, width: 1)),
+              padding: WidgetStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ))),
@@ -210,7 +209,7 @@ class settings_button extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: TColors.secondary,
                           fontFamily: 'Poppins',
                           fontSize: 16,
@@ -219,7 +218,7 @@ class settings_button extends StatelessWidget {
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Iconsax.arrow_right_3,
                 size: 20,
                 color: TColors.secondary,

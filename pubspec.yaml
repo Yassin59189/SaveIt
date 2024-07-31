@@ -40,11 +40,10 @@ dependencies:
   firebase_auth: ^5.1.1
   cloud_firestore: ^5.0.2
 
+  carousel_slider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  carousel_slider: ^4.2.1
-
   flutter_lints: ^3.0.0
 
 flutter:
@@ -66,6 +65,7 @@ flutter:
     - assets/images/productsfood/
     - assets/images/storecloths/
     - assets/images/recomanded/recomnd/
+    - assets/animations/checkmark.json
 
   #------------------ LOCAL FONTS ------------------#
   fonts:

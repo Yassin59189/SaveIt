@@ -29,7 +29,7 @@ class _WalletState extends State<Wallet> {
                 ),
                 child: Column(
                   children: [
-                    const Image(
+                    Image(
                         image: AssetImage("assets/images/home/logo1.png"))
                   ],
                 ),
@@ -47,7 +47,7 @@ class _WalletState extends State<Wallet> {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(claimcode());
+                  Get.to(const claimcode());
                 },
               ),
               ListTile(
@@ -72,9 +72,9 @@ class _WalletState extends State<Wallet> {
                   SAppBar(
                     title: TextButton(
                         onPressed: () {
-                          Get.to(EditWallet());
+                          Get.to(const EditWallet());
                         },
-                        child: Text(
+                        child: const Text(
                           "Edit",
                           style: TextStyle(color: Colors.white),
                         )),
@@ -91,18 +91,18 @@ class _WalletState extends State<Wallet> {
                       })
                     ],
                   ),
-                  Text(
+                  const Text(
                     "TOTAL BALANCE",
                     style: TextStyle(
                         color: Color(0xFFA8ADDD),
                         fontFamily: 'Poppins',
                         fontSize: 16),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   //Balance
-                  Text(
+                  const Text(
                     "358,50DT",
                     style: TextStyle(
                         fontFamily: 'Poppins',
@@ -170,7 +170,7 @@ class _WalletState extends State<Wallet> {
                                   ],
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 "01 March - 31 March",
                                 style: TextStyle(
                                     color: TColors.accent,
@@ -183,7 +183,7 @@ class _WalletState extends State<Wallet> {
                             height: 20,
                           ),
                           //stats info
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               //Income
@@ -254,21 +254,21 @@ class _WalletState extends State<Wallet> {
                           //button
                           Container(
                             width: MediaQuery.of(context).size.width - 40,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     top: BorderSide(
                                         width: 2, color: TColors.secondary))),
                             child: ElevatedButton(
                                 onPressed: () {},
-                                child: Text("SHOW CHART"),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.transparent,
                                   shadowColor: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius
                                         .zero, // Set all radii to zero
                                   ),
-                                )),
+                                ),
+                                child: const Text("SHOW CHART")),
                           ),
                         ],
                       ),
@@ -299,38 +299,38 @@ class _WalletState extends State<Wallet> {
                         children: [
                           ElevatedButton(
                             onPressed: () {},
-                            child: Text(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: TColors.secondary),
+                            child: const Text(
                               "All",
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: TColors.secondary),
                           ),
                           ElevatedButton(
                             onPressed: () {},
-                            child: Text(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shadowColor: Colors.transparent,
+                                side: const BorderSide(
+                                    width: 2, color: TColors.secondary)),
+                            child: const Text(
                               "Income",
                               style: TextStyle(color: TColors.secondary),
                             ),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shadowColor: Colors.transparent,
-                                side: BorderSide(
-                                    width: 2, color: TColors.secondary)),
                           ),
                           ElevatedButton(
                             onPressed: () {},
-                            child: Text(
-                              "Spending",
-                              style: TextStyle(color: TColors.secondary),
-                            ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 shadowColor: Colors.transparent,
-                                side: BorderSide(
+                                side: const BorderSide(
                                     width: 2, color: TColors.secondary)),
+                            child: const Text(
+                              "Spending",
+                              style: TextStyle(color: TColors.secondary),
+                            ),
                           ),
                         ],
                       ),
@@ -339,12 +339,12 @@ class _WalletState extends State<Wallet> {
                       height: 20,
                     ),
                     //title
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width - 75,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "15 March",
                             style: TextStyle(
                                 fontFamily: 'Poppins',
@@ -355,7 +355,7 @@ class _WalletState extends State<Wallet> {
                             decoration: BoxDecoration(
                                 color: TColors.secondary,
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Text(
+                            child: const Text(
                               "+/-000.00DT",
                               style: TextStyle(
                                 fontFamily: 'Poppins',
@@ -367,13 +367,13 @@ class _WalletState extends State<Wallet> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     //content
-                    Container(
+                    SizedBox(
                         width: MediaQuery.of(context).size.width - 75,
-                        child: HistoryContent()),
+                        child: const HistoryContent()),
                   ],
                 ),
               )
@@ -392,8 +392,8 @@ class HistoryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

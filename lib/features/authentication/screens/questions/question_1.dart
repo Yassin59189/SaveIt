@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:saveit/features/authentication/screens/questions/question_3.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -12,7 +8,7 @@ import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
 class question1 extends StatefulWidget {
-  question1({super.key});
+  const question1({super.key});
 
   @override
   State<question1> createState() => _question1State();
@@ -31,7 +27,7 @@ class _question1State extends State<question1> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
@@ -39,9 +35,9 @@ class _question1State extends State<question1> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuestionRegion()));
+                            builder: (context) => const QuestionRegion()));
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
           ),
           Center(
@@ -61,7 +57,7 @@ class _question1State extends State<question1> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -74,11 +70,11 @@ class _question1State extends State<question1> {
                         style: isPressed1
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           TText.answer1,
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -92,11 +88,11 @@ class _question1State extends State<question1> {
                         style: isPressed2
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           TText.answer2,
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -109,11 +105,11 @@ class _question1State extends State<question1> {
                         style: isPressed3
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           TText.answer3,
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -126,11 +122,11 @@ class _question1State extends State<question1> {
                         style: isPressed4
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           TText.answer4,
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -139,10 +135,10 @@ class _question1State extends State<question1> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Question3()));
+                                  builder: (context) => const Question3()));
                         },
                         style: buttonanContinueSecondary,
-                        child: Text(
+                        child: const Text(
                           TText.Continue,
                           style: TextStyle(color: TColors.white),
                         ))),

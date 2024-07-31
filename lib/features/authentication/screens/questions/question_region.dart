@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:saveit/features/authentication/screens/questions/question_1.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -45,15 +41,15 @@ class QuestionRegion extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Welcome()));
+                        MaterialPageRoute(builder: (context) => const Welcome()));
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
           ),
           Center(
@@ -140,7 +136,7 @@ class QuestionRegion extends StatelessWidget {
                   child: DropdownMenu(
                     width: 353.65,
                     menuHeight: 250,
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       color: TColors.primary,
                       fontFamily: "poppins",
                     ),
@@ -162,7 +158,7 @@ class QuestionRegion extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => question1()));
+                          MaterialPageRoute(builder: (context) => const question1()));
                     },
                     style: buttonanContinueSecondary,
                     child: const Text(
