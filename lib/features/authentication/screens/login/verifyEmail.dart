@@ -7,7 +7,7 @@ import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 
 class VerifyemailPage extends StatefulWidget {
-  const VerifyemailPage({super.key});
+  const VerifyemailPage({super.key, String? email});
 
   @override
   State<VerifyemailPage> createState() => _VerifyemailPageState();
