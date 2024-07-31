@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:saveit/features/authentication/screens/home/home.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
-import 'package:saveit/features/authentication/screens/login/verifyEmail.dart';
+/* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
 import 'package:saveit/navigation_menu.dart';
+/* import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart'; */
 import 'package:saveit/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:saveit/utils/exceptions/firebase_exceptions.dart';
 import 'package:saveit/utils/exceptions/format_exceptions.dart';
 import 'package:saveit/utils/exceptions/platform_exceptions.dart';
+import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -33,10 +33,10 @@ class AuthenticationRepository extends GetxController {
     print('Email verified: ${user?.emailVerified}');
     print("ready called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (user != null) {
-      if (!user.emailVerified) {
+      if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
       } else {
-        Get.offAll(() => VerifyemailPage(email: user.email));
+        Get.offAll(() => VerifyemailPage(email: _auth.currentUser?.email));
       }
     } else {
       deviceStorage.writeIfNull('isFirstTime', true);
@@ -81,6 +81,22 @@ class AuthenticationRepository extends GetxController {
   }
 
   sendEmailVerification() {}
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw "somthing went wrong . Please Try again";
+    }
+  }
 }
 
 /*-------------------------------------Email verification---------------------------------------------------------*/
@@ -92,10 +108,14 @@ Future<void> sendEmailVerification() async {
   } on FirebaseException catch (e) {
     throw TFirebaseException(e.code).message;
   } on FormatException catch (_) {
-    throw TFormatException();
+    throw const TFormatException();
   } on PlatformException catch (e) {
     throw TPlatformException(e.code).message;
   } catch (e) {
     throw "somthing went wrong . Please Try again";
   }
 }
+
+/*-------------------------------------Logout---------------------------------------------------------*/
+
+

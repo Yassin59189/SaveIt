@@ -1,11 +1,8 @@
 // ignore_for_file: unnecessary_const
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
-import 'package:saveit/features/authentication/screens/Store/clothstore.dart';
 import 'package:saveit/features/authentication/screens/Store/clothStorre.dart';
 import 'package:saveit/features/authentication/screens/Store/vig2.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -41,8 +38,8 @@ class _mainStoreState extends State<mainStore> {
               color: TColors.primary,
               height: 120,
               child: SAppBar(
-                title: Column(children: [
-                  Container(
+                title: const Column(children: [
+                  SizedBox(
                       width: 90,
                       child: Image(
                           image: AssetImage("assets/images/home/logo1.png"))),
@@ -57,7 +54,7 @@ class _mainStoreState extends State<mainStore> {
                 ],
               ),
             ),
-            Image(image: AssetImage("assets/images/home/Vector.png")),
+            const Image(image: AssetImage("assets/images/home/Vector.png")),
             /* Container(
               width: THelperFunctions.screenWidth(),
               height: THelperFunctions.screenHeight() * 0.15,
@@ -210,7 +207,7 @@ class _mainStoreState extends State<mainStore> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => VigStore2()));
+                                            builder: (context) => const VigStore2()));
                                   },
                                   style: vistPrimary,
                                   child: const Text(
@@ -310,7 +307,7 @@ class _mainStoreState extends State<mainStore> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Clothsstorre()));
+                                              const Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
@@ -372,7 +369,7 @@ class _mainStoreState extends State<mainStore> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Clothsstorre()));
+                                              const Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
@@ -385,7 +382,7 @@ class _mainStoreState extends State<mainStore> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 Container(
@@ -430,7 +427,7 @@ class _mainStoreState extends State<mainStore> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              Clothsstorre()));
+                                              const Clothsstorre()));
                                 },
                                 style: vistSecondary,
                                 child: const Text(
@@ -449,7 +446,7 @@ class _mainStoreState extends State<mainStore> {
                                 fit: BoxFit.cover))),
                   ]),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
               ],

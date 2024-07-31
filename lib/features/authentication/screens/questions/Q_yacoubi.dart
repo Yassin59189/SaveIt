@@ -1,11 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:saveit/features/authentication/screens/home/home.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_savings.dart';
-import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/navigation_menu.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -14,7 +8,7 @@ import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
 class QuestionYacoubi extends StatefulWidget {
-  QuestionYacoubi({super.key});
+  const QuestionYacoubi({super.key});
 
   @override
   State<QuestionYacoubi> createState() => _QuestionYacoubiState();
@@ -33,7 +27,7 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
@@ -41,9 +35,9 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuestionSavings()));
+                            builder: (context) => const QuestionSavings()));
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
           ),
           Center(
@@ -63,7 +57,7 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -76,11 +70,11 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                         style: isPressed1
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "Yes i do",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -94,11 +88,11 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                         style: isPressed2
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "No i dont",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -111,11 +105,11 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                         style: isPressed4
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "Not intrested in investing",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -124,10 +118,10 @@ class _QuestionYacoubiState extends State<QuestionYacoubi> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NavigationMenu()));
+                                  builder: (context) => const NavigationMenu()));
                         },
                         style: buttonanContinueSecondary,
-                        child: Text(
+                        child: const Text(
                           TText.Continue,
                           style: TextStyle(color: TColors.white),
                         ))),

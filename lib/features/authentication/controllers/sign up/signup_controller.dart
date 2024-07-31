@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:saveit/common/widgets/snackBars/loaders.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
 import 'package:saveit/data/repositories/user_repository.dart';
+import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart';
 import 'package:saveit/features/models/user_model.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/popups/full_screen_loader.dart';
@@ -54,7 +55,7 @@ class SignupController extends GetxController {
           message: 'Your account has been created! verify email to continue');
 
       // Move to vrify email
-      /* Get.to(() => const esmklpage()); */
+      Get.to(() => VerifyemailPage(email: email.text.trim()));
     } catch (e) {
       Loaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     } finally {

@@ -11,8 +11,8 @@ import 'package:saveit/features/authentication/screens/home/notification_bottom_
     
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Notification")),
-        actions: [Icon(Iconsax.more)],
+        title: const Center(child: Text("Notification")),
+        actions: const [Icon(Iconsax.more)],
       ),
       body: ListView.separated(
       itemCount: notifications.length,
@@ -21,11 +21,11 @@ import 'package:saveit/features/authentication/screens/home/notification_bottom_
           startActionPane: ActionPane(
             motion: const BehindMotion(),
             children: [
-              SlidableAction(icon: Iconsax.receipt_add, onPressed: (context){}, backgroundColor: Color(0xFF5469D4),)
+              SlidableAction(icon: Iconsax.receipt_add, onPressed: (context){}, backgroundColor: const Color(0xFF5469D4),)
             ],
           ),
-          endActionPane: ActionPane(motion: BehindMotion(), children: [
-            SlidableAction(onPressed: (context){}, icon: Iconsax.box, backgroundColor: Color(0xFF3C4257),)
+          endActionPane: ActionPane(motion: const BehindMotion(), children: [
+            SlidableAction(onPressed: (context){}, icon: Iconsax.box, backgroundColor: const Color(0xFF3C4257),)
           ]),
           child: listTile(index));
       },

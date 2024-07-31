@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:saveit/features/authentication/controllers/sign%20up/signup_controller.dart';
 import 'package:saveit/features/authentication/screens/signup/code_verify.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -18,9 +17,9 @@ class PhoneRegistrationScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 100),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width - 50,
-              child: Column(
+              child: const Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,10 +47,10 @@ class PhoneRegistrationScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 40,
                           ),
-                          Container(
+                          SizedBox(
                               width: 244,
                               child: Text(
                                   'Le lorem ipsum est en imprimerie une suite Le lorem '))
@@ -100,22 +99,22 @@ class phoneRegistration extends StatelessWidget {
               height: 5,
             ),
             //Send code button
-            Container(
+            SizedBox(
                 width: 214,
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(CodeVerifyScreen());
+                    Get.to(const CodeVerifyScreen());
                   },
-                  child: Text(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: TColors.primary),
+                  child: const Text(
                     "Send code",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w300),
                   ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: TColors.primary),
                 )),
           ],
         ));

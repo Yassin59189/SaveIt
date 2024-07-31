@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:saveit/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:saveit/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
@@ -24,7 +23,7 @@ class OnBoardingScreen extends StatelessWidget {
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
-            children: [
+            children: const [
             OnBoardingPage(image: TImage.onBoardImage1, text: TText.onBoardText1),
             OnBoardingPage(image: TImage.onBoardImage2, text: TText.onBoardText2),
             OnBoardingPage(image: TImage.onBoardImage3, text: TText.onBoardText3),
@@ -40,7 +39,7 @@ class OnBoardingScreen extends StatelessWidget {
             bottom: TDeviceUtils.getBottomNavigationBarHeight()+100,
             left: 135,
             width: 150,
-            child: ElevatedButton(onPressed: ()=>OnBoardingController.instance.nextPage(), child: Text("Next", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
+            child: ElevatedButton(onPressed: ()=>OnBoardingController.instance.nextPage(), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary), child: const Text("Next", style: TextStyle(color: Colors.white),),),
             ),
 
             //Sign Up button
@@ -48,7 +47,7 @@ class OnBoardingScreen extends StatelessWidget {
             bottom: TDeviceUtils.getBottomNavigationBarHeight()+40,
             left: 135,
             width: 150,
-            child: ElevatedButton(onPressed: (){}, child: Text("Sign up", style: TextStyle(color: Colors.white),), style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),),
+            child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(backgroundColor: TColors.primary), child: const Text("Sign up", style: TextStyle(color: Colors.white),),),
             ),
         ],
       ),
