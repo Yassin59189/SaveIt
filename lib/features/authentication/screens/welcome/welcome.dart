@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -19,7 +15,7 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
           image: AssetImage("assets/images/welcome_images/bg_welcome.png"),
           fit: BoxFit.cover,
@@ -48,7 +44,7 @@ class Welcome extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     SizedBox(
@@ -56,10 +52,10 @@ class Welcome extends StatelessWidget {
                         height: 54.04,
                         child: ElevatedButton(
                             onPressed: () {
-                              Get.to(QuestionRegion());
+                              Get.to(const QuestionRegion());
                             },
                             style: buttonPrimary,
-                            child: Text(
+                            child: const Text(
                               "Continue",
                               style: TextStyle(color: TColors.white),
                             )))

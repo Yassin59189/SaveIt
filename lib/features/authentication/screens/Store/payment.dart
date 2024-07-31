@@ -1,15 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
-import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
 class paymentdone extends StatelessWidget {
@@ -19,7 +13,7 @@ class paymentdone extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
           image: AssetImage("assets/images/vigitabs/paybanner.png"),
           fit: BoxFit.cover,
@@ -31,7 +25,7 @@ class paymentdone extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtsections * 8,
                     ),
                     Container(
@@ -46,7 +40,7 @@ class paymentdone extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     SizedBox(
@@ -54,10 +48,10 @@ class paymentdone extends StatelessWidget {
                         height: 54.04,
                         child: ElevatedButton(
                             onPressed: () {
-                              Get.to(QuestionRegion());
+                              Get.to(const QuestionRegion());
                             },
                             style: buttonPrimary,
-                            child: Text(
+                            child: const Text(
                               "Continue",
                               style: TextStyle(color: TColors.white),
                             )))

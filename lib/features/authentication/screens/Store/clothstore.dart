@@ -1,11 +1,8 @@
 // ignore_for_file: unnecessary_const
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
-import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -68,10 +65,10 @@ class _mainStoreState extends State<clothsstore> {
             color: TColors.primary,
             height: 120,
             child: SAppBar(
-              title: Column(children: [
-                Container(
+              title: const Column(children: [
+                SizedBox(
                     width: 90,
-                    child: const Image(
+                    child: Image(
                         image: AssetImage("assets/images/home/logo1.png"))),
               ]),
               actions: [
@@ -137,7 +134,7 @@ class _mainStoreState extends State<clothsstore> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(4.0, 0, 0, 0),
                   child: TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     textAlign: TextAlign.start,
                     decoration: const InputDecoration(
                         prefixIcon: const Icon(
@@ -158,13 +155,13 @@ class _mainStoreState extends State<clothsstore> {
                 ),
               ),
             )),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Container(
               width: double.infinity,
               height: 40,
-              decoration: BoxDecoration(color: TColors.primary),
+              decoration: const BoxDecoration(color: TColors.primary),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -191,10 +188,10 @@ class _mainStoreState extends State<clothsstore> {
                         image:
                             AssetImage("assets/images/storecloths/banerr.png"),
                         fit: BoxFit.contain))),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
-            Text(
+            const Text(
               "Trending ",
               style: TextStyle(
                   fontFamily: "poppins",
@@ -202,7 +199,7 @@ class _mainStoreState extends State<clothsstore> {
                   fontSize: TSizes.fontMd,
                   color: TColors.primary),
             ),
-            Container(
+            SizedBox(
               height: 200,
               child: Row(
                 children: [
@@ -220,7 +217,7 @@ class _mainStoreState extends State<clothsstore> {
                             Container(
                               width: 140,
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
                                       "assets/images/storecloths/short.png"),
@@ -229,18 +226,18 @@ class _mainStoreState extends State<clothsstore> {
                               ),
                             ),
                             Container(
-                              decoration: BoxDecoration(color: TColors.primary),
-                              child: Container(
+                              decoration: const BoxDecoration(color: TColors.primary),
+                              child: SizedBox(
                                 width: 140,
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 25,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Shorts",
                                             style: TextStyle(
                                                 fontFamily: "poppins",
@@ -248,7 +245,7 @@ class _mainStoreState extends State<clothsstore> {
                                                 fontSize: 10,
                                                 color: TColors.white),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 30,
                                             child: IconButton(
                                                 icon: Image.asset(
@@ -258,7 +255,7 @@ class _mainStoreState extends State<clothsstore> {
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    const SizedBox(
                                       width: 130,
                                       height: 25,
                                       child: Text(
@@ -295,7 +292,7 @@ class _mainStoreState extends State<clothsstore> {
                             Container(
                               width: 140,
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
                                       "assets/images/storecloths/shirt.png"),
@@ -304,18 +301,18 @@ class _mainStoreState extends State<clothsstore> {
                               ),
                             ),
                             Container(
-                              decoration: BoxDecoration(color: TColors.primary),
-                              child: Container(
+                              decoration: const BoxDecoration(color: TColors.primary),
+                              child: SizedBox(
                                 width: 140,
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 25,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "T-Shirt",
                                             style: TextStyle(
                                                 fontFamily: "poppins",
@@ -323,7 +320,7 @@ class _mainStoreState extends State<clothsstore> {
                                                 fontSize: 10,
                                                 color: TColors.white),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 30,
                                             child: IconButton(
                                                 icon: Image.asset(
@@ -333,7 +330,7 @@ class _mainStoreState extends State<clothsstore> {
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    const SizedBox(
                                       width: 130,
                                       height: 25,
                                       child: Text(
@@ -370,7 +367,7 @@ class _mainStoreState extends State<clothsstore> {
                             Container(
                               width: 140,
                               height: 100,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
                                       "assets/images/storecloths/boots.png"),
@@ -379,18 +376,18 @@ class _mainStoreState extends State<clothsstore> {
                               ),
                             ),
                             Container(
-                              decoration: BoxDecoration(color: TColors.primary),
-                              child: Container(
+                              decoration: const BoxDecoration(color: TColors.primary),
+                              child: SizedBox(
                                 width: 140,
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 25,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          const Text(
                                             "Boots",
                                             style: TextStyle(
                                                 fontFamily: "poppins",
@@ -398,7 +395,7 @@ class _mainStoreState extends State<clothsstore> {
                                                 fontSize: 10,
                                                 color: TColors.white),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: 30,
                                             child: IconButton(
                                                 icon: Image.asset(
@@ -408,7 +405,7 @@ class _mainStoreState extends State<clothsstore> {
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    const SizedBox(
                                       width: 130,
                                       height: 25,
                                       child: Text(
@@ -434,7 +431,7 @@ class _mainStoreState extends State<clothsstore> {
                 ],
               ),
             ),
-            Text(
+            const Text(
               "Best Quilty Value",
               style: TextStyle(
                   fontFamily: "poppins",
@@ -458,7 +455,7 @@ class _mainStoreState extends State<clothsstore> {
                           Container(
                             width: 140,
                             height: 100,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
                                     "assets/images/storecloths/short.png"),
@@ -467,18 +464,18 @@ class _mainStoreState extends State<clothsstore> {
                             ),
                           ),
                           Container(
-                            decoration: BoxDecoration(color: TColors.primary),
-                            child: Container(
+                            decoration: const BoxDecoration(color: TColors.primary),
+                            child: SizedBox(
                               width: 140,
                               child: Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 25,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "shorts",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -486,7 +483,7 @@ class _mainStoreState extends State<clothsstore> {
                                               fontSize: 10,
                                               color: TColors.white),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 30,
                                           child: IconButton(
                                               icon: Image.asset(
@@ -496,7 +493,7 @@ class _mainStoreState extends State<clothsstore> {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  const SizedBox(
                                     width: 130,
                                     height: 25,
                                     child: Text(
@@ -533,7 +530,7 @@ class _mainStoreState extends State<clothsstore> {
                           Container(
                             width: 140,
                             height: 100,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
                                     "assets/images/storecloths/dress.png"),
@@ -542,18 +539,18 @@ class _mainStoreState extends State<clothsstore> {
                             ),
                           ),
                           Container(
-                            decoration: BoxDecoration(color: TColors.primary),
-                            child: Container(
+                            decoration: const BoxDecoration(color: TColors.primary),
+                            child: SizedBox(
                               width: 140,
                               child: Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 25,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Dress",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -561,7 +558,7 @@ class _mainStoreState extends State<clothsstore> {
                                               fontSize: 10,
                                               color: TColors.white),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 30,
                                           child: IconButton(
                                               icon: Image.asset(
@@ -571,7 +568,7 @@ class _mainStoreState extends State<clothsstore> {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  const SizedBox(
                                     width: 130,
                                     height: 25,
                                     child: Text(
@@ -608,7 +605,7 @@ class _mainStoreState extends State<clothsstore> {
                           Container(
                             width: 140,
                             height: 100,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
                                     "assets/images/storecloths/shirt.png"),
@@ -617,18 +614,18 @@ class _mainStoreState extends State<clothsstore> {
                             ),
                           ),
                           Container(
-                            decoration: BoxDecoration(color: TColors.primary),
-                            child: Container(
+                            decoration: const BoxDecoration(color: TColors.primary),
+                            child: SizedBox(
                               width: 140,
                               child: Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     height: 25,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "T-Shirt",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -636,7 +633,7 @@ class _mainStoreState extends State<clothsstore> {
                                               fontSize: 10,
                                               color: TColors.white),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: 30,
                                           child: IconButton(
                                               icon: Image.asset(
@@ -646,7 +643,7 @@ class _mainStoreState extends State<clothsstore> {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  const SizedBox(
                                     width: 130,
                                     height: 25,
                                     child: Text(
@@ -672,7 +669,7 @@ class _mainStoreState extends State<clothsstore> {
               ],
             ),
           ]),
-          SizedBox(
+          const SizedBox(
             height: TSizes.spaceBtsections,
           ),
         ])));

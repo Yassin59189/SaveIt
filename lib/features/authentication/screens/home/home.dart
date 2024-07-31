@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     Future NotificationBottomSheet(BuildContext context) {
       return showModalBottomSheet(
           context: context,
-          builder: (context) => Container(
+          builder: (context) => SizedBox(
                 height: 500,
                 child: test(),
               ));
@@ -33,8 +33,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Image(
-                        image: AssetImage("assets/images/home/logo1.png"))
+                    Image(image: AssetImage("assets/images/home/logo1.png"))
                   ],
                 ),
               ),
@@ -44,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(Wallet());
+                  Get.to(const Wallet());
                 },
               ),
               ListTile(
@@ -53,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(claimcode());
+                  Get.to(const claimcode());
                 },
               ),
               ListTile(
@@ -79,9 +78,9 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SAppBar(
-                    title: Column(
+                    title: const Column(
                       children: [
-                        Container(
+                        SizedBox(
                             width: 90,
                             child: Image(
                                 image: AssetImage(
@@ -112,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                         //Balance
                         Container(
                           width: 172,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16))),
@@ -122,10 +121,10 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image(
+                                const Image(
                                     image: AssetImage(
                                         "assets/images/home/card.png")),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -151,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                         //Total
                         Container(
                           width: 172,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16))),
@@ -161,10 +160,10 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image(
+                                const Image(
                                     image: AssetImage(
                                         "assets/images/home/coin.png")),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -193,13 +192,13 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Image(image: AssetImage("assets/images/home/Vector.png")),
+            const Image(image: AssetImage("assets/images/home/Vector.png")),
             const SizedBox(
               height: 20,
             ),
             //Notification
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: TColors.secondary,
                   borderRadius: BorderRadius.all(Radius.circular(16))),
               width: MediaQuery.of(context).size.width - 35,
@@ -209,7 +208,7 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -235,7 +234,7 @@ class HomeScreen extends StatelessWidget {
                         onPressed: () {
                           NotificationBottomSheet(context);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Iconsax.notification5,
                           color: Colors.white,
                         ))
@@ -243,12 +242,12 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             //History
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/images/home/bg.png"),
                       fit: BoxFit.cover)),
@@ -259,7 +258,7 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "History",
                         style: TextStyle(
                             color: TColors.primary,
@@ -272,7 +271,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           TextButton(
                               onPressed: () {},
-                              child: Text(
+                              child: const Text(
                                 "See all",
                                 style: TextStyle(
                                     color: TColors.primary,
@@ -280,7 +279,7 @@ class HomeScreen extends StatelessWidget {
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600),
                               )),
-                          Icon(
+                          const Icon(
                             Iconsax.arrow_right_1,
                             color: TColors.primary,
                           )
@@ -301,11 +300,11 @@ class HomeScreen extends StatelessWidget {
                   itemCount: 6,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisExtent: 60,
                       mainAxisSpacing: 20),
-                  itemBuilder: (_, index) => HistoryContent()),
+                  itemBuilder: (_, index) => const HistoryContent()),
             )
           ],
         ),
@@ -321,8 +320,8 @@ class HistoryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

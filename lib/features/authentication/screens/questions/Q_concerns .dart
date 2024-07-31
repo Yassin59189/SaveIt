@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_habits.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_yacoubi.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -12,7 +8,7 @@ import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
 class QuestionConcerns extends StatefulWidget {
-  QuestionConcerns({super.key});
+  const QuestionConcerns({super.key});
 
   @override
   State<QuestionConcerns> createState() => _QuestionConcernsState();
@@ -31,7 +27,7 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
@@ -39,9 +35,9 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuestionHabits()));
+                            builder: (context) => const QuestionHabits()));
                   },
-                  icon: Icon(Icons.arrow_back_rounded)),
+                  icon: const Icon(Icons.arrow_back_rounded)),
             ),
           ),
           Center(
@@ -61,7 +57,7 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -74,11 +70,11 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                         style: isPressed1
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "Reducing monthly expenses",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -92,11 +88,11 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                         style: isPressed2
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "Saving for a large purchase",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -109,11 +105,11 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                         style: isPressed4
                             ? buttonquestionSelected
                             : buttonquestions,
-                        child: Text(
+                        child: const Text(
                           "Paying off debt",
                           style: TextStyle(color: TColors.white),
                         ))),
-                SizedBox(
+                const SizedBox(
                   height: TSizes.spaceBtwitems,
                 ),
                 SizedBox(
@@ -122,10 +118,10 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QuestionYacoubi()));
+                                  builder: (context) => const QuestionYacoubi()));
                         },
                         style: buttonanContinueSecondary,
-                        child: Text(
+                        child: const Text(
                           TText.Continue,
                           style: TextStyle(color: TColors.white),
                         ))),

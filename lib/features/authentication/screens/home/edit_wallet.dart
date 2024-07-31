@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
-import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
 class EditWallet extends StatefulWidget {
@@ -25,9 +20,9 @@ class _EditWalletState extends State<EditWallet> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Wallet", style: TextStyle(color: Colors.white, fontSize: 24, fontFamily: 'Poppins', fontWeight: FontWeight.w600),),
+        title: const Text("Edit Wallet", style: TextStyle(color: Colors.white, fontSize: 24, fontFamily: 'Poppins', fontWeight: FontWeight.w600),),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: TColors.primary,
         
       ),
@@ -100,7 +95,7 @@ class _EditWalletState extends State<EditWallet> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               //Date
-                              Container(
+                              SizedBox(
                                 width: screenWidth*0.4,
                                 height: 50,
                                 child: TextFormField(
@@ -108,14 +103,14 @@ class _EditWalletState extends State<EditWallet> {
                                     labelText: "Date",
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(color: TColors.secondary, width: 1)
+                                      borderSide: const BorderSide(color: TColors.secondary, width: 1)
                                     ),
                                     
                                   ),
                                 ),
                               ),
                               //Cost
-                              Container(
+                              SizedBox(
                                 width: screenWidth*0.3,
                                 height: 50,
                                 child: TextFormField(
@@ -123,7 +118,7 @@ class _EditWalletState extends State<EditWallet> {
                                     labelText: "Cost(DT)",
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(color: TColors.secondary, width: 1)
+                                      borderSide: const BorderSide(color: TColors.secondary, width: 1)
                                     ),
                                   ),
                                 ),
@@ -138,16 +133,16 @@ class _EditWalletState extends State<EditWallet> {
                         ),
                         const SizedBox(height: 50,),
                         //Save button
-                        Container(
+                        SizedBox(
                           width: screenWidth*0.5,
                           height: screenHeight*0.05,
-                          child: ElevatedButton(onPressed: (){}, child: Text("SAVE", style: TextStyle(color: Colors.white, fontFamily: 'Nunito', fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: 5),),
+                          child: ElevatedButton(onPressed: (){},
                           style: ElevatedButton.styleFrom(backgroundColor: TColors.secondary, shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),),  
+                          borderRadius: BorderRadius.circular(10))), child: const Text("SAVE", style: TextStyle(color: Colors.white, fontFamily: 'Nunito', fontSize: 20, fontWeight: FontWeight.w800, letterSpacing: 5),),),  
                         ),
                         const SizedBox(height: 10,),
                         //Image
-                        Image(image: AssetImage("assets/images/home/wallet.png"))
+                        const Image(image: AssetImage("assets/images/home/wallet.png"))
                 ]
                 ))
                 ],
@@ -165,11 +160,8 @@ class _EditWalletState extends State<EditWallet> {
                           selectedColor: Colors.white,
                           fillColor: TColors.secondary,
                           color: TColors.secondary,
-                          constraints: BoxConstraints(minHeight: 30.0, minWidth: 140.0),
+                          constraints: const BoxConstraints(minHeight: 30.0, minWidth: 140.0),
                           borderRadius: BorderRadius.circular(5.0),
-                          children: const
-                        [Text("Regular"),
-                        Text("Once")],
                         isSelected: isSelected,
                         onPressed: (int index){
                           setState(() {
@@ -178,6 +170,9 @@ class _EditWalletState extends State<EditWallet> {
                           }
                           });
                         },
+                          children: const
+                        [Text("Regular"),
+                        Text("Once")],
                         );
   }
 }

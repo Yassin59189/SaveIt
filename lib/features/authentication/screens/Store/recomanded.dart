@@ -1,15 +1,11 @@
 // ignore_for_file: unnecessary_const
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
-import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
@@ -44,7 +40,7 @@ class _mainStoreState extends State<recomanded> {
                     "wallet",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {Get.to(Wallet());},
+                  onTap: () {Get.to(const Wallet());},
                 ),
                 ListTile(
                   title: const Text(
@@ -70,10 +66,10 @@ class _mainStoreState extends State<recomanded> {
             color: TColors.primary,
             height: 120,
             child: SAppBar(
-              title: Column(children: [
-                Container(
+              title: const Column(children: [
+                SizedBox(
                     width: 90,
-                    child: const Image(
+                    child: Image(
                         image: AssetImage("assets/images/home/logo1.png"))),
               ]),
               actions: [
@@ -116,7 +112,7 @@ class _mainStoreState extends State<recomanded> {
             const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Container(
@@ -127,7 +123,7 @@ class _mainStoreState extends State<recomanded> {
                         image: AssetImage(
                             "assets/images/recomanded/recomnd/bannerrec.png"),
                         fit: BoxFit.contain))),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Column(
@@ -135,7 +131,7 @@ class _mainStoreState extends State<recomanded> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 200,
                       width: THelperFunctions.screenWidth() * 0.85,
                       child: Row(
@@ -143,7 +139,7 @@ class _mainStoreState extends State<recomanded> {
                           Container(
                             width: 150,
                             height: 150,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
                                     "assets/images/recomanded/recomnd/ar.png"),
@@ -157,11 +153,11 @@ class _mainStoreState extends State<recomanded> {
                               alignment: Alignment.centerLeft,
                               width: 180,
                               height: 160,
-                              child: Column(
+                              child: const Column(
                                 children: [
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: const Text(
+                                    child: Text(
                                       "Artichoke",
                                       style: TextStyle(
                                           fontFamily: "poppins",
@@ -184,7 +180,7 @@ class _mainStoreState extends State<recomanded> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: const Text(
+                                    child: Text(
                                       "Savor the exquisite taste of our artichokes, perfect for adding a gourmet touch to any dish.",
                                       style: TextStyle(
                                           fontFamily: "poppins",
@@ -210,7 +206,7 @@ class _mainStoreState extends State<recomanded> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: TSizes.spaceBtwitems,
                   ),
                   Center(
@@ -218,7 +214,7 @@ class _mainStoreState extends State<recomanded> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 200,
                           width: THelperFunctions.screenWidth() * 0.85,
                           child: Row(
@@ -226,7 +222,7 @@ class _mainStoreState extends State<recomanded> {
                               Container(
                                 width: 150,
                                 height: 150,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage(
                                         "assets/images/recomanded/recomnd/zit.png"),
@@ -240,11 +236,11 @@ class _mainStoreState extends State<recomanded> {
                                   alignment: Alignment.centerLeft,
                                   width: 180,
                                   height: 160,
-                                  child: Column(
+                                  child: const Column(
                                     children: [
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: const Text(
+                                        child: Text(
                                           "Vegetable Oil",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -267,7 +263,7 @@ class _mainStoreState extends State<recomanded> {
                                       ),
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: const Text(
+                                        child: Text(
                                           "Pure and versatile, our vegetable oil is the perfect choice for all your cooking needs...",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -300,7 +296,7 @@ class _mainStoreState extends State<recomanded> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 200,
                           width: THelperFunctions.screenWidth() * 0.85,
                           child: Row(
@@ -308,7 +304,7 @@ class _mainStoreState extends State<recomanded> {
                               Container(
                                 width: 150,
                                 height: 150,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage(
                                         "assets/images/recomanded/recomnd/hrisssa.png"),
@@ -322,11 +318,11 @@ class _mainStoreState extends State<recomanded> {
                                   alignment: Alignment.centerLeft,
                                   width: 180,
                                   height: 160,
-                                  child: Column(
+                                  child: const Column(
                                     children: [
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: const Text(
+                                        child: Text(
                                           "Harissa",
                                           style: TextStyle(
                                               fontFamily: "poppins",
@@ -349,7 +345,7 @@ class _mainStoreState extends State<recomanded> {
                                       ),
                                       Align(
                                         alignment: Alignment.centerLeft,
-                                        child: const Text(
+                                        child: Text(
                                           "Savor the exquisite taste of our Harissa, perfect for adding a gourmet touch to any dish.",
                                           style: TextStyle(
                                               fontFamily: "poppins",

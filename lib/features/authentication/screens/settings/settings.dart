@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
@@ -25,7 +24,7 @@ class settings extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    const Image(
+                    Image(
                         image: AssetImage("assets/images/home/logo1.png"))
                   ],
                 ),
@@ -36,7 +35,7 @@ class settings extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(Wallet());
+                  Get.to(const Wallet());
                 },
               ),
               ListTile(
@@ -45,7 +44,7 @@ class settings extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(claimcode());
+                  Get.to(const claimcode());
                 },
               ),
               ListTile(
@@ -68,9 +67,9 @@ class settings extends StatelessWidget {
               child: Column(
                 children: [
                   SAppBar(
-                    title: Column(
+                    title: const Column(
                       children: [
-                        Container(
+                        SizedBox(
                             width: 90,
                             child: Image(
                                 image: AssetImage(
@@ -101,7 +100,7 @@ class settings extends StatelessWidget {
                         //Balance
                         Container(
                           width: 172,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16))),
@@ -111,10 +110,10 @@ class settings extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image(
+                                const Image(
                                     image: AssetImage(
                                         "assets/images/home/card.png")),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -140,7 +139,7 @@ class settings extends StatelessWidget {
                         //Total
                         Container(
                           width: 172,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(16))),
@@ -150,10 +149,10 @@ class settings extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image(
+                                const Image(
                                     image: AssetImage(
                                         "assets/images/home/coin.png")),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -182,7 +181,7 @@ class settings extends StatelessWidget {
                 ],
               ),
             ),
-            Image(image: AssetImage("assets/images/home/Vector.png")),
+            const Image(image: AssetImage("assets/images/home/Vector.png")),
             const SizedBox(
               height: 20,
             ),
@@ -193,7 +192,7 @@ class settings extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20)),
               width: screenWidth * 0.9,
               height: 53,
-              child: Center(
+              child: const Center(
                   child: Text(
                 "Settings",
                 style: TextStyle(
@@ -251,7 +250,7 @@ class settings extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {},
-                  customBorder: CircleBorder(),
+                  customBorder: const CircleBorder(),
                   child: CircleAvatar(
                     radius: 30,
                     backgroundColor: Colors.transparent,
@@ -259,7 +258,7 @@ class settings extends StatelessWidget {
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: TColors.accent, width: 1)),
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Iconsax.logout,
                           color: TColors.accent,
@@ -269,8 +268,8 @@ class settings extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 8), // Space between the icon and text
-                Text("Log Out",
+                const SizedBox(height: 8), // Space between the icon and text
+                const Text("Log Out",
                     style: TextStyle(
                       color: TColors.accent,
                       fontSize: 16,
@@ -299,20 +298,20 @@ class settings_button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: ElevatedButton(
           onPressed: () {},
           style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.transparent),
-              elevation: MaterialStateProperty.all<double>(0),
-              side: MaterialStateProperty.all<BorderSide>(
-                  BorderSide(color: TColors.secondary, width: 1)),
-              padding: MaterialStateProperty.all<EdgeInsets>(
-                  EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  WidgetStateProperty.all<Color>(Colors.transparent),
+              elevation: WidgetStateProperty.all<double>(0),
+              side: WidgetStateProperty.all<BorderSide>(
+                  const BorderSide(color: TColors.secondary, width: 1)),
+              padding: WidgetStateProperty.all<EdgeInsets>(
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ))),
@@ -330,7 +329,7 @@ class settings_button extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       text,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: TColors.secondary,
                           fontFamily: 'Poppins',
                           fontSize: 16,
@@ -339,7 +338,7 @@ class settings_button extends StatelessWidget {
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Iconsax.arrow_right_3,
                 size: 20,
                 color: TColors.secondary,

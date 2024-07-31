@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:saveit/features/authentication/controllers/login/login_controller.dart';
@@ -15,16 +14,16 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage("assets/logos/logo_colors.png")),
+              const Image(image: AssetImage("assets/logos/logo_colors.png")),
               Stack(children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 60,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
@@ -48,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
+                      SizedBox(
                           width: 100,
                           child: Image(
                             image: AssetImage(

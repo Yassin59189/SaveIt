@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:saveit/features/authentication/screens/welcome/welcome.dart';
 import 'package:saveit/utils/constants/colors.dart';
 
@@ -15,12 +14,12 @@ class CodeVerifyScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 100),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width - 40,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
@@ -44,7 +43,7 @@ class CodeVerifyScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      Container(
+                      SizedBox(
                           width: 200,
                           child: Image(
                               image: AssetImage(
@@ -54,7 +53,7 @@ class CodeVerifyScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
+                  const SizedBox(
                       width: 243,
                       child: Text(
                         "Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire",
@@ -66,7 +65,7 @@ class CodeVerifyScreen extends StatelessWidget {
                   ),
                   //Form
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width - 80,
                       child: Form(
                         child: Column(
@@ -78,7 +77,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                   height: 68,
                                   width: 56,
                                   child: TextField(
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
                                     onChanged: (value) {
@@ -91,7 +90,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(1)
                                     ],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: TColors.accent,
@@ -106,7 +105,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                   height: 68,
                                   width: 56,
                                   child: TextField(
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
                                     onChanged: (value) {
@@ -119,7 +118,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(1)
                                     ],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: TColors.accent,
@@ -134,7 +133,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                   height: 68,
                                   width: 56,
                                   child: TextField(
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
                                     onChanged: (value) {
@@ -147,7 +146,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(1)
                                     ],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: TColors.accent,
@@ -162,7 +161,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                   height: 68,
                                   width: 56,
                                   child: TextField(
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500),
                                     onChanged: (value) {
@@ -175,7 +174,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                     inputFormatters: [
                                       LengthLimitingTextInputFormatter(1)
                                     ],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: TColors.accent,
@@ -191,27 +190,27 @@ class CodeVerifyScreen extends StatelessWidget {
                             const SizedBox(
                               height: 40,
                             ),
-                            Container(
+                            SizedBox(
                                 width: 206,
                                 height: 54,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Get.to(Welcome());
+                                    Get.to(const Welcome());
                                   },
-                                  child: Text(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: TColors.primary),
+                                  child: const Text(
                                     "Continue",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: TColors.primary),
                                 )),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Didn't receive the code?",
                                   style: TextStyle(
                                       fontFamily: 'Nunito',
@@ -220,7 +219,7 @@ class CodeVerifyScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {},
-                                    child: Text(
+                                    child: const Text(
                                       "Send it again",
                                       style: TextStyle(
                                           fontFamily: 'Nunito',

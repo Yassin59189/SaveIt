@@ -3,60 +3,60 @@ import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 
 final ButtonStyle buttonPrimary = ElevatedButton.styleFrom(
-    minimumSize: Size(206.35, 54.04),
+    minimumSize: const Size(206.35, 54.04),
     backgroundColor: TColors.primary,
     elevation: 0,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontMd,
         color: TColors.white));
 
 final ButtonStyle buttonquestions = ElevatedButton.styleFrom(
-    minimumSize: Size(334.06, 60.52),
+    minimumSize: const Size(334.06, 60.52),
     backgroundColor: TColors.primary,
     elevation: 0,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontMd,
         color: TColors.white));
 
 final ButtonStyle buttonquestionSelected = ElevatedButton.styleFrom(
-    minimumSize: Size(334.06, 60.52),
+    minimumSize: const Size(334.06, 60.52),
     backgroundColor: TColors.secondary,
     elevation: 0,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontMd,
         color: TColors.white));
 
 final ButtonStyle buttonanContinueSecondary = ElevatedButton.styleFrom(
-    minimumSize: Size(203.34, 53.26),
+    minimumSize: const Size(203.34, 53.26),
     backgroundColor: TColors.accent,
     elevation: 0,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontMd,
         color: TColors.white));
 final ButtonStyle logostore = ElevatedButton.styleFrom(
-  minimumSize: Size(203.34, 53.26),
+  minimumSize: const Size(203.34, 53.26),
 );
 //vist Store
 final ButtonStyle vistPrimary = ElevatedButton.styleFrom(
-    minimumSize: Size(82.04, 22),
+    minimumSize: const Size(82.04, 22),
     backgroundColor: TColors.primary,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontexSm,
         color: TColors.white));
 final ButtonStyle vistSecondary = ElevatedButton.styleFrom(
-    minimumSize: Size(25.94, 20.33),
+    minimumSize: const Size(25.94, 20.33),
     backgroundColor: TColors.accent,
-    textStyle: TextStyle(
+    textStyle: const TextStyle(
         fontFamily: "nunito",
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontexSm,

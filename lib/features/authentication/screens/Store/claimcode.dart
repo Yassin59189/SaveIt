@@ -1,15 +1,12 @@
 // ignore_for_file: unnecessary_const
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
-import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
   bool isPressed4 = false;
@@ -45,7 +42,7 @@ class _mainStoreState extends State<claimcode> {
                     textAlign: TextAlign.center,
                   ),
                   onTap: () {
-                    Get.to(Wallet());                 },
+                    Get.to(const Wallet());                 },
                 ),
                 ListTile(
                   title: const Text(
@@ -71,10 +68,10 @@ class _mainStoreState extends State<claimcode> {
             color: TColors.primary,
             height: 120,
             child: SAppBar(
-              title: Column(children: [
-                Container(
+              title: const Column(children: [
+                SizedBox(
                     width: 90,
-                    child: const Image(
+                    child: Image(
                         image: AssetImage("assets/images/home/logo1.png"))),
               ]),
               actions: [
@@ -96,7 +93,7 @@ class _mainStoreState extends State<claimcode> {
             height: TSizes.spaceBtwitems,
           ),
           Column(children: [
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Container(
@@ -107,7 +104,7 @@ class _mainStoreState extends State<claimcode> {
                         image: AssetImage(
                             "assets/images/recomanded/recomnd/zit.png"),
                         fit: BoxFit.contain))),
-            SizedBox(
+            const SizedBox(
               height: TSizes.spaceBtwitems,
             ),
             Center(
@@ -116,7 +113,7 @@ class _mainStoreState extends State<claimcode> {
                 child: Column(
                   children: [
                     Container(
-                      child: Row(
+                      child: const Row(
                         children: [
                           Text(
                             "Vegetable Oil",
@@ -135,10 +132,10 @@ class _mainStoreState extends State<claimcode> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwitems,
                     ),
-                    Text(
+                    const Text(
                       "Pure and versatile, our vegetable oil is the perfect choice for all your cooking needs. Made from high-quality ingredients,",
                       style: TextStyle(
                           fontFamily: "poppins",
@@ -146,7 +143,7 @@ class _mainStoreState extends State<claimcode> {
                           fontSize: TSizes.fontexSm,
                           color: TColors.primary),
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Text(
                           "Marque",
@@ -166,10 +163,10 @@ class _mainStoreState extends State<claimcode> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwitems,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "18.00 DT",
@@ -180,16 +177,16 @@ class _mainStoreState extends State<claimcode> {
                             color: TColors.primary),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwitems,
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Image(
                           image: AssetImage(
                               "assets/images/recomanded/recomnd/stars.png")),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: TSizes.spaceBtwitems,
                     ),
                     SizedBox(
@@ -202,7 +199,7 @@ class _mainStoreState extends State<claimcode> {
                         style: isPressed4
                             ? buttonanContinueSecondary
                             : buttonquestionSelected,
-                        child: Text(
+                        child: const Text(
                         "Claim code",
                           style: TextStyle(color: TColors.white),
                         ))),
