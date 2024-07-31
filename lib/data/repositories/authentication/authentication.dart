@@ -81,6 +81,22 @@ class AuthenticationRepository extends GetxController {
   }
 
   sendEmailVerification() {}
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw "somthing went wrong . Please Try again";
+    }
+  }
 }
 
 /*-------------------------------------Email verification---------------------------------------------------------*/
@@ -92,10 +108,14 @@ Future<void> sendEmailVerification() async {
   } on FirebaseException catch (e) {
     throw TFirebaseException(e.code).message;
   } on FormatException catch (_) {
-    throw TFormatException();
+    throw const TFormatException();
   } on PlatformException catch (e) {
     throw TPlatformException(e.code).message;
   } catch (e) {
     throw "somthing went wrong . Please Try again";
   }
 }
+
+/*-------------------------------------Logout---------------------------------------------------------*/
+
+

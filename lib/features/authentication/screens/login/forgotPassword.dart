@@ -9,9 +9,7 @@ import 'package:saveit/features/authentication/screens/login/login.dart';
 
 class EnterEmailOnForgetPassword extends StatefulWidget {
   const EnterEmailOnForgetPassword({super.key});
-void dispose(){
- 
-}
+  void dispose() {}
   @override
   State<EnterEmailOnForgetPassword> createState() =>
       _EnterEmailOnForgetPasswordState();
@@ -94,9 +92,7 @@ class _EnterEmailOnForgetPasswordState
                           width: 214,
                           height: 56,
                           child: ElevatedButton(
-                            onPressed: () {
-                              PasswordRest,
-                            },
+                            onPressed: () {},
                             child: Text(
                               "Reset Password",
                               style: TextStyle(
