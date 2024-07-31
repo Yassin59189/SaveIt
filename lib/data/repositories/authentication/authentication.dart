@@ -33,7 +33,7 @@ class AuthenticationRepository extends GetxController {
     print('Email verified: ${user?.emailVerified}');
     print("ready called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (user != null) {
-      if (!user.emailVerified) {
+      if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyemailPage(email: _auth.currentUser?.email));
