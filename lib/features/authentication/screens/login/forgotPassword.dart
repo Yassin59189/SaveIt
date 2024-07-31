@@ -3,7 +3,7 @@ import 'package:saveit/utils/constants/colors.dart';
 
 class EnterEmailOnForgetPassword extends StatefulWidget {
   const EnterEmailOnForgetPassword({super.key});
-
+  void dispose() {}
   @override
   State<EnterEmailOnForgetPassword> createState() =>
       _EnterEmailOnForgetPasswordState();

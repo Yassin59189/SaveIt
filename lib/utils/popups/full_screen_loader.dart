@@ -7,8 +7,8 @@ class FullScreenLoader {
     showDialog(
       context: Get.overlayContext!,
       barrierDismissible: false,
-      builder: (_) => WillPopScope(
-        onWillPop: () async => false,
+      builder: (_) => PopScope(
+        canPop: false,
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Center(
