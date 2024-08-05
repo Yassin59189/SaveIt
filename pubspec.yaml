@@ -65,6 +65,7 @@ flutter:
     - assets/images/productsfood/
     - assets/images/storecloths/
     - assets/images/recomanded/recomnd/
+    - assets/images/reset_password/
     - assets/animations/checkmark.json
 
   #------------------ LOCAL FONTS ------------------#

@@ -20,4 +20,8 @@ class TText {
   static const String answer3 = 'retired';
   static const String answer4 = 'unemployed';
   static const String Continue = 'Continue';
+//rest Password
+  static const String resetPasswordText =
+      'Your Account Security is Our Prioity!We’ve Sent You a Secure Link to Safely Change Your Password And Keep Your Account Protected';
+  static const String resetPasswordTitle = 'Password reset Email Sent To';
 }

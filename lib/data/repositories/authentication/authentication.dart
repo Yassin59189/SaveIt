@@ -33,7 +33,7 @@ class AuthenticationRepository extends GetxController {
     print('Email verified: ${user?.emailVerified}');
     print("ready called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (user != null) {
-      if (!user.emailVerified) {
+      if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyemailPage(email: _auth.currentUser?.email));
@@ -45,7 +45,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => const LoginScreen());
+        Get.offAll(() => /* LoginScreen() */ VerifyemailPage());
       }
     }
   }
@@ -80,7 +80,6 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  sendEmailVerification() {}
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -114,21 +113,22 @@ class AuthenticationRepository extends GetxController {
       throw "somthing went wrong . Please Try again";
     }
   }
+
+  Future<void> sendEmailVerification() async {
+    try {
+      await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw "somthing went wrong . Please Try again";
+    }
+  }
 }
 
 /*-------------------------------------Email verification---------------------------------------------------------*/
-Future<void> sendEmailVerification() async {
-  try {
-    await FirebaseAuth.instance.currentUser?.sendEmailVerification();
-  } on FirebaseAuthException catch (e) {
-    throw TFirebaseAuthException(e.code).message;
-  } on FirebaseException catch (e) {
-    throw TFirebaseException(e.code).message;
-  } on FormatException catch (_) {
-    throw const TFormatException();
-  } on PlatformException catch (e) {
-    throw TPlatformException(e.code).message;
-  } catch (e) {
-    throw "somthing went wrong . Please Try again";
-  }
-}
