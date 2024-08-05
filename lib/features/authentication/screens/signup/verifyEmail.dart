@@ -139,24 +139,6 @@ class _VerifyemailPageState extends State<VerifyemailPage> {
                                 fontWeight: FontWeight.w300,
                                 color: TColors.white),
                           ),
-                          SizedBox(
-                              width: 206,
-                              height: 54,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Get.to(
-                                      controller.checkEmailVeficationStatus());
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: TColors.accent),
-                                child: const Text(
-                                  "Continue",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              )),
                           TextButton(
                               onPressed: !widget.allowResend
                                   ? null
@@ -165,14 +147,14 @@ class _VerifyemailPageState extends State<VerifyemailPage> {
                                       Get.to(
                                           controller.sendEmailVerification());
                                     },
-                              child: const Text(
-                                "Send it again",
-                                style: TextStyle(
-                                    fontFamily: 'Nunito',
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w300,
-                                    color: TColors.p),
-                              ))
+                              child: Text("Send it again",
+                                  style: TextStyle(
+                                      fontFamily: 'Nunito',
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w300,
+                                      color: !widget.allowResend
+                                          ? Color.fromARGB(69, 255, 255, 255)
+                                          : TColors.accent)))
                         ],
                       ),
                     ],

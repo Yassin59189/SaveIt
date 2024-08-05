@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:async';
+
 import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -8,8 +10,28 @@ import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
 
-class Reset_Password_Screen extends StatelessWidget {
-  const Reset_Password_Screen({super.key});
+class Reset_Password_Screen extends StatefulWidget {
+  Reset_Password_Screen({super.key});
+  bool allowResend = true;
+
+  @override
+  State<Reset_Password_Screen> createState() => _Reset_Password_ScreenState();
+}
+
+class _Reset_Password_ScreenState extends State<Reset_Password_Screen> {
+  didClickResend() {
+    setState(() {
+      widget.allowResend = false;
+    });
+
+    Timer(Duration(seconds: 30), () {
+      setState(() {
+        widget.allowResend = true;
+      });
+      print("Execute this code afer 2 seconds");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,25 +101,41 @@ class Reset_Password_Screen extends StatelessWidget {
                         height: 54.04,
                         child: ElevatedButton(
                             onPressed: () {
-                              /* Get.to(const );  hot page li b3dha*/
+                              /* Get.to(const );  hot page li b3d continue lhne */
                             },
                             style: buttonanContinueSecondary,
                             child: const Text(
                               "Continue",
                               style: TextStyle(color: TColors.white),
                             ))),
-                    SizedBox(
-                        width: 206.35,
-                        height: 54.04,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              /* Get.to(const );  hot function t3 resend*/
-                            },
-                            style: buttonPrimary,
-                            child: const Text(
-                              "Resend Email",
-                              style: TextStyle(color: TColors.white),
-                            )))
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Didn't receive an Email?",
+                          style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontSize: 13,
+                              fontWeight: FontWeight.w300,
+                              color: TColors.white),
+                        ),
+                        TextButton(
+                            onPressed: !widget.allowResend
+                                ? null
+                                : () {
+                                    didClickResend();
+                                    /* Get.to();  hot el Resend lhne */
+                                  },
+                            child: Text("Send it again",
+                                style: TextStyle(
+                                    fontFamily: 'Nunito',
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w300,
+                                    color: !widget.allowResend
+                                        ? Color.fromARGB(69, 255, 255, 255)
+                                        : TColors.accent)))
+                      ],
+                    ),
                   ],
                 )
               ],

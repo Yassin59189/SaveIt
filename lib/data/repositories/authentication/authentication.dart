@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
@@ -45,7 +46,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => /* LoginScreen() */ VerifyemailPage());
+        Get.offAll(() => /* LoginScreen() */ Reset_Password_Screen());
       }
     }
   }
