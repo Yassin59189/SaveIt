@@ -15,7 +15,8 @@ import 'package:saveit/utils/helpers/helper_functions.dart';
 class Reset_Password_Screen extends StatefulWidget {
   Reset_Password_Screen({super.key});
   bool allowResend = true;
-  final test = "this is a test";
+  final test = "this is a test wtf do you mean men ";
+  final test2 = "this is a test wtf do you mean men ";
   @override
   State<Reset_Password_Screen> createState() => _Reset_Password_ScreenState();
 }
