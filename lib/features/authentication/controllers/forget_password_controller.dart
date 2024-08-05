@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saveit/common/widgets/snackBars/loaders.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
 import 'package:saveit/features/authentication/screens/login/forgotPassword.dart';
 
 class ForgetPasswordController extends GetxController {
@@ -28,7 +29,7 @@ class ForgetPasswordController extends GetxController {
 
       /* Redirect */
 
-      Get.to(() => res);
+      Get.to(() => Reset_Password_Screen());
     } catch (e) {}
   }
 
