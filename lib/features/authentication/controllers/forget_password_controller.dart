@@ -28,7 +28,7 @@ class ForgetPasswordController extends GetxController {
 
       /* Redirect */
 
-      Get.to(() => EnterEmailOnForgetPassword());
+      Get.to(() => res);
     } catch (e) {}
   }
 
