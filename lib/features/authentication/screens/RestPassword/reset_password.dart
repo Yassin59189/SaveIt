@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -13,7 +15,7 @@ import 'package:saveit/utils/helpers/helper_functions.dart';
 class Reset_Password_Screen extends StatefulWidget {
   Reset_Password_Screen({super.key});
   bool allowResend = true;
-
+  final test = "this is a test";
   @override
   State<Reset_Password_Screen> createState() => _Reset_Password_ScreenState();
 }
