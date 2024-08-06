@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:saveit/features/authentication/controllers/forget_password_controller.dart';
+import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
 import 'package:saveit/utils/constants/colors.dart';
+import 'package:saveit/utils/validators/validation.dart';
 
 class EnterEmailOnForgetPassword extends StatefulWidget {
   const EnterEmailOnForgetPassword({super.key});
@@ -13,8 +18,7 @@ class _EnterEmailOnForgetPasswordState
     extends State<EnterEmailOnForgetPassword> {
   @override
   Widget build(BuildContext context) {
-/*     final controller = Get.put(const verifyEmailController())
- */
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -67,40 +71,42 @@ class _EnterEmailOnForgetPasswordState
                   ),
                   //Form
                   Form(
+                      key: controller.forgetPasswordFormKey,
                       child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                            labelText: "Email",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30))),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      //Send code button
-                      SizedBox(
-                          width: 214,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              /*     PasswordRest, */
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: TColors.primary),
-                            child: const Text(
-                              "Reset Password",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                          )),
-                    ],
-                  ))
+                        children: [
+                          TextFormField(
+                            controller: controller.email,
+                            validator: TValidator.validateEmail,
+                            decoration: InputDecoration(
+                                labelText: "Email",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          //Send code button
+                          SizedBox(
+                              width: 214,
+                              height: 56,
+                              child: ElevatedButton(
+                                onPressed: () =>
+                                    controller.sendPasswordResetEmail(),
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: TColors.primary),
+                                child: const Text(
+                                  "Reset Password",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                              )),
+                        ],
+                      ))
                 ],
               ),
             ),

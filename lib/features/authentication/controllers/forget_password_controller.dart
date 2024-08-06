@@ -29,11 +29,24 @@ class ForgetPasswordController extends GetxController {
 
       /* Redirect */
 
-      Get.to(() => Reset_Password_Screen());
-    } catch (e) {}
+      Get.to(() => Reset_Password_Screen(
+            email: email.text.trim(),
+          ));
+    } catch (e) {
+      Loaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+    }
   }
 
   resendPasswordResetEmail(String email) async {
-    try {} catch (e) {}
+    try {
+      // Loading
+      // Internet check
+
+      await AuthenticationRepository.instance.sendPasswordResetEmail(email);
+
+      Loaders.successSnackBar(
+          title: 'Email Sent',
+          message: 'Email link sent to reset your password'.tr);
+    } catch (e) {}
   }
 }
