@@ -14,6 +14,7 @@ import 'package:saveit/utils/exceptions/firebase_exceptions.dart';
 import 'package:saveit/utils/exceptions/format_exceptions.dart';
 import 'package:saveit/utils/exceptions/platform_exceptions.dart';
 import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart';
+import 'package:saveit/features/authentication/screens/settings/profile.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -46,7 +47,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => LoginScreen());
+        Get.offAll(() => /* LoginScreen() */ Profile());
       }
     }
   }
