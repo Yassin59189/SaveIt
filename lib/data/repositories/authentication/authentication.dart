@@ -7,6 +7,7 @@ import 'package:saveit/features/authentication/screens/RestPassword/reset_passwo
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
+import 'package:saveit/features/authentication/screens/settings/notification.dart';
 import 'package:saveit/navigation_menu.dart';
 /* import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart'; */
 import 'package:saveit/utils/exceptions/firebase_auth_exceptions.dart';
@@ -47,7 +48,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => /* LoginScreen() */ Profile());
+        Get.offAll(() => /* LoginScreen() */ Notification());
       }
     }
   }
