@@ -53,8 +53,118 @@ class _NotificationState extends State<Notification> {
                 ),
               ],
             ),
+            SizedBox(height: screenHeight * 0.03),
             Column(
-              children: [],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Common",
+                  style: TextStyle(
+                      color: TColors.primary,
+                      fontSize: TSizes.lg - 5,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.left,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Notification_settings(
+                    text: 'General Notification',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                Notification_settings(
+                    text: 'Sound',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'Vibrate',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "System & services update",
+                  style: TextStyle(
+                      color: TColors.primary,
+                      fontSize: TSizes.lg - 5,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.left,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Notification_settings(
+                    text: 'App updates',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'Bill Reminder',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'Promotions',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'Discount Available',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'Payment Request',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Others",
+                  style: TextStyle(
+                      color: TColors.primary,
+                      fontSize: TSizes.lg - 5,
+                      fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.left,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Notification_settings(
+                    text: 'New Service Available',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+                const SizedBox(
+                  height: 3,
+                ),
+                Notification_settings(
+                    text: 'New Tips Available',
+                    onPressed: () {},
+                    width: screenWidth * 0.8,
+                    height: screenHeight * 0.04),
+              ],
             )
           ],
         ),
@@ -97,12 +207,14 @@ class _Notification_settingsState extends State<Notification_settings> {
               style: TextStyle(color: TColors.primary, fontSize: TSizes.fontMd),
             ),
             Transform.scale(
-              scale: 0.8,
+              scale: 0.7,
               child: Switch(
                   activeColor: Color.fromARGB(255, 255, 255, 255),
                   activeTrackColor: TColors.secondary,
-                  inactiveTrackColor: Color.fromRGBO(177, 177, 177, 0.719),
+                  inactiveTrackColor: Color.fromRGBO(187, 187, 187, 0.718),
                   inactiveThumbColor: TColors.white,
+                  trackOutlineColor:
+                      MaterialStateProperty.all(Colors.transparent),
                   value: isSwitched,
                   onChanged: (value) {
                     setState(() {
