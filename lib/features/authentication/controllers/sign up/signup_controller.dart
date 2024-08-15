@@ -14,15 +14,15 @@ class SignupController extends GetxController {
   final fullname = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
+  final budget = "0";
   final verifPassword = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   // Sign up
   Future<void> signup() async {
     try {
       // Loading
-      print('Signup called');
       FullScreenLoader.openLoadingDialog(
-          'We are processing your information...', TImage.colorLogo);
+          'We are processing your information...');
       // Check Internet
       /* final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
@@ -41,25 +41,28 @@ class SignupController extends GetxController {
               email.text.trim(), password.text.trim());
       // Save
       final NewUser = UserModel(
-          id: userCredential.user!.uid,
-          fullName: fullname.text.trim(),
-          email: email.text.trim(),
-          profilePicture: '');
+        id: userCredential.user!.uid,
+        fullName: fullname.text.trim(),
+        email: email.text.trim(),
+        profilePicture: '',
+        budget: "0",
+      );
 
       final userRepository = Get.put(UserRepository());
-      userRepository.saveUserRecord(NewUser);
+      await userRepository.saveUserRecord(NewUser);
 
       // Success message
       Loaders.successSnackBar(
           title: 'Congratulations',
           message: 'Your account has been created! verify email to continue');
 
-      // Move to vrify email
+      print("Navigating to Verify Email Page...");
+      // Move to verify email
       Get.to(() => VerifyemailPage(email: email.text.trim()));
+      print("Navigation successful");
     } catch (e) {
-      Loaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
-    } finally {
       FullScreenLoader.stopLoading();
+      Loaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
 }

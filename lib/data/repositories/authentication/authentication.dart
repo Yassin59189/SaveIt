@@ -21,18 +21,17 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  /* AUTHENTICATED USER DATA */
+  User? get authUser => _auth.currentUser;
+
   @override
   void onReady() {
-    print("ready called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     FlutterNativeSplash.remove();
     screenRedirect();
   }
 
   void screenRedirect() async {
     final user = _auth.currentUser;
-    print('Current user: ${user?.email}');
-    print('Email verified: ${user?.emailVerified}');
-    print("ready called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     if (user != null) {
       if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());

@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^5.0.2
 
   carousel_slider: any
+  shimmer: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

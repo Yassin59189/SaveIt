@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/common/widgets/loaders/shimmer.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/controllers/user/user_controller.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
@@ -13,6 +16,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     Future NotificationBottomSheet(BuildContext context) {
       return showModalBottomSheet(
           context: context,
@@ -135,13 +139,16 @@ class HomeScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       color: TColors.primary.withOpacity(0.8)),
                                 ),
-                                Text(
-                                  "450.000DT",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: TColors.primary.withOpacity(0.8)),
+                                Obx(
+                                  () => Text(
+                                    controller.user.value.budget + "DT",
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            TColors.primary.withOpacity(0.8)),
+                                  ),
                                 )
                               ],
                             ),
@@ -208,10 +215,10 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Hello!",
                           style: TextStyle(
                               color: Colors.white,
@@ -219,14 +226,20 @@ class HomeScreen extends StatelessWidget {
                               fontSize: 18,
                               fontWeight: FontWeight.w700),
                         ),
-                        Text(
-                          "Yassin Ben Mosbeh",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        Obx(() {
+                          if (controller.profileLoading.value) {
+                            return ShimmerEffect(width: 80, height: 15);
+                          } else {
+                            return Text(
+                              controller.user.value.fullName,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            );
+                          }
+                        }),
                       ],
                     ),
                     //Notification button
@@ -296,7 +309,7 @@ class HomeScreen extends StatelessWidget {
             //History content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: GridView.builder(
+              /* child: GridView.builder(
                   itemCount: 6,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -304,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 1,
                       mainAxisExtent: 60,
                       mainAxisSpacing: 20),
-                  itemBuilder: (_, index) => const HistoryContent()),
+                  itemBuilder: (_, index) => const HistoryContent()), */
             )
           ],
         ),
@@ -327,35 +340,41 @@ class HistoryContent extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image(image: AssetImage("assets/icons/history.png")),
+              Image(image: AssetImage("assets/images/home/round.png")),
+              SizedBox(
+                width: 10,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Lorem Ipsum",
+                    "200DT",
                     style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400),
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Poppins'),
                   ),
                   Text(
-                    "Yesterday 19:12",
+                    "sended to your friend.",
                     style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
+                        color: Colors.white,
+                        fontSize: 12,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xFF999999)),
-                  )
+                        fontFamily: 'Poppins'),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
-          Text("-10.000DT",
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF999999)))
+          Text(
+            "02/11/2022",
+            style: TextStyle(
+                color: TColors.primary,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Poppins'),
+          )
         ],
       ),
     );
