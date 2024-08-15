@@ -168,9 +168,6 @@ class SignupForm extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Form Key: ${controller.signupFormKey}');
-                    print(
-                        'Current State: ${controller.signupFormKey.currentState}');
                     controller.signup();
                   },
                   style: ElevatedButton.styleFrom(
