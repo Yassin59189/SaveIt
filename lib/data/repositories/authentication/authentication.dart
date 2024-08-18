@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
+import 'package:saveit/features/authentication/screens/settings/Languge.dart';
 import 'package:saveit/features/authentication/screens/settings/notification.dart';
 import 'package:saveit/navigation_menu.dart';
 /* import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart'; */
@@ -48,7 +50,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => /* LoginScreen() */ Notification());
+        Get.offAll(() => /* LoginScreen() */ NewTransaction());
       }
     }
   }

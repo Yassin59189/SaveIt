@@ -85,3 +85,19 @@ final ButtonStyle mdDisabled = ElevatedButton.styleFrom(
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontexSm,
         color: TColors.white));
+final ButtonStyle sSecondary = ElevatedButton.styleFrom(
+    minimumSize: const Size(160.34, 40.71),
+    backgroundColor: TColors.secondary,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
+final ButtonStyle sWhite = ElevatedButton.styleFrom(
+    minimumSize: const Size(160.34, 40.71),
+    backgroundColor: TColors.white,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
