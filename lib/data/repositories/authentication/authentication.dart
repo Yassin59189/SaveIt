@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
+import 'package:saveit/features/authentication/screens/settings/Languge.dart';
+import 'package:saveit/features/authentication/screens/settings/notification.dart';
 import 'package:saveit/navigation_menu.dart';
 /* import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart'; */
 import 'package:saveit/utils/exceptions/firebase_auth_exceptions.dart';
@@ -14,6 +17,7 @@ import 'package:saveit/utils/exceptions/firebase_exceptions.dart';
 import 'package:saveit/utils/exceptions/format_exceptions.dart';
 import 'package:saveit/utils/exceptions/platform_exceptions.dart';
 import 'package:saveit/features/authentication/screens/signup/verifyEmail.dart';
+import 'package:saveit/features/authentication/screens/settings/profile.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -45,7 +49,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => LoginScreen());
+        Get.offAll(() => /* LoginScreen() */ NewTransaction());
       }
     }
   }

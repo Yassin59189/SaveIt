@@ -41,6 +41,10 @@ dependencies:
   cloud_firestore: ^5.0.2
 
   carousel_slider: any
+
+  flutter_hooks: ^0.20.5
+  animated_toggle_switch: ^0.8.3
+  currency_formatter: ^2.2.1
   shimmer: ^3.0.0
 dev_dependencies:
   flutter_test:
@@ -67,6 +71,7 @@ flutter:
     - assets/images/storecloths/
     - assets/images/recomanded/recomnd/
     - assets/images/reset_password/
+    - assets/images/profile/
     - assets/animations/checkmark.json
 
   #------------------ LOCAL FONTS ------------------#

@@ -61,3 +61,43 @@ final ButtonStyle vistSecondary = ElevatedButton.styleFrom(
         fontWeight: FontWeight.w600,
         fontSize: TSizes.fontexSm,
         color: TColors.white));
+final ButtonStyle mdaccent = ElevatedButton.styleFrom(
+    minimumSize: const Size(180.34, 51.71),
+    backgroundColor: TColors.accent,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
+final ButtonStyle mdPrimary = ElevatedButton.styleFrom(
+    minimumSize: const Size(180.34, 51.71),
+    backgroundColor: TColors.primary,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
+final ButtonStyle mdDisabled = ElevatedButton.styleFrom(
+    minimumSize: const Size(180.34, 51.71),
+    backgroundColor: const Color.fromARGB(255, 63, 63, 65),
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
+final ButtonStyle sSecondary = ElevatedButton.styleFrom(
+    minimumSize: const Size(160.34, 40.71),
+    backgroundColor: TColors.secondary,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
+final ButtonStyle sWhite = ElevatedButton.styleFrom(
+    minimumSize: const Size(160.34, 40.71),
+    backgroundColor: TColors.white,
+    textStyle: const TextStyle(
+        fontFamily: "popins",
+        fontWeight: FontWeight.w600,
+        fontSize: TSizes.fontexSm,
+        color: TColors.white));
