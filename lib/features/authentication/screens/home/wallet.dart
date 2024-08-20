@@ -5,6 +5,8 @@ import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/edit_wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
+import 'package:currency_formatter/currency_formatter.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Wallet extends StatefulWidget {
   const Wallet({super.key});
@@ -13,11 +15,23 @@ class Wallet extends StatefulWidget {
   State<Wallet> createState() => _WalletState();
 }
 
-String dropdownValue = 'This mounth';
+CurrencyFormat DinarSettings = CurrencyFormat(
+  code: 'dt',
+  symbol: 'DT',
+  symbolSide: SymbolSide.right,
+  thousandSeparator: '.',
+  decimalSeparator: ',',
+  symbolSeparator: ' ',
+);
+String dropdownValue = 'Today';
+String filterType = "all";
 
 class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       endDrawer: Drawer(
         child: Expanded(
@@ -29,8 +43,7 @@ class _WalletState extends State<Wallet> {
                 ),
                 child: Column(
                   children: [
-                    Image(
-                        image: AssetImage("assets/images/home/logo1.png"))
+                    Image(image: AssetImage("assets/images/home/logo1.png"))
                   ],
                 ),
               ),
@@ -102,8 +115,10 @@ class _WalletState extends State<Wallet> {
                     height: 10,
                   ),
                   //Balance
-                  const Text(
-                    "358,50DT",
+                  Text(
+                    CurrencyFormatter.format(
+                        358500, //hott el blance fi blast el number
+                        DinarSettings),
                     style: TextStyle(
                         fontFamily: 'Poppins',
                         color: Colors.white,
@@ -136,38 +151,49 @@ class _WalletState extends State<Wallet> {
                                 ),
                                 width: 118,
                                 height: 37,
-                                child: DropdownButton<String>(
-                                  value: dropdownValue,
-                                  icon: const Icon(
-                                    Iconsax.arrow_bottom,
-                                    color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: new Theme(
+                                    data: Theme.of(context).copyWith(
+                                      canvasColor: TColors.secondary,
+                                    ),
+                                    child: DropdownButton<String>(
+                                      value: dropdownValue,
+                                      icon: Transform.scale(
+                                        scale: 0.6,
+                                        child: const Icon(
+                                          Iconsax.arrow_down_1,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          dropdownValue = newValue!;
+                                        });
+                                      },
+                                      items: const [
+                                        DropdownMenuItem<String>(
+                                          value: 'Today',
+                                          child: Text("Today"),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'This week',
+                                          child: Text("This week"),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'This month',
+                                          child: Text("This mounth"),
+                                        ),
+                                        DropdownMenuItem<String>(
+                                          value: 'This Year',
+                                          child: Text("This Year"),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownValue = newValue!;
-                                    });
-                                  },
-                                  items: const [
-                                    DropdownMenuItem<String>(
-                                      value: 'This mounth',
-                                      child: Text("This mounth"),
-                                    ),
-                                    DropdownMenuItem<String>(
-                                      value: 'This week',
-                                      child: Text("This week"),
-                                    ),
-                                    DropdownMenuItem<String>(
-                                      value: 'Last mounth',
-                                      child: Text("Last mounth"),
-                                    ),
-                                    DropdownMenuItem<String>(
-                                      value: 'Last week',
-                                      child: Text("Last week"),
-                                    )
-                                  ],
                                 ),
                               ),
                               const Text(
@@ -183,68 +209,78 @@ class _WalletState extends State<Wallet> {
                             height: 20,
                           ),
                           //stats info
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               //Income
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image(
-                                      image: AssetImage(
-                                          "assets/images/home/income.png")),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Income",
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: TColors.primary,
-                                            fontSize: 13),
-                                      ),
-                                      Text(
-                                        "000.00DT",
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: TColors.primary,
-                                            fontSize: 17),
-                                      )
-                                    ],
-                                  ),
-                                ],
+                              SizedBox(
+                                width: screenWidth * 0.36,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image(
+                                        image: AssetImage(
+                                            "assets/images/home/income.png")),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Income",
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              color: TColors.primary,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          "000.00DT",
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              color: TColors.primary,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               //Spending
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image(
-                                      image: AssetImage(
-                                          "assets/images/home/spending.png")),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "spending",
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: TColors.primary,
-                                            fontSize: 13),
-                                      ),
-                                      Text(
-                                        "000.00DT",
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: TColors.primary,
-                                            fontSize: 17),
-                                      )
-                                    ],
-                                  ),
-                                ],
+                              SizedBox(
+                                width: screenWidth * 0.36,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image(
+                                        image: AssetImage(
+                                            "assets/images/home/spending.png")),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Expenses",
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              color: TColors.primary,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          "000.00DT",
+                                          style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              color: TColors.primary,
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -286,6 +322,11 @@ class _WalletState extends State<Wallet> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image:
+                        AssetImage("assets/images/home/bg_newTransaction.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 height: 500,
                 child: Column(
@@ -298,38 +339,67 @@ class _WalletState extends State<Wallet> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                filterType = "all";
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: TColors.secondary),
-                            child: const Text(
+                                side: BorderSide(
+                                    width: 2, color: TColors.secondary),
+                                backgroundColor: filterType == 'all'
+                                    ? TColors.secondary
+                                    : TColors.white),
+                            child: Text(
                               "All",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: filterType == 'all'
+                                    ? TColors.white
+                                    : TColors.secondary,
                               ),
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                filterType = "income";
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shadowColor: Colors.transparent,
-                                side: const BorderSide(
-                                    width: 2, color: TColors.secondary)),
-                            child: const Text(
+                              backgroundColor: filterType == 'income'
+                                  ? TColors.secondary
+                                  : TColors.white,
+                              shadowColor: Colors.transparent,
+                              side: BorderSide(
+                                  width: 2, color: TColors.secondary),
+                            ),
+                            child: Text(
                               "Income",
-                              style: TextStyle(color: TColors.secondary),
+                              style: TextStyle(
+                                  color: filterType == 'income'
+                                      ? TColors.white
+                                      : TColors.secondary),
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                filterType = "expense";
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
+                                backgroundColor: filterType == 'expense'
+                                    ? TColors.secondary
+                                    : Colors.white,
                                 shadowColor: Colors.transparent,
                                 side: const BorderSide(
                                     width: 2, color: TColors.secondary)),
-                            child: const Text(
-                              "Spending",
-                              style: TextStyle(color: TColors.secondary),
+                            child: Text(
+                              "Expense",
+                              style: TextStyle(
+                                  color: filterType == 'expense'
+                                      ? TColors.white
+                                      : TColors.secondary),
                             ),
                           ),
                         ],
@@ -351,7 +421,7 @@ class _WalletState extends State<Wallet> {
                                 fontSize: 13,
                                 color: TColors.secondary),
                           ),
-                          Container(
+                          /*    Container(
                             decoration: BoxDecoration(
                                 color: TColors.secondary,
                                 borderRadius: BorderRadius.circular(10)),
@@ -363,7 +433,7 @@ class _WalletState extends State<Wallet> {
                                 color: Colors.white,
                               ),
                             ),
-                          )
+                          ) */
                         ],
                       ),
                     ),
@@ -372,10 +442,34 @@ class _WalletState extends State<Wallet> {
                     ),
                     //content
                     SizedBox(
-                        width: MediaQuery.of(context).size.width - 75,
-                        child: const HistoryContent()),
+                        width: MediaQuery.of(context).size.width,
+                        child: HistoryContent(
+                          type: "expense", //inome or expense
+                          amount: CurrencyFormatter.format(
+                              10000, //hott el amount fi blast el 1000
+                              DinarSettings),
+                          title: "Lorem Ipsum",
+                          date: DateTime.now().subtract(Duration(
+                              days:
+                                  2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                        )),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: HistoryContent(
+                          type: "income", //inome or expense
+                          amount: CurrencyFormatter.format(
+                              10000, //hott el amount fi blast el 1000
+                              DinarSettings),
+                          title: "Lorem IpsumT",
+                          date: DateTime.now().subtract(Duration(
+                              days:
+                                  2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                        )),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 30,
               )
             ],
           ),
@@ -385,33 +479,58 @@ class _WalletState extends State<Wallet> {
   }
 }
 
-class HistoryContent extends StatelessWidget {
-  const HistoryContent({
+class HistoryContent extends StatefulWidget {
+  String title;
+  String amount;
+  String type;
+  DateTime date;
+  HistoryContent({
+    required this.title,
+    required this.amount,
+    required this.type,
+    required this.date,
     super.key,
   });
+  @override
+  State<HistoryContent> createState() => _HistoryContentState();
+}
 
+class _HistoryContentState extends State<HistoryContent> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 10),
+    print(widget.amount);
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Image(image: AssetImage("assets/icons/history.png")),
+              Container(
+                width: 60,
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Icon(
+                      widget.type == "expense"
+                          ? Iconsax.empty_wallet5
+                          : Iconsax.empty_wallet_add5,
+                      color: TColors.accent,
+                      size: 20),
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Lorem Ipsum",
+                    widget.title,
                     style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 15,
                         fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    "Yesterday 19:12",
+                    timeago.format(widget.date),
                     style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 11,
@@ -422,7 +541,10 @@ class HistoryContent extends StatelessWidget {
               )
             ],
           ),
-          Text("-10.000DT",
+          Text(
+              widget.type == "income"
+                  ? "+" + widget.amount
+                  : "-" + widget.amount,
               style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 16,

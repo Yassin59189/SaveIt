@@ -45,6 +45,7 @@ dependencies:
   animated_toggle_switch: ^0.8.3
   currency_formatter: ^2.2.1
   shimmer: ^3.0.0
+  timeago: ^3.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

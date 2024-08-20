@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/RestPassword/reset_password.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
@@ -49,7 +50,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => /* LoginScreen() */ NewTransaction());
+        Get.offAll(() => /* LoginScreen() */ Wallet());
       }
     }
   }
