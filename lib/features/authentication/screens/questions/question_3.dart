@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:saveit/features/authentication/controllers/sign%20up/signup_controller.dart';
+import 'package:saveit/features/authentication/controllers/update/update_budget_controller.dart';
 import 'package:saveit/features/authentication/screens/questions/Q_dependencies%20.dart';
 import 'package:saveit/features/authentication/screens/questions/question_1.dart';
 import 'package:saveit/utils/constants/buttons.dart';
@@ -6,6 +10,7 @@ import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
+import 'package:saveit/utils/validators/validation.dart';
 
 class Question3 extends StatefulWidget {
   const Question3({super.key});
@@ -22,17 +27,22 @@ class _question3State extends State<Question3> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UpdateBudgetController());
+
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            padding:
+                const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
                   hoverColor: TColors.secondary,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const question1()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const question1()));
                   },
                   icon: const Icon(Icons.arrow_back_rounded)),
             ),
@@ -59,11 +69,17 @@ class _question3State extends State<Question3> {
                 ),
                 SizedBox(
                   width: 334.06,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "income",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30))),
+                  child: Form(
+                    key: controller.UpdateBudgetFormKey,
+                    child: TextFormField(
+                      controller: controller.budget,
+                      validator: (value) =>
+                          TValidator.validateEmptyText('income', value),
+                      decoration: InputDecoration(
+                          labelText: "income",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -71,12 +87,7 @@ class _question3State extends State<Question3> {
                 ),
                 SizedBox(
                     child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const QuestionDep()));
-                        },
+                        onPressed: () => controller.updateBudget(),
                         style: buttonanContinueSecondary,
                         child: const Text(
                           TText.Continue,
