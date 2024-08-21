@@ -498,8 +498,6 @@ class HistoryContent extends StatefulWidget {
 class _HistoryContentState extends State<HistoryContent> {
   @override
   Widget build(BuildContext context) {
-    print(widget.amount);
-
     return Padding(
       padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       child: Row(
