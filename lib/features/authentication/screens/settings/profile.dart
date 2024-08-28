@@ -148,7 +148,7 @@ class _ProfileState extends State<Profile> {
                     height: 10,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   // Delete Account
                   Column(
@@ -246,7 +246,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       const SizedBox(
                           height: 8), // Space between the icon and text
-                      const Text("Delete Account",
+                      const Text("Log out",
                           style: TextStyle(
                             color: TColors.accent,
                             fontSize: 16,

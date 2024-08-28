@@ -174,9 +174,10 @@ class _NewTransaction extends State<NewTransaction> {
                                                         TColors.white,
                                                         local.animationValue),
                                                     local.value
-                                                        ? Iconsax.shopping_cart
+                                                        ? Icons
+                                                            .shopping_cart_rounded
                                                         : Iconsax
-                                                            .empty_wallet_add),
+                                                            .empty_wallet_add5),
                                               ),
                                               Text(
                                                 local.value

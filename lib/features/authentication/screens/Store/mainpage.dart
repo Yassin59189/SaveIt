@@ -1,15 +1,18 @@
-// ignore_for_file: unnecessary_const
+// ignore_for_file: unnecessary_const, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
-import 'package:saveit/features/authentication/screens/Store/clothStorre.dart';
-import 'package:saveit/features/authentication/screens/Store/vig2.dart';
-import 'package:saveit/utils/constants/buttons.dart';
+import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
+import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:saveit/utils/constants/Veg_list_of_items.dart';
+import 'package:saveit/utils/constants/Fruits_list_of_items.dart';
 
 class mainStore extends StatefulWidget {
   const mainStore({super.key});
@@ -18,6 +21,23 @@ class mainStore extends StatefulWidget {
   State<mainStore> createState() => _mainStoreState();
 }
 
+final sampleItemss = [
+  {"imageUrl": "https://ychef.files.bbci.co.uk/1280x720/p07v2wjn.jpg"},
+  {"imageUrl": "https://sklep.onix.pl/wp-content/uploads/2021/03/banan.jpg"},
+  {
+    "imageUrl":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6v6-5oWwpOH3jeOliF9RJObbpb9OAYn8IZw&s"
+  },
+  {
+    "imageUrl":
+        "https://www.elaoula.com/wp-content/uploads/2022/03/Gaufrettes-CHOCOTOM-100g-e1678392797891.jpg"
+  },
+  {
+    "imageUrl":
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmLVXtRetmKw_HvsSJ2YQ4XYdqFUPcBFu77Q&s"
+  },
+];
+
 class _mainStoreState extends State<mainStore> {
   @override
   Widget build(BuildContext context) {
@@ -25,433 +45,346 @@ class _mainStoreState extends State<mainStore> {
         endDrawer: Drawer(
           child: ListView(
             children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: TColors.primary,
+                ),
+                child: Column(
+                  children: [
+                    const Image(
+                        image: AssetImage("assets/images/home/logo1.png"))
+                  ],
+                ),
+              ),
               ListTile(
-                title: const Text("hello 1"),
+                title: const Text(
+                  "wallet",
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  Get.to(const Wallet());
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  "coupon",
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  Get.to(const claimcode());
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  "settings",
+                  textAlign: TextAlign.center,
+                ),
                 onTap: () {},
-              )
+              ),
             ],
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(children: [
-            Container(
-              color: TColors.primary,
-              height: 120,
-              child: SAppBar(
-                title: const Column(children: [
-                  SizedBox(
-                      width: 90,
-                      child: Image(
-                          image: AssetImage("assets/images/home/logo1.png"))),
-                ]),
-                actions: [
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Iconsax.menu_14,
-                        color: Colors.white,
-                      ))
-                ],
-              ),
-            ),
-            const Image(image: AssetImage("assets/images/home/Vector.png")),
-            /* Container(
-              width: THelperFunctions.screenWidth(),
-              height: THelperFunctions.screenHeight() * 0.15,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage(TImage.sthead),
-                /* fit: BoxFit.contain, */
-                fit: BoxFit.fill,
-              )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-                    child: SizedBox(
-                      width: 124,
-                      height: 103,
-                      child: IconButton(
-                        hoverColor: const Color.fromARGB(117, 10, 106, 203),
-                        style: logostore,
-                        icon: Container(
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                            image: AssetImage(TImage.horizantalwhiteLogo),
-                            fit: BoxFit.fitWidth,
-                          )),
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ),
-                  Container(
-                      child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: IconButton(
-                            hoverColor: const Color.fromARGB(117, 10, 106, 203),
-                            style: logostore,
-                            icon: Container(
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                image: AssetImage(TImage.shopingcart),
-                              )),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Builder(builder: (context) {
-                            return IconButton(
-                              hoverColor:
-                                  const Color.fromARGB(117, 10, 106, 203),
-                              style: logostore,
-                              icon: const Icon(Icons.menu_rounded),
-                              color: TColors.white,
-                              onPressed: () {
-                                Scaffold.of(context).openEndDrawer();
-                              },
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
-                  ))
-                ],
-              ),
-            ), */
-            const SizedBox(
-              height: TSizes.spaceBtwitems,
-            ),
-            Column(
+            child: Column(children: [
+          Container(
+            color: TColors.primary,
+            child: Column(
               children: [
-                const Text(
-                  "Dive into Our Collection",
-                  style: TextStyle(
-                      fontFamily: "poppins",
-                      fontWeight: FontWeight.w900,
-                      fontSize: TSizes.fontMd),
-                  textAlign: TextAlign.center,
-                ),
-                const Text(
-                  "Browse our product selection ",
-                  style: TextStyle(
-                      fontFamily: "poppins",
-                      fontWeight: FontWeight.w600,
-                      fontSize: TSizes.fontMd),
-                  textAlign: TextAlign.center,
-                ),
-                const Text(
-                  "and shop with ease.",
-                  style: TextStyle(
-                      fontFamily: "poppins",
-                      fontWeight: FontWeight.w600,
-                      fontSize: TSizes.fontMd),
-                  textAlign: TextAlign.center,
-                ),
-                Container(
-                    width: double.infinity,
-                    height: THelperFunctions.screenHeight() * 0.25,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(TImage.stopen),
-                            fit: BoxFit.contain))),
-                Container(
-                  width: 350.59,
-                  height: THelperFunctions.screenHeight() * 0.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: TColors.accent,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: TSizes.spaceBtwitems,
-                              ),
-                              const Text(
-                                "Fresh Market ",
-                                style: TextStyle(
-                                    fontFamily: "poppins",
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: TSizes.fontMd,
-                                    color: Colors.white),
-                              ),
-                              const Text(
-                                "Fruits and Vegetables, Guaranteed Freshness.",
-                                style: TextStyle(
-                                    fontFamily: "poppins",
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: TSizes.fontexSm,
-                                    color: Colors.white),
-                              ),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const VigStore2()));
-                                  },
-                                  style: vistPrimary,
-                                  child: const Text(
-                                    "Visit >>",
-                                    style: TextStyle(color: TColors.white),
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ),
-                      ClipRect(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(21, 1, 0, 0),
-                          child: Align(
-                            alignment:
-                                Alignment.bottomRight, // Adjust alignment
-
-                            child: Container(
-                                width: 146.93,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(TImage.stveg),
-                                        fit: BoxFit.cover))),
-                          ),
-                        ),
-                      ),
-                      // ignore: prefer_const_constructors
-                      // Stack(
-                      //   fit: StackFit.loose,
-                      //   children: [
-                      //     Positioned.fill(
-                      //       child: Image.asset(
-                      //         TImage.stveg,
-                      //         fit: BoxFit.fitWidth,
-                      //         alignment: Alignment.bottomRight,
-                      //       ),
-                      //     )
-                      //   ],
-                      // )
-                    ],
-                  ),
-                ),
-                //section2
-
-                const SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: THelperFunctions.screenWidth() * 0.48,
-                      height: THelperFunctions.screenHeight() * 0.17,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(
-                                20.0), // Adjust the values as needed
-                            topRight: Radius.circular(
-                                20.0), // Adjust the values as needed
-                          ),
-                          color: TColors.primary,
-                          image: const DecorationImage(
-                              image: AssetImage(TImage.sclock),
-                              fit: BoxFit.fitHeight,
-                              alignment: Alignment.centerLeft,
-                              scale: 0.5)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            const SizedBox(
-                              height: TSizes.spaceBtwitems,
-                            ),
-                            const Text(
-                              "Accessories ",
-                              style: TextStyle(
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600,
-                                fontSize: TSizes.fontMd,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const Text(
-                              "Practical Essentials",
-                              style: TextStyle(
-                                  fontFamily: "poppins",
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: TSizes.fontexSm,
-                                  color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Clothsstorre()));
-                                },
-                                style: vistSecondary,
-                                child: const Text(
-                                  "<< Visit",
-                                  style: TextStyle(color: TColors.white),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: THelperFunctions.screenWidth() * 0.48,
-                      height: THelperFunctions.screenHeight() * 0.17,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(
-                                20.0), // Adjust the values as needed
-                            topLeft: Radius.circular(
-                                20.0), // Adjust the values as needed
-                          ),
-                          color: TColors.primary,
-                          image: DecorationImage(
-                            image: AssetImage(TImage.stwasher),
-                            fit: BoxFit.fitHeight,
-                          )),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: TSizes.spaceBtwitems,
-                            ),
-                            const Text(
-                              "Home Appliances ",
-                              style: TextStyle(
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600,
-                                fontSize: TSizes.fontSm,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              width: 110,
-                              child: Text(
-                                "Our Range of Essential Appliances.",
-                                style: TextStyle(
-                                    fontFamily: "poppins",
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: TSizes.fontexSm,
-                                    color: Colors.white),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Clothsstorre()));
-                                },
-                                style: vistSecondary,
-                                child: const Text(
-                                  "Visit >>",
-                                  style: TextStyle(color: TColors.white),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
+                SAppBar(
+                  title: const Column(children: [
+                    SizedBox(
+                        width: 90,
+                        child: Image(
+                            image: AssetImage("assets/images/home/logo1.png"))),
+                  ]),
+                  actions: [
+                    Builder(builder: (context) {
+                      return IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openEndDrawer();
+                          },
+                          icon: const Icon(
+                            Iconsax.menu_14,
+                            color: Colors.white,
+                          ));
+                    })
                   ],
                 ),
                 const SizedBox(
-                  height: TSizes.spaceBtwitems,
+                  height: 10,
                 ),
-                Container(
-                  width: 350.59,
-                  height: THelperFunctions.screenHeight() * 0.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: TColors.secondary,
-                  ),
-                  child: Row(children: [
-                    SizedBox(
-                      width: 180,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(30, 5, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: TSizes.spaceBtwitems,
+                Center(
+                  child: SizedBox(
+                    width: THelperFunctions.screenWidth() * 0.8,
+                    height: 40,
+                    child: Form(
+                      child: TextFormField(
+                        cursorColor: TColors.white,
+                        cursorWidth: 1,
+                        minLines: 1,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          color: TColors.primary,
+                          fontSize: TSizes.fontSm,
+                        ),
+                        decoration: InputDecoration(
+                          fillColor: TColors.white,
+                          filled: true,
+                          suffixIcon: IconButton(
+                            onPressed: () => {},
+                            icon: Icon(
+                              size: 18,
+                              Iconsax.search_normal,
+                              color: TColors.primary,
                             ),
-                            const Text(
-                              "Clothing ",
-                              style: TextStyle(
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600,
-                                fontSize: TSizes.fontMd,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
+                          ),
+                          suffixIconConstraints: BoxConstraints(
+                            maxWidth: THelperFunctions.screenWidth() * 1,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(84, 158, 158, 158),
                             ),
-                            const Text(
-                              "Style & Confort",
-                              style: TextStyle(
-                                  fontFamily: "poppins",
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: TSizes.fontexSm,
-                                  color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30.0)),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(84, 158, 158, 158),
                             ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Clothsstorre()));
-                                },
-                                style: vistSecondary,
-                                child: const Text(
-                                  "Visit >>",
-                                  style: TextStyle(color: TColors.white),
-                                )),
-                          ],
+                          ),
+                          hintText: 'Search',
+                          hintStyle: TextStyle(
+                              color: TColors.primary.withOpacity(0.5),
+                              fontSize: TSizes.fontSm),
+                          contentPadding: EdgeInsets.symmetric(
+                            vertical:
+                                10, // Adjust this value for vertical padding
+                            horizontal:
+                                20, // Adjust this value for horizontal padding
+                          ),
                         ),
                       ),
                     ),
-                    Container(
-                        width: 146.93,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(TImage.stshirt),
-                                fit: BoxFit.cover))),
-                  ]),
+                  ),
                 ),
                 const SizedBox(
-                  height: TSizes.spaceBtwitems,
+                  height: 20,
                 ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: TSizes.spaceBtwitems,
+          ),
+          Column(children: [
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.5,
+            ),
+            SizedBox(
+              width: THelperFunctions.screenWidth() * 0.9,
+              child: const Text(
+                "Specail Offers",
+                style: TextStyle(
+                    fontFamily: "poppins",
+                    fontWeight: FontWeight.w500,
+                    fontSize: TSizes.fontMd,
+                    color: TColors.primary),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.48,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  height: MediaQuery.of(context).size.height * 0.33,
+                  autoPlay: false,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                  autoPlayCurve: Curves.easeInSine,
+                  viewportFraction: 0.5,
+                  aspectRatio: 9 / 16,
+                ),
+                items: sampleItemss.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return GestureDetector(
+                        onTap: () {
+                          print(1);
+                        },
+                        child: Transform.scale(
+                          scale: 0.85,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.53,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromARGB(64, 36, 36, 36),
+                                            blurRadius: 10,
+                                            spreadRadius: 2,
+                                            offset:
+                                                Offset(0, 1), // Shadow position
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        image: DecorationImage(
+                                          image: NetworkImage(i[
+                                              "imageUrl"]!), // Access the correct key
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Tom",
+                                              style: TextStyle(
+                                                  color: TColors.primary,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: TSizes.fontSm),
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            Text(
+                                              "Gaufrettes Choco Tom",
+                                              style: TextStyle(
+                                                  color: TColors.primary,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: TSizes.fontSm),
+                                            ),
+                                            Text(
+                                              '1.8 DT',
+                                              style: TextStyle(
+                                                  color: TColors.accent,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: TSizes.fontSm),
+                                            ),
+                                          ],
+                                        ),
+                                        Transform.scale(
+                                          scale: 0.8,
+                                          child: Image(
+                                            image: AssetImage(
+                                                "assets/images/productsfood/sponsors/geant.png"),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.5,
+            ),
+            SizedBox(
+              width: THelperFunctions.screenWidth() * 0.9,
+              child: const Text(
+                "Specail Offers",
+                style: TextStyle(
+                    fontFamily: "poppins",
+                    fontWeight: FontWeight.w500,
+                    fontSize: TSizes.fontMd,
+                    color: TColors.primary),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.5,
+            ),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200.0,
+                autoPlay: false,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                autoPlayCurve: Curves.easeInSine,
+                viewportFraction: 0.48,
+                aspectRatio: 9 / 16,
+              ),
+              items: sampleItemss.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Transform.scale(
+                      scale: 0.85,
+                      child: Container(
+                        height: 150.0,
+                        width: MediaQuery.of(context).size.width * 0.53,
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(64, 36, 36, 36),
+                              blurRadius: 1,
+                              spreadRadius: 2,
+                              offset: Offset(0, 2), // Shadow position
+                            ),
+                          ],
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  i["imageUrl"]!), // Access the correct key
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.5,
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwitems * 0.5,
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtsections,
+            ),
           ]),
-        ));
+        ])));
   }
 }
