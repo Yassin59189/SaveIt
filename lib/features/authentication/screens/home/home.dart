@@ -1,7 +1,9 @@
+import 'package:currency_formatter/currency_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/common/widgets/loaders/shimmer.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
@@ -26,18 +28,39 @@ class HomeScreen extends StatelessWidget {
               ));
     }
 
+    CurrencyFormat DinarSettings = CurrencyFormat(
+      code: 'dt',
+      symbol: 'DT',
+      symbolSide: SymbolSide.right,
+      thousandSeparator: '.',
+      decimalSeparator: ',',
+      symbolSeparator: ' ',
+    );
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('MMM d, yyyy').format(now);
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      endDrawer: Drawer(
-        child: Expanded(
+      endDrawer: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          ),
+          color: Colors.white, // Set background color here
+        ),
+        child: Drawer(
           child: ListView(
+            padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
                   color: TColors.primary,
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image(image: AssetImage("assets/images/home/logo1.png"))
+                    Image(image: AssetImage("assets/images/home/logo1.png")),
                   ],
                 ),
               ),
@@ -73,19 +96,15 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ElevatedButton(
-                onPressed: () => AuthenticationRepository.instance.logout(),
-                child: Text("Logout")),
             Container(
               color: TColors.primary,
-              height: 270,
               child: Column(
                 children: [
                   SAppBar(
                     title: const Column(
                       children: [
                         SizedBox(
-                            width: 90,
+                            width: 70,
                             child: Image(
                                 image: AssetImage(
                                     "assets/images/home/logo1.png"))),
@@ -105,220 +124,216 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //Balance
-                        Container(
-                          width: 172,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15, bottom: 15, left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Image(
-                                    image: AssetImage(
-                                        "assets/images/home/card.png")),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Your Balance",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: TColors.primary.withOpacity(0.8)),
-                                ),
-                                Obx(
-                                  () => Text(
-                                    controller.user.value.budget + "DT",
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            TColors.primary.withOpacity(0.8)),
-                                  ),
-                                )
-                              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      //Balance
+                      Container(
+                        width: screenWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Current Balance",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w400,
+                                  color: TColors.accent),
+                              textAlign: TextAlign.center,
                             ),
-                          ),
-                        ),
-                        //Total
-                        Container(
-                          width: 172,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 9, bottom: 15, left: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Image(
-                                    image: AssetImage(
-                                        "assets/images/home/coin.png")),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Total Spend",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: TColors.primary.withOpacity(0.8)),
-                                ),
-                                Text(
-                                  "250.000DT",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: TColors.primary.withOpacity(0.8)),
-                                )
-                              ],
+                            Obx(
+                              () => Text(
+                                CurrencyFormatter.format(
+                                    (controller.user.value.budget * 3000),
+                                    DinarSettings),
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700,
+                                    color: TColors.white.withOpacity(0.8)),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
+                            Text(
+                              formattedDate,
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                  color: TColors.white.withOpacity(0.8)),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 70,
+                            )
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   )
                 ],
               ),
             ),
-            const Image(image: AssetImage("assets/images/home/Vector.png")),
-            const SizedBox(
-              height: 20,
-            ),
+
             //Notification
-            Container(
-              decoration: const BoxDecoration(
-                  color: TColors.secondary,
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
-              width: MediaQuery.of(context).size.width - 35,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 30, bottom: 30, left: 20, right: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Hello!",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        Obx(() {
-                          if (controller.profileLoading.value) {
-                            return ShimmerEffect(width: 80, height: 15);
-                          } else {
-                            return Text(
-                              controller.user.value.fullName,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            );
-                          }
-                        }),
-                      ],
-                    ),
-                    //Notification button
-                    IconButton(
-                        onPressed: () {
-                          NotificationBottomSheet(context);
-                        },
-                        icon: const Icon(
-                          Iconsax.notification5,
-                          color: Colors.white,
-                        ))
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            //History
-            Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/home/bg.png"),
-                      fit: BoxFit.cover)),
-              width: MediaQuery.of(context).size.width - 35,
+            Transform.translate(
+              offset: const Offset(0.0, -45.0),
               child: Column(
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        "History",
-                        style: TextStyle(
-                            color: TColors.primary,
-                            fontSize: 20,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600),
+                      Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromARGB(85, 36, 36, 36),
+                                  blurRadius: 5,
+                                  spreadRadius: 0.5,
+                                  offset: Offset(0, 1), // Shadow position
+                                ),
+                              ],
+                              color: TColors.secondary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          width: screenWidth - 35,
+                          height: screenHeight * 0.15,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Hello!",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    Obx(() {
+                                      if (controller.profileLoading.value) {
+                                        return ShimmerEffect(
+                                            width: 80, height: 15);
+                                      } else {
+                                        return Text(
+                                          controller.user.value.fullName +
+                                              "tester",
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500),
+                                        );
+                                      }
+                                    }),
+                                  ],
+                                ),
+                                //Notification button
+                                IconButton(
+                                    onPressed: () {
+                                      NotificationBottomSheet(context);
+                                    },
+                                    icon: const Icon(
+                                      Iconsax.notification5,
+                                      color: Colors.white,
+                                    ))
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                      Container(
-                          child: Row(
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                "See all",
-                                style: TextStyle(
-                                    color: TColors.primary,
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w600),
-                              )),
-                          const Icon(
-                            Iconsax.arrow_right_1,
-                            color: TColors.primary,
-                          )
-                        ],
-                      )),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 20,
                   ),
+                  //History
+                  Container(
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/home/bg.png"),
+                            fit: BoxFit.cover)),
+                    width: MediaQuery.of(context).size.width - 35,
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "History",
+                              style: TextStyle(
+                                  color: TColors.primary,
+                                  fontSize: 20,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Your onPressed function here
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    "See all",
+                                    style: TextStyle(
+                                      color: TColors.primary,
+                                      fontSize: 16,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      width:
+                                          3), // Space between the text and the icon
+                                  Transform.scale(
+                                    scale: 0.8,
+                                    child: const Icon(
+                                      Iconsax.arrow_right_1,
+                                      color: TColors.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  //History content
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    /* child: GridView.builder(
+                    itemCount: 6,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        mainAxisExtent: 60,
+                        mainAxisSpacing: 20),
+                    itemBuilder: (_, index) => const HistoryContent()), */
+                  )
                 ],
               ),
             ),
-            //History content
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              /* child: GridView.builder(
-                  itemCount: 6,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      mainAxisExtent: 60,
-                      mainAxisSpacing: 20),
-                  itemBuilder: (_, index) => const HistoryContent()), */
-            )
           ],
         ),
       ),
