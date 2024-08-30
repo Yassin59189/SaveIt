@@ -9,7 +9,6 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   // Todo: Await Native Splash
-
   // Firebase
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();

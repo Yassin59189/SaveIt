@@ -24,8 +24,7 @@ class settings extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Image(
-                        image: AssetImage("assets/images/home/logo1.png"))
+                    Image(image: AssetImage("assets/images/home/logo1.png"))
                   ],
                 ),
               ),
@@ -303,7 +302,7 @@ class settings_button extends StatelessWidget {
       height: height,
       child: ElevatedButton(
           onPressed: () {},
-          style: ButtonStyle(
+          /* style: ButtonStyle(
               backgroundColor:
                   WidgetStateProperty.all<Color>(Colors.transparent),
               elevation: WidgetStateProperty.all<double>(0),
@@ -314,7 +313,7 @@ class settings_button extends StatelessWidget {
               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
-              ))),
+              ))), */
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

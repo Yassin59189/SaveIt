@@ -5,7 +5,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/common/widgets/loaders/shimmer.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/data/repositories/transaction_repository.dart';
+import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
 import 'package:saveit/features/authentication/controllers/user/user_controller.dart';
+import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
@@ -17,6 +20,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
+    final transactionController = Get.put(TransactionController());
+
     Future NotificationBottomSheet(BuildContext context) {
       return showModalBottomSheet(
           context: context,
@@ -76,6 +81,9 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
                 onPressed: () => AuthenticationRepository.instance.logout(),
                 child: Text("Logout")),
+            ElevatedButton(
+                onPressed: () => Get.to(NewTransaction()),
+                child: Text("transaction")),
             Container(
               color: TColors.primary,
               height: 270,
@@ -309,15 +317,15 @@ class HomeScreen extends StatelessWidget {
             //History content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              /* child: GridView.builder(
-                  itemCount: 6,
+              child: GridView.builder(
+                  itemCount: 1,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       mainAxisExtent: 60,
                       mainAxisSpacing: 20),
-                  itemBuilder: (_, index) => const HistoryContent()), */
+                  itemBuilder: (_, index) => HistoryContent()),
             )
           ],
         ),
@@ -327,7 +335,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HistoryContent extends StatelessWidget {
-  const HistoryContent({
+  HistoryContent({
     super.key,
   });
 
@@ -340,7 +348,6 @@ class HistoryContent extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image(image: AssetImage("assets/images/home/round.png")),
               SizedBox(
                 width: 10,
               ),
@@ -350,15 +357,15 @@ class HistoryContent extends StatelessWidget {
                   Text(
                     "200DT",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: TColors.primary,
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Poppins'),
                   ),
                   Text(
-                    "sended to your friend.",
+                    'test',
                     style: TextStyle(
-                        color: Colors.white,
+                        color: TColors.primary,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Poppins'),

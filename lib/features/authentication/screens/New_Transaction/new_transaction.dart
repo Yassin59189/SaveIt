@@ -3,13 +3,18 @@ import 'dart:ui';
 
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:currency_formatter/currency_formatter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
+import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -23,8 +28,11 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransaction extends State<NewTransaction> {
+  final transactionController = Get.put(TransactionController());
+
   bool switchExpenseIncom = false;
   String? errorText;
+  String backCategory = '';
 
   bool ExpenseButtonState = true;
   CurrencyFormat DinarSettings = CurrencyFormat(
@@ -57,15 +65,23 @@ class _NewTransaction extends State<NewTransaction> {
       'icon': Iconsax.empty_wallet,
     },
   ];
-  DateTime? _selectedDate;
-  void _submitForm() {
-    if (_formKey.currentState?.validate() ?? false) {
-      _formKey.currentState?.save();
-      // Handle the data submission to the backend here
-      print(
-          "Amount: $amount, Category: $category, Date: $_selectedDate, Repeating: $isReapting,income_Expense: $switchExpenseIncom"); //False=Income True=Expense
-    }
+  DateTime _selectedDate = DateTime.now();
+  void _submitForm() async {
+    final transaction = TransactionModel(
+      id: DateTime.now().toString(),
+      userId: FirebaseAuth.instance.currentUser?.uid ?? '',
+      amount: amount,
+      category: backCategory,
+      date: _selectedDate,
+      isRepeating: isReapting,
+      isExpense: switchExpenseIncom,
+    );
+
+    await transactionController.addTransaction(transaction);
+    Navigator.pop(context);
   }
+
+/* CATEGORY */
 
   void addCategory(String newCategoryName) {
     setState(() {
@@ -90,6 +106,8 @@ class _NewTransaction extends State<NewTransaction> {
       setState(() {
         _selectedDate = picked;
       });
+    } else {
+      _selectedDate = DateTime.now();
     }
   }
 
@@ -259,6 +277,7 @@ class _NewTransaction extends State<NewTransaction> {
                                               SizedBox(
                                                   width: 120,
                                                   child: TextFormField(
+                                                    /* controller: , */
                                                     textAlign: TextAlign.center,
                                                     keyboardType: TextInputType
                                                         .numberWithOptions(
@@ -373,6 +392,8 @@ class _NewTransaction extends State<NewTransaction> {
                                                       setState(() {
                                                         category =
                                                             selectedcategory;
+                                                        backCategory =
+                                                            selectedcategory;
                                                       });
                                                     },
                                                     onAddCategory:
@@ -436,10 +457,7 @@ class _NewTransaction extends State<NewTransaction> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                _selectedDate ==
-                                                        null //_selectedDate Hwa el date (fromat Date)
-                                                    ? 'Enter The Date'
-                                                    : '${_selectedDate!.month}-${_selectedDate!.day}-${_selectedDate!.year}',
+                                                '${_selectedDate!.month}-${_selectedDate!.day}-${_selectedDate!.year}',
                                                 style: TextStyle(
                                                   color: _selectedDate == null
                                                       ? Colors.grey.shade500
