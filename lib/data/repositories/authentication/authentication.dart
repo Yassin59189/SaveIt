@@ -50,7 +50,7 @@ class AuthenticationRepository extends GetxController {
       if (isFirstTime == true) {
         Get.offAll(const OnBoardingScreen());
       } else {
-        Get.offAll(() => /* LoginScreen() */ NavigationMenu());
+        Get.offAll(() => LoginScreen());
       }
     }
   }
