@@ -12,6 +12,7 @@ import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -124,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,21 +141,21 @@ class HomeScreen extends StatelessWidget {
                               "Current Balance",
                               style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  fontSize: 12.5,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
                                   color: TColors.accent),
                               textAlign: TextAlign.center,
                             ),
                             Obx(
                               () => Text(
                                 CurrencyFormatter.format(
-                                    (controller.user.value.budget * 3000),
+                                    controller.user.value.budget,
                                     DinarSettings),
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700,
-                                    color: TColors.white.withOpacity(0.8)),
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.w600,
+                                    color: TColors.white.withOpacity(1)),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -162,8 +163,8 @@ class HomeScreen extends StatelessWidget {
                               formattedDate,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w600,
                                   color: TColors.white.withOpacity(0.8)),
                               textAlign: TextAlign.center,
                             ),
@@ -174,6 +175,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20,
                   )
                 ],
               ),
@@ -181,7 +185,7 @@ class HomeScreen extends StatelessWidget {
 
             //Notification
             Transform.translate(
-              offset: const Offset(0.0, -45.0),
+              offset: const Offset(0.0, -65.0),
               child: Column(
                 children: [
                   Row(
@@ -199,11 +203,11 @@ class HomeScreen extends StatelessWidget {
                                   offset: Offset(0, 1), // Shadow position
                                 ),
                               ],
-                              color: TColors.secondary,
+                              color: TColors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           width: screenWidth - 35,
-                          height: screenHeight * 0.15,
+                          height: screenHeight * 0.13,
                           child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
@@ -211,35 +215,50 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      "Hello!",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700),
+                                Transform.scale(
+                                  scale: 0.8,
+                                  child: const CircleAvatar(
+                                    radius: 40,
+                                    backgroundColor: TColors.primary,
+                                    child: Icon(
+                                      Icons.person,
+                                      size: 60,
+                                      color: Colors.white,
                                     ),
-                                    Obx(() {
-                                      if (controller.profileLoading.value) {
-                                        return ShimmerEffect(
-                                            width: 80, height: 15);
-                                      } else {
-                                        return Text(
-                                          controller.user.value.fullName +
-                                              "tester",
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        );
-                                      }
-                                    }),
-                                  ],
+                                  ),
+                                ),
+                                Transform.translate(
+                                  offset: Offset(-screenWidth * 0.09, 0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Hello!",
+                                        style: TextStyle(
+                                            color: TColors.secondary,
+                                            fontFamily: 'Poppins',
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      Obx(() {
+                                        if (controller.profileLoading.value) {
+                                          return ShimmerEffect(
+                                              width: 80, height: 15);
+                                        } else {
+                                          return Text(
+                                            controller.user.value.fullName,
+                                            style: const TextStyle(
+                                                color: TColors.secondary,
+                                                fontFamily: 'Poppins',
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500),
+                                          );
+                                        }
+                                      }),
+                                    ],
+                                  ),
                                 ),
                                 //Notification button
                                 IconButton(
@@ -248,7 +267,7 @@ class HomeScreen extends StatelessWidget {
                                     },
                                     icon: const Icon(
                                       Iconsax.notification5,
-                                      color: Colors.white,
+                                      color: TColors.secondary,
                                     ))
                               ],
                             ),
@@ -267,70 +286,137 @@ class HomeScreen extends StatelessWidget {
                             image: AssetImage("assets/images/home/bg.png"),
                             fit: BoxFit.cover)),
                     width: MediaQuery.of(context).size.width - 35,
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "History",
-                              style: TextStyle(
-                                  color: TColors.primary,
-                                  fontSize: 20,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                // Your onPressed function here
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text(
-                                    "See all",
-                                    style: TextStyle(
-                                      color: TColors.primary,
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                      width:
-                                          3), // Space between the text and the icon
-                                  Transform.scale(
-                                    scale: 0.8,
-                                    child: const Icon(
-                                      Iconsax.arrow_right_1,
-                                      color: TColors.primary,
-                                    ),
-                                  ),
-                                ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: TColors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.1),
+                              blurRadius: 3,
+                              spreadRadius: 0,
+                              offset: Offset(
+                                0,
+                                1,
                               ),
                             ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
+                            BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.1),
+                              blurRadius: 2,
+                              spreadRadius: 0,
+                              offset: Offset(
+                                0,
+                                1,
+                              ),
+                            ),
+                          ]),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "History",
+                                  style: TextStyle(
+                                      color: TColors.primary,
+                                      fontSize: 20,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // Your onPressed function here
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Text(
+                                        "See all",
+                                        style: TextStyle(
+                                          color: TColors.primary,
+                                          fontSize: 12,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                          width:
+                                              3), // Space between the text and the icon
+                                      Transform.scale(
+                                        scale: 0.8,
+                                        child: const Icon(
+                                          Iconsax.arrow_right_1,
+                                          color: TColors.primary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: HistoryContent(
+                                type: "expense", //inome or expense
+                                amount: CurrencyFormatter.format(
+                                    10000, //hott el amount fi blast el 1000
+                                    DinarSettings),
+                                title: "Lorem Ipsum",
+                                date: DateTime.now().subtract(Duration(
+                                    days:
+                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                              )),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: HistoryContent(
+                                type: "income", //inome or expense
+                                amount: CurrencyFormatter.format(
+                                    10000, //hott el amount fi blast el 1000
+                                    DinarSettings),
+                                title: "Lorem IpsumT",
+                                date: DateTime.now().subtract(Duration(
+                                    days:
+                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                              )),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: HistoryContent(
+                                type: "income", //inome or expense
+                                amount: CurrencyFormatter.format(
+                                    10000, //hott el amount fi blast el 1000
+                                    DinarSettings),
+                                title: "Lorem IpsumT",
+                                date: DateTime.now().subtract(Duration(
+                                    days:
+                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                              )),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: HistoryContent(
+                                type: "income", //inome or expense
+                                amount: CurrencyFormatter.format(
+                                    10000, //hott el amount fi blast el 1000
+                                    DinarSettings),
+                                title: "Lorem IpsumT",
+                                date: DateTime.now().subtract(Duration(
+                                    days:
+                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
+                              )),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   //History content
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    /* child: GridView.builder(
-                    itemCount: 6,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        mainAxisExtent: 60,
-                        mainAxisSpacing: 20),
-                    itemBuilder: (_, index) => const HistoryContent()), */
-                  )
                 ],
               ),
             ),
@@ -341,55 +427,75 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class HistoryContent extends StatelessWidget {
-  const HistoryContent({
+class HistoryContent extends StatefulWidget {
+  String title;
+  String amount;
+  String type;
+  DateTime date;
+  HistoryContent({
+    required this.title,
+    required this.amount,
+    required this.type,
+    required this.date,
     super.key,
   });
+  @override
+  State<HistoryContent> createState() => _HistoryContentState();
+}
 
+class _HistoryContentState extends State<HistoryContent> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 10),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Image(image: AssetImage("assets/images/home/round.png")),
-              SizedBox(
-                width: 10,
+              Container(
+                width: 60,
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Icon(
+                      widget.type == "expense"
+                          ? Iconsax.empty_wallet5
+                          : Iconsax.empty_wallet_add5,
+                      color: TColors.accent,
+                      size: 20),
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "200DT",
+                    widget.title,
                     style: TextStyle(
-                        color: Colors.white,
+                        fontFamily: 'Poppins',
                         fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'Poppins'),
+                        fontWeight: FontWeight.w400),
                   ),
                   Text(
-                    "sended to your friend.",
+                    timeago.format(widget.date),
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
+                        fontFamily: 'Poppins',
+                        fontSize: 11,
                         fontWeight: FontWeight.w400,
-                        fontFamily: 'Poppins'),
-                  ),
+                        color: Color(0xFF999999)),
+                  )
                 ],
-              ),
+              )
             ],
           ),
           Text(
-            "02/11/2022",
-            style: TextStyle(
-                color: TColors.primary,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Poppins'),
-          )
+              widget.type == "income"
+                  ? "+" + widget.amount
+                  : "-" + widget.amount,
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF999999)))
         ],
       ),
     );
