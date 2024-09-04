@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:saveit/features/authentication/screens/questions/Q_habits.dart';
-import 'package:saveit/features/authentication/screens/questions/Q_yacoubi.dart';
+
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/constants/text_strings.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:iconsax/iconsax.dart';
+import 'ManageBudget.dart'; // Import the page
+
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 class QuestionConcerns extends StatefulWidget {
   const QuestionConcerns({super.key});
@@ -15,119 +19,115 @@ class QuestionConcerns extends StatefulWidget {
 }
 
 class _QuestionConcernsState extends State<QuestionConcerns> {
-  bool isPressed1 = false;
-  bool isPressed2 = false;
-  bool isPressed3 = false;
-  bool isPressed4 = false;
-  bool active = false;
+  PageController _pageController = PageController();
+  int currentProgress = 0;
+
+  List<Widget> pages = [
+    MangeBudget(), // Your ManageBudget page
+    MangeBudget(), // Your ManageBudget page
+    MangeBudget(), // Your ManageBudget page
+    MangeBudget(), // Your ManageBudget page
+    MangeBudget(), // Your ManageBudget page
+    // Add more pages here
+  ];
+
+  void _nextPage() {
+    if (currentProgress < pages.length - 1) {
+      setState(() {
+        currentProgress++;
+        _pageController.animateToPage(
+          currentProgress,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
+            alignment: Alignment.centerLeft,
+            padding:
+                const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
             child: SizedBox(
               child: IconButton(
-                  hoverColor: TColors.secondary,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuestionHabits()));
-                  },
-                  icon: const Icon(Icons.arrow_back_rounded)),
+                hoverColor: TColors.secondary,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_rounded),
+              ),
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+          Container(
+            width: screenWidth * 0.9,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: Alignment.topCenter,
-                  width: THelperFunctions.screenWidth() * 0.8,
-                  child: const Text(
-                    "What are some of your biggest financial concerns right now ?",
-                    style: TextStyle(
-                        fontFamily: "poppins",
-                        fontWeight: FontWeight.w600,
-                        fontSize: TSizes.fontMd,
-                        color: TColors.primary),
-                    textAlign: TextAlign.center,
+                Text(
+                  "Managing Your Budget",
+                  style: TextStyle(
+                    fontFamily: 'popins',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: TColors.primary,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Transform.scale(
+                  scale: 0.6,
+                  child: Container(
+                    width: screenWidth * 0.16,
+                    decoration: BoxDecoration(
+                      color: TColors.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        '${currentProgress + 1}/${pages.length}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                          fontFamily: 'popins',
+                          color: TColors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed1 = !isPressed1;
-                          });
-                        },
-                        style: isPressed1
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: const Text(
-                          "Reducing monthly expenses",
-                          style: TextStyle(color: TColors.white),
-                        ))),
-                const SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed2 = !isPressed2;
-                            if (isPressed2 == true) {}
-                          });
-                        },
-                        style: isPressed2
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: const Text(
-                          "Saving for a large purchase",
-                          style: TextStyle(color: TColors.white),
-                        ))),
-                const SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed4 = !isPressed4;
-                          });
-                        },
-                        style: isPressed4
-                            ? buttonquestionSelected
-                            : buttonquestions,
-                        child: const Text(
-                          "Paying off debt",
-                          style: TextStyle(color: TColors.white),
-                        ))),
-                const SizedBox(
-                  height: TSizes.spaceBtwitems,
-                ),
-                SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const QuestionYacoubi()));
-                        },
-                        style: buttonanContinueSecondary,
-                        child: const Text(
-                          TText.Continue,
-                          style: TextStyle(color: TColors.white),
-                        ))),
               ],
             ),
-          )
+          ),
+          Container(
+            width: screenWidth * 0.9,
+            child: Center(
+                child: FAProgressBar(
+                    progressColor: TColors.secondary,
+                    size: 10,
+                    borderRadius: BorderRadius.circular(30),
+                    currentValue: currentProgress.toDouble() + 1,
+                    maxValue: pages.length.toDouble(),
+                    backgroundColor: Colors.grey.shade300.withOpacity(0.6))),
+          ),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              children: pages,
+              physics: NeverScrollableScrollPhysics(), // Disable manual swipe
+            ),
+          ),
+          ElevatedButton(
+            onPressed: _nextPage,
+            child: Text('Next (${currentProgress + 1}/${pages.length})'),
+          ),
         ],
       ),
     );

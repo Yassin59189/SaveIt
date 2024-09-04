@@ -36,6 +36,8 @@ class _NewTransaction extends State<NewTransaction> {
     symbolSeparator: ' ',
   );
   bool isReapting = false;
+  String dropdownValue = 'Every Month';
+  double _currentSavingsValue = 0.0;
 
   int amount = 0;
   bool IncomButtonState = false;
@@ -62,8 +64,6 @@ class _NewTransaction extends State<NewTransaction> {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       // Handle the data submission to the backend here
-      print(
-          "Amount: $amount, Category: $category, Date: $_selectedDate, Repeating: $isReapting,income_Expense: $switchExpenseIncom"); //False=Income True=Expense
     }
   }
 
@@ -491,35 +491,117 @@ class _NewTransaction extends State<NewTransaction> {
                                             fontSize: TSizes.fontMd,
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      Row(
-                                        children: [
-                                          Transform.scale(
-                                            scale: 0.7,
-                                            child: Switch(
-                                                activeColor: Color.fromARGB(
-                                                    255, 255, 255, 255),
-                                                activeTrackColor:
-                                                    TColors.secondary,
-                                                inactiveTrackColor:
-                                                    Color.fromRGBO(
-                                                        187, 187, 187, 0.718),
-                                                inactiveThumbColor:
-                                                    TColors.white,
-                                                trackOutlineColor:
-                                                    MaterialStateProperty.all(
-                                                        Colors.transparent),
-                                                value: isReapting,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    isReapting = value;
-                                                  }); //lhne zid fazt el reapting
-                                                }),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: new Theme(
+                                          data: Theme.of(context).copyWith(
+                                            canvasColor: TColors.white,
                                           ),
-                                        ],
-                                      )
+                                          child: DropdownButton<String>(
+                                            value: dropdownValue,
+                                            icon: Transform.scale(
+                                              scale: 0.6,
+                                              child: Icon(
+                                                Iconsax.arrow_down_1,
+                                                color: Colors.grey.shade500,
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                                color: Colors.grey.shade500,
+                                                fontSize: TSizes.fontMd,
+                                                fontWeight: FontWeight.w500),
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                dropdownValue = newValue!;
+                                              });
+                                            },
+                                            items: const [
+                                              DropdownMenuItem<String>(
+                                                value: 'Every Month',
+                                                child: Text("Every Month"),
+                                              ),
+                                              DropdownMenuItem<String>(
+                                                value: 'no',
+                                                child: Text("No"),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ])),
                             //========================= Repeating container DONE=============================
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //=========================Savings Contaier=============================
 
+                            AnimatedOpacity(
+                              opacity: !switchExpenseIncom ? 1.0 : 0.0,
+                              duration: Duration(milliseconds: 700),
+                              child: !switchExpenseIncom
+                                  ? Container(
+                                      width: screenWidth * 0.8,
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                width: 1,
+                                                color: const Color.fromARGB(
+                                                    54, 0, 6, 61))),
+                                      ),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Saving Percentage",
+                                              style: TextStyle(
+                                                  color: TColors.primary,
+                                                  fontSize: TSizes.fontMd,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            //=========================Amount Form =============================
+                                            SizedBox(
+                                              width: screenWidth * 0.4,
+                                              child: Slider(
+                                                inactiveColor: Colors
+                                                    .grey.shade500
+                                                    .withOpacity(0.4),
+                                                activeColor: TColors.secondary,
+                                                value: _currentSavingsValue,
+                                                min: 0,
+                                                max: 100,
+                                                divisions: 100,
+                                                label:
+                                                    '${_currentSavingsValue.toStringAsFixed(0)}%',
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _currentSavingsValue =
+                                                        value;
+                                                  });
+                                                },
+                                              ),
+                                            )
+                                          ]))
+                                  : SizedBox.shrink(),
+                            ),
+//=========================Savings Container Done =============================
+                            AnimatedOpacity(
+                              duration: Duration(milliseconds: 300),
+                              opacity: !switchExpenseIncom ? 1.0 : 0.0,
+                              child: !switchExpenseIncom
+                                  ? Container(
+                                      width: screenWidth * 0.8,
+                                      child: Text(
+                                        "the more you save the faster you get to your goal !",
+                                        style: TextStyle(
+                                            color: TColors.accent,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
+                                      ),
+                                    )
+                                  : SizedBox.shrink(),
+                            ),
                             SizedBox(height: screenHeight * 0.1),
                             //========================= Submit container =============================
 

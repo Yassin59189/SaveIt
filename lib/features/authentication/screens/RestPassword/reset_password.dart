@@ -6,7 +6,6 @@ import 'package:saveit/features/authentication/controllers/forget_password_contr
 import 'package:saveit/features/authentication/screens/login/login.dart';
 import 'dart:async';
 
-import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/image_strings.dart';
