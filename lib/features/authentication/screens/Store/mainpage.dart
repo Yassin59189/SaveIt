@@ -62,7 +62,7 @@ class _mainStoreState extends State<mainStore> {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(const Wallet());
+                  Get.to(Wallet());
                 },
               ),
               ListTile(

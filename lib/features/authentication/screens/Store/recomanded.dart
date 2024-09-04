@@ -40,7 +40,9 @@ class _mainStoreState extends State<recomanded> {
                     "wallet",
                     textAlign: TextAlign.center,
                   ),
-                  onTap: () {Get.to(const Wallet());},
+                  onTap: () {
+                    Get.to(Wallet());
+                  },
                 ),
                 ListTile(
                   title: const Text(

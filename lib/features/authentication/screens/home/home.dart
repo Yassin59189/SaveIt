@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(const Wallet());
+                  Get.to(Wallet());
                 },
               ),
               ListTile(
@@ -207,7 +207,6 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const Image(image: AssetImage("assets/images/home/Vector.png")),
             const SizedBox(
               height: 20,
             ),
