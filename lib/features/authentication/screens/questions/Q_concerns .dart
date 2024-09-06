@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saveit/features/authentication/screens/questions/priorities.dart';
 
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -24,17 +25,36 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
 
   List<Widget> pages = [
     MangeBudget(), // Your ManageBudget page
-    MangeBudget(), // Your ManageBudget page
-    MangeBudget(), // Your ManageBudget page
-    MangeBudget(), // Your ManageBudget page
-    MangeBudget(), // Your ManageBudget page
+    Priorities(), // Your ManageBudget page
+    Priorities(), // Your ManageBudget page
+    // Your ManageBudget page
+    // Your ManageBudget page
+    // Your ManageBudget page
     // Add more pages here
+  ];
+  List<String> Captions = [
+    "Managing Your Budget", // Your ManageBudget page
+    "Orginizing Your finances", // Your ManageBudget page
+    "Setting up Goals", // Your ManageBudget page
   ];
 
   void _nextPage() {
     if (currentProgress < pages.length - 1) {
       setState(() {
         currentProgress++;
+        _pageController.animateToPage(
+          currentProgress,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      });
+    }
+  }
+
+  void _lastPage() {
+    if (currentProgress > 0) {
+      setState(() {
+        currentProgress--;
         _pageController.animateToPage(
           currentProgress,
           duration: Duration(milliseconds: 300),
@@ -51,27 +71,28 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            padding:
-                const EdgeInsets.symmetric(vertical: TSizes.spaceBtsections),
-            child: SizedBox(
-              child: IconButton(
-                hoverColor: TColors.secondary,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_rounded),
-              ),
-            ),
-          ),
+          currentProgress >= 1
+              ? Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: TSizes.spaceBtsections),
+                  child: SizedBox(
+                    child: IconButton(
+                      hoverColor: TColors.secondary,
+                      onPressed: _lastPage,
+                      icon: const Icon(Icons.arrow_back_rounded),
+                    ),
+                  ),
+                )
+              : SizedBox(
+                  height: TSizes.spaceBtsections * 2.5,
+                ),
           Container(
             width: screenWidth * 0.9,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Managing Your Budget",
+                  Captions[currentProgress],
                   style: TextStyle(
                     fontFamily: 'popins',
                     fontWeight: FontWeight.bold,

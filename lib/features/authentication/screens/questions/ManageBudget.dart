@@ -183,7 +183,7 @@ class _MangeBudgetState extends State<MangeBudget> {
                         )),
                   ),
                   SizedBox(
-                    height: 6,
+                    height: 10,
                   ),
                   Container(
                     width: screenWidth * 0.9,
@@ -203,63 +203,61 @@ class _MangeBudgetState extends State<MangeBudget> {
                         ),
                       ],
                     ),
-                    child: Container(
-                      child: AnimatedToggleSwitch<bool>.size(
-                          current: SwitchVarFixed,
-                          values: const [true, false],
-                          indicatorSize: Size.fromWidth(300),
-                          customIconBuilder: (context, local, global) =>
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 0.9,
-                                      child: Icon(
+                    child: AnimatedToggleSwitch<bool>.size(
+                        current: SwitchVarFixed,
+                        values: const [true, false],
+                        indicatorSize: Size.fromWidth(300),
+                        customIconBuilder: (context, local, global) => Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Row(
+                                children: [
+                                  Transform.scale(
+                                    scale: 0.9,
+                                    child: Icon(
+                                        color: Color.lerp(
+                                            TColors.primary,
+                                            TColors.white,
+                                            local.animationValue),
+                                        local.value
+                                            ? Iconsax.money_change5
+                                            : Iconsax.money_add5),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Text(
+                                        local.value
+                                            ? "Fixed Salary"
+                                            : "My income varies ",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 13,
                                           color: Color.lerp(
                                               TColors.primary,
                                               TColors.white,
                                               local.animationValue),
-                                          local.value
-                                              ? Iconsax.money_change5
-                                              : Iconsax.money_add5),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      child: Text(
-                                          local.value
-                                              ? "Fixed Salary"
-                                              : "My income varies ",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 13,
-                                            color: Color.lerp(
-                                                TColors.primary,
-                                                TColors.white,
-                                                local.animationValue),
-                                          ),
-                                          textAlign: TextAlign.start),
-                                    ),
-                                  ],
-                                ),
+                                        ),
+                                        textAlign: TextAlign.start),
+                                  ),
+                                ],
                               ),
-                          borderWidth: 5.0,
-                          iconAnimationType: AnimationType.onHover,
-                          style: ToggleStyle(
-                            indicatorColor: TColors.secondary,
-                            backgroundColor: TColors.white,
-                            borderColor: Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          selectedIconScale: 1.0,
-                          onChanged: (value) {
-                            setState(() {
-                              SwitchVarFixed = value;
-                            });
-                          }),
-                    ),
+                            ),
+                        borderWidth: 5.0,
+                        iconAnimationType: AnimationType.onHover,
+                        style: ToggleStyle(
+                          indicatorColor: TColors.secondary,
+                          backgroundColor: TColors.white,
+                          borderColor: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        selectedIconScale: 1.0,
+                        onChanged: (value) {
+                          setState(() {
+                            SwitchVarFixed = value;
+                          });
+                        }),
                   ),
+
                   //=========================FIXED INCOME=============================
 
                   AnimatedOpacity(
@@ -271,13 +269,11 @@ class _MangeBudgetState extends State<MangeBudget> {
                             decoration: BoxDecoration(),
                             child: Column(children: [
                               SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Container(
-                                padding: EdgeInsets.all(10.0),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 20),
                                 width: screenWidth * 0.9,
                                 height: screenHeight * 0.4,
                                 decoration: BoxDecoration(
@@ -705,7 +701,7 @@ class _MangeBudgetState extends State<MangeBudget> {
                                                           width:
                                                               screenWidth * 0.4,
                                                           child: Text(
-                                                              "What's your monthly payment ?",
+                                                              "How many Months left ",
                                                               style: TextStyle(
                                                                 fontFamily:
                                                                     'popins',
@@ -786,7 +782,7 @@ class _MangeBudgetState extends State<MangeBudget> {
                                                                       .red,
                                                                 ),
                                                                 hintText:
-                                                                    'Enter amount in DT ',
+                                                                    'Enter Months  ',
                                                                 hintStyle: TextStyle(
                                                                     color: TColors
                                                                         .primary
@@ -803,7 +799,7 @@ class _MangeBudgetState extends State<MangeBudget> {
                                                     Container(
                                                       width: screenWidth * 0.4,
                                                       child: Text(
-                                                          "Monthly payment day",
+                                                          " payment day",
                                                           style: TextStyle(
                                                             fontFamily:
                                                                 'popins',
@@ -916,9 +912,6 @@ class _MangeBudgetState extends State<MangeBudget> {
                             ]))
                         : SizedBox.shrink(),
                   ),
-
-                  //=========================FIXED INCOME=============================
-
                   AnimatedOpacity(
                     opacity: !SwitchVarFixed ? 1.0 : 0.0,
                     duration: Duration(milliseconds: 700),
@@ -928,20 +921,634 @@ class _MangeBudgetState extends State<MangeBudget> {
                             decoration: BoxDecoration(),
                             child: Column(children: [
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
-                              Text(
-                                "varies",
-                                style: TextStyle(
-                                    color: TColors.primary,
-                                    fontSize: TSizes.fontMd,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 20),
+                                width: screenWidth * 0.9,
+                                height: screenHeight * 0.4,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: TColors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(0, 0, 0, 0.16),
+                                      blurRadius: 4,
+                                      spreadRadius: 0,
+                                      offset: Offset(
+                                        0,
+                                        1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Column(children: [
+                                      Container(
+                                        width: screenWidth * 0.8,
+                                        child: Text(
+                                            "How much usually is your Monthly income?",
+                                            style: TextStyle(
+                                              fontFamily: 'popins',
+                                              fontSize: 12.5,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.black.withOpacity(0.06),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        width: screenWidth * 0.8,
+                                        child: SizedBox(
+                                          height: screenHeight * 0.05,
+                                          child: TextField(
+                                            maxLines:
+                                                1, // Allows the text to wrap and expand vertically
+                                            minLines: 1,
+
+                                            style: TextStyle(
+                                                color: TColors.primary,
+                                                fontSize: 13.5),
+
+                                            keyboardType: TextInputType.number,
+                                            cursorColor: TColors.secondary,
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.symmetric(
+                                                  vertical: 2.0,
+                                                  horizontal:
+                                                      12.0), // Adjust the padding
+
+                                              focusColor: TColors.secondary,
+                                              fillColor: TColors.secondary,
+                                              border: OutlineInputBorder(),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              errorStyle: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                              hintText: 'Enter amount in DT ',
+                                              hintStyle: TextStyle(
+                                                  color: TColors.primary
+                                                      .withOpacity(0.3),
+                                                  fontSize: 13.5),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ]),
+                                    //========================= Date Container=============================
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Column(children: [
+                                      Container(
+                                        width: screenWidth * 0.8,
+                                        child: Text(
+                                            "How many source of income you have ?",
+                                            style: TextStyle(
+                                              fontFamily: 'popins',
+                                              fontSize: 12.5,
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.black.withOpacity(0.06),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        width: screenWidth * 0.8,
+                                        child: SizedBox(
+                                          height: screenHeight * 0.05,
+                                          child: TextField(
+                                            maxLines:
+                                                1, // Allows the text to wrap and expand vertically
+                                            minLines: 1,
+
+                                            style: TextStyle(
+                                                color: TColors.primary,
+                                                fontSize: 13.5),
+
+                                            keyboardType: TextInputType.number,
+                                            cursorColor: TColors.secondary,
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.symmetric(
+                                                  vertical: 2.0,
+                                                  horizontal:
+                                                      12.0), // Adjust the padding
+
+                                              focusColor: TColors.secondary,
+                                              fillColor: TColors.secondary,
+                                              border: OutlineInputBorder(),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.transparent),
+                                              ),
+                                              errorStyle: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                              hintText:
+                                                  'Enter Number of sources ',
+                                              hintStyle: TextStyle(
+                                                  color: TColors.primary
+                                                      .withOpacity(0.3),
+                                                  fontSize: 13.5),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ]),
+
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              width: screenWidth * 0.35,
+                                              child: Text("do you have debt ?",
+                                                  style: TextStyle(
+                                                    fontFamily: 'popins',
+                                                    fontSize: 12.5,
+                                                    fontWeight: FontWeight.w600,
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              width: screenWidth * 0.40,
+                                              height: screenHeight * 0.05,
+                                              decoration: BoxDecoration(),
+                                              child: AnimatedToggleSwitch<
+                                                      bool>.size(
+                                                  current: SwitchDebt,
+                                                  values: const [true, false],
+                                                  indicatorSize:
+                                                      Size.fromWidth(70),
+                                                  customIconBuilder: (context,
+                                                          local, global) =>
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        4.0),
+                                                            child: Text(
+                                                                local.value
+                                                                    ? "No"
+                                                                    : "yes ",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 13,
+                                                                  color: Color.lerp(
+                                                                      TColors
+                                                                          .primary,
+                                                                      TColors
+                                                                          .white,
+                                                                      local
+                                                                          .animationValue),
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                  borderWidth: 5.0,
+                                                  iconAnimationType:
+                                                      AnimationType.onHover,
+                                                  style: ToggleStyle(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromRGBO(
+                                                            0, 0, 0, 0.16),
+                                                        blurRadius: 4,
+                                                        spreadRadius: 0,
+                                                        offset: Offset(
+                                                          0,
+                                                          1,
+                                                        ),
+                                                      )
+                                                    ],
+                                                    indicatorColor:
+                                                        TColors.secondary,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  selectedIconScale: 1.0,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      SwitchDebt = value;
+                                                    });
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              width: screenWidth * 0.4,
+                                              decoration: BoxDecoration(),
+                                              child: AnimatedOpacity(
+                                                opacity:
+                                                    !SwitchDebt ? 1.0 : 0.0,
+                                                duration:
+                                                    Duration(milliseconds: 700),
+                                                child: !SwitchDebt
+                                                    ? Column(
+                                                        children: [
+                                                          Container(
+                                                            alignment: Alignment
+                                                                .centerLeft,
+                                                            width: screenWidth *
+                                                                0.4,
+                                                            child: Text(
+                                                                "What's your monthly payment ?",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      'popins',
+                                                                  fontSize:
+                                                                      11.2,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                )),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                          Container(
+                                                            decoration: BoxDecoration(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.06),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                            width: screenWidth *
+                                                                0.9,
+                                                            child: SizedBox(
+                                                              height:
+                                                                  screenHeight *
+                                                                      0.05,
+                                                              child: TextField(
+                                                                maxLines:
+                                                                    1, // Allows the text to wrap and expand vertically
+                                                                minLines: 1,
+
+                                                                style: TextStyle(
+                                                                    color: TColors
+                                                                        .primary,
+                                                                    fontSize:
+                                                                        13.5),
+
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .number,
+                                                                cursorColor:
+                                                                    TColors
+                                                                        .secondary,
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  contentPadding: EdgeInsets.symmetric(
+                                                                      vertical:
+                                                                          2.0,
+                                                                      horizontal:
+                                                                          12.0), // Adjust the padding
+
+                                                                  focusColor:
+                                                                      TColors
+                                                                          .secondary,
+                                                                  fillColor: TColors
+                                                                      .secondary,
+                                                                  border:
+                                                                      OutlineInputBorder(),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                Colors.transparent),
+                                                                  ),
+                                                                  focusedBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                Colors.transparent),
+                                                                  ),
+                                                                  errorStyle:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .red,
+                                                                  ),
+                                                                  hintText:
+                                                                      'Enter amount in DT ',
+                                                                  hintStyle: TextStyle(
+                                                                      color: TColors
+                                                                          .primary
+                                                                          .withOpacity(
+                                                                              0.3),
+                                                                      fontSize:
+                                                                          13.5),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    : SizedBox.shrink(),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      child: AnimatedOpacity(
+                                        opacity: !SwitchDebt ? 1.0 : 0.0,
+                                        duration: Duration(milliseconds: 700),
+                                        child: !SwitchDebt
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Container(
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          width:
+                                                              screenWidth * 0.4,
+                                                          child: Text(
+                                                              "How many Months left ",
+                                                              style: TextStyle(
+                                                                fontFamily:
+                                                                    'popins',
+                                                                fontSize: 11.2,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              )),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Container(
+                                                          decoration: BoxDecoration(
+                                                              color: Colors
+                                                                  .black
+                                                                  .withOpacity(
+                                                                      0.06),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          width: screenWidth *
+                                                              0.35,
+                                                          child: SizedBox(
+                                                            height:
+                                                                screenHeight *
+                                                                    0.05,
+                                                            child: TextField(
+                                                              maxLines:
+                                                                  1, // Allows the text to wrap and expand vertically
+                                                              minLines: 1,
+
+                                                              style: TextStyle(
+                                                                  color: TColors
+                                                                      .primary,
+                                                                  fontSize:
+                                                                      13.5),
+
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .number,
+                                                              cursorColor:
+                                                                  TColors
+                                                                      .secondary,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                contentPadding:
+                                                                    EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            2.0,
+                                                                        horizontal:
+                                                                            12.0), // Adjust the padding
+
+                                                                focusColor: TColors
+                                                                    .secondary,
+                                                                fillColor: TColors
+                                                                    .secondary,
+                                                                border:
+                                                                    OutlineInputBorder(),
+                                                                enabledBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                          color:
+                                                                              Colors.transparent),
+                                                                ),
+                                                                focusedBorder:
+                                                                    OutlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                          color:
+                                                                              Colors.transparent),
+                                                                ),
+                                                                errorStyle:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .red,
+                                                                ),
+                                                                hintText:
+                                                                    'Enter Months  ',
+                                                                hintStyle: TextStyle(
+                                                                    color: TColors
+                                                                        .primary
+                                                                        .withOpacity(
+                                                                            0.3),
+                                                                    fontSize:
+                                                                        13.5),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                  Column(children: [
+                                                    Container(
+                                                      width: screenWidth * 0.4,
+                                                      child: Text(
+                                                          " payment day",
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'popins',
+                                                            fontSize: 11,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          )),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Container(
+                                                        width:
+                                                            screenWidth * 0.4,
+                                                        height:
+                                                            screenHeight * 0.05,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(
+                                                                  0.06),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: TextButton(
+                                                            onPressed: () {
+                                                              _selectDateDebt(
+                                                                  context);
+                                                            },
+                                                            style: ButtonStyle(
+                                                              shape: MaterialStateProperty
+                                                                  .all<
+                                                                      RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10.0), // Set the desired border radius
+                                                                ),
+                                                              ),
+                                                              overlayColor:
+                                                                  MaterialStateProperty
+                                                                      .resolveWith<
+                                                                          Color?>(
+                                                                (Set<MaterialState>
+                                                                    states) {
+                                                                  if (states.contains(
+                                                                      MaterialState
+                                                                          .pressed)) {
+                                                                    return Colors
+                                                                        .grey
+                                                                        .withOpacity(
+                                                                            0.2); // Set the color when the button is pressed
+                                                                  }
+                                                                  return null; // Defer to the widget's default color
+                                                                },
+                                                              ),
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  _DebtDate ==
+                                                                          null // _DebtDate Hwa el date (fromat Date)
+                                                                      ? 'Enter The Date'
+                                                                      : '${_DebtDate!.month}-${_DebtDate!.day}-${_DebtDate!.year}',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: _DebtDate ==
+                                                                            null
+                                                                        ? Colors
+                                                                            .grey
+                                                                            .shade500
+                                                                            .withOpacity(
+                                                                                0.6)
+                                                                        : TColors
+                                                                            .primary,
+                                                                    fontSize:
+                                                                        13.5,
+                                                                  ),
+                                                                ),
+                                                                Transform.scale(
+                                                                  scale: 0.8,
+                                                                  child: Icon(
+                                                                      color: _DebtDate ==
+                                                                              null
+                                                                          ? Colors
+                                                                              .grey
+                                                                              .shade500
+                                                                              .withOpacity(
+                                                                                  0.6)
+                                                                          : TColors
+                                                                              .primary,
+                                                                      Iconsax
+                                                                          .calendar5),
+                                                                ),
+                                                              ],
+                                                            ))),
+                                                  ]),
+                                                ],
+                                              )
+                                            : SizedBox.shrink(),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                //========================= Date  container Done ============================= ])) ],
+                              )
                             ]))
                         : SizedBox.shrink(),
                   ),
                 ],
               ),
+
+              //=========================FIXED INCOME=============================
             ],
           ),
         ),
