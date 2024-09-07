@@ -42,7 +42,6 @@ class LoginController extends GetxController {
 
       // Save data if remeber me is selected
       if (rememberMe.value) {
-        print("remeber me active !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         localStorage.write('REMEMBER_ME_EMAIL', email.text.trim());
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }

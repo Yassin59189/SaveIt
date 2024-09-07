@@ -11,11 +11,11 @@ import 'package:saveit/utils/helpers/helper_functions.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 
-class Priorities extends StatefulWidget {
-  const Priorities({super.key});
+class Savings extends StatefulWidget {
+  const Savings({super.key});
 
   @override
-  State<Priorities> createState() => _PrioritiesState();
+  State<Savings> createState() => _SavingsState();
 }
 
 CurrencyFormat DinarSettings = CurrencyFormat(
@@ -27,18 +27,13 @@ CurrencyFormat DinarSettings = CurrencyFormat(
   symbolSeparator: ' ',
 );
 bool SwitchPrimary = true;
-List<Map<String, dynamic>> categorList = [];
+final List<Map<String, dynamic>> categorList = [];
 
-class _PrioritiesState extends State<Priorities> {
+class _SavingsState extends State<Savings> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
-    void initState() {
-      super.initState();
-    }
-
     void myStateSetter() {
       setState(() {});
     }
@@ -47,21 +42,103 @@ class _PrioritiesState extends State<Priorities> {
         floatingActionButton: ClipRRect(
           borderRadius:
               BorderRadius.circular(90.0), // Adjust the radius as needed
-          child: FloatingActionButton(
-            onPressed: () =>
-                _showAddCategoryDialog(context, categorList, myStateSetter),
-            backgroundColor: TColors.secondary,
-            child: Icon(Iconsax.add, color: TColors.white),
-          ),
+          child: SwitchPrimary
+              ? FloatingActionButton(
+                  onPressed: () => _showAddCategoryDialog(
+                    context,
+                    categorList,
+                    myStateSetter,
+                  ),
+                  backgroundColor: TColors.accent,
+                  child: Icon(Iconsax.add, color: TColors.white),
+                )
+              : Container(),
         ),
         body: SingleChildScrollView(
-            child: categorList.length == 0
+          child: Column(children: [
+            Center(
+              child: Container(
+                width: screenWidth * 0.9,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      "Do you want us to track your financial goals?",
+                      style: TextStyle(
+                        color: TColors.primary,
+                        fontSize: 14.5,
+                        fontFamily: "poppins",
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      width: screenWidth * 0.90,
+                      height: screenHeight * 0.08,
+                      decoration: BoxDecoration(),
+                      child: AnimatedToggleSwitch<bool>.size(
+                          current: SwitchPrimary,
+                          values: const [true, false],
+                          indicatorSize: Size.fromWidth(200),
+                          customIconBuilder: (context, local, global) => Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Text(local.value ? "Yes" : "No",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                          color: Color.lerp(
+                                              TColors.primary,
+                                              TColors.white,
+                                              local.animationValue),
+                                        ),
+                                        textAlign: TextAlign.center),
+                                  ),
+                                ],
+                              ),
+                          borderWidth: 5.0,
+                          iconAnimationType: AnimationType.onHover,
+                          style: ToggleStyle(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.16),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                                offset: Offset(
+                                  0,
+                                  1,
+                                ),
+                              )
+                            ],
+                            indicatorColor: TColors.secondary,
+                            backgroundColor: Colors.white,
+                            borderColor: Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          selectedIconScale: 1.0,
+                          onChanged: (value) {
+                            setState(() {
+                              SwitchPrimary = value;
+                            });
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            categorList.length == 0 && SwitchPrimary
                 ? Transform.scale(
                     scale: 1,
                     child: Center(
                       child: Container(
                         width: screenWidth * 0.9,
-                        height: screenHeight * 0.8,
+                        height: screenHeight * 0.5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,8 +150,6 @@ class _PrioritiesState extends State<Priorities> {
                                 Container(
                                   width: screenWidth * 0.9,
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
                                         mainAxisAlignment:
@@ -85,33 +160,33 @@ class _PrioritiesState extends State<Priorities> {
                                           Container(
                                             width: screenWidth * 0.5,
                                             child: Text(
-                                              "To Provide Accurate Financial Insights",
+                                              "To Set and Achieve Your Financial Goals",
                                               style: TextStyle(
                                                   color: TColors.primary,
                                                   fontSize: 22,
                                                   fontFamily: "popins",
                                                   fontWeight: FontWeight.w900),
-                                              textAlign: TextAlign.justify,
+                                              textAlign: TextAlign.start,
                                             ),
                                           ),
                                           Container(
                                             width: screenWidth * 0.5,
                                             child: Text(
-                                              "let's organize your income and expenses into simple categories",
+                                              "Set your financial goals with actionable steps and track progress through clear milestones",
                                               style: TextStyle(
                                                   color: TColors.primary,
                                                   fontSize: 16,
                                                   fontFamily: "popins",
                                                   fontWeight: FontWeight.w400),
-                                              textAlign: TextAlign.justify,
+                                              textAlign: TextAlign.start,
                                             ),
                                           ),
                                           Container(
-                                            width: screenWidth * 0.5,
+                                            width: screenWidth * 0.4,
                                             child: Text(
-                                              "click the plus button to add a new category.",
+                                              "click the plus button to set up a new Goal.",
                                               style: TextStyle(
-                                                  color: TColors.secondary,
+                                                  color: TColors.accent,
                                                   fontSize: 12,
                                                   fontFamily: "popins",
                                                   fontWeight: FontWeight.w900),
@@ -121,11 +196,11 @@ class _PrioritiesState extends State<Priorities> {
                                         ],
                                       ),
                                       Transform.scale(
-                                        scale: 1.4,
+                                        scale: 1.3,
                                         child: Image(
-                                            width: screenWidth * 0.3,
+                                            width: screenWidth * 0.4,
                                             image: AssetImage(
-                                                "assets/images/login_image/verify.png")),
+                                                "assets/images/on_board_images/tip2.png")),
                                       ),
                                     ],
                                   ),
@@ -138,114 +213,180 @@ class _PrioritiesState extends State<Priorities> {
                       ),
                     ),
                   )
-                : Column(
-                    children: [
-                      SizedBox(height: 25),
-                      Text(
-                        "Your Gategories",
-                        style: TextStyle(
-                          color: TColors.primary,
-                          fontSize: 15,
-                          fontFamily: "poppins",
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      ...categorList.map((category) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 10),
-                            Center(
-                              child: Container(
-                                width: screenWidth * 0.9,
-                                padding: EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                                      blurRadius: 4,
-                                      spreadRadius: 0,
-                                      offset: Offset(
-                                        0,
-                                        1,
-                                      ),
-                                    )
-                                  ],
-                                  color: TColors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        category['prioritie'] == true
-                                            ? Container(
-                                                child: Icon(
-                                                  category['Icon'],
+                : SwitchPrimary
+                    ? Column(
+                        children: [
+                          Text(
+                            "Your Savings Goals",
+                            style: TextStyle(
+                              color: TColors.primary,
+                              fontSize: 15,
+                              fontFamily: "poppins",
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 10),
+                              Center(
+                                child: Container(
+                                  width: screenWidth * 0.9,
+                                  padding: EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(0, 0, 0, 0.16),
+                                        blurRadius: 4,
+                                        spreadRadius: 0,
+                                        offset: Offset(
+                                          0,
+                                          1,
+                                        ),
+                                      )
+                                    ],
+                                    color: TColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: screenWidth * 0.15,
+                                            child: Text(
+                                              "Type",
+                                              style: TextStyle(
                                                   color: TColors.primary,
-                                                ),
-                                              )
-                                            : Container(
-                                                child: Icon(
-                                                  category['Icon'],
-                                                  color: TColors.accent,
-                                                ),
-                                              ),
-                                        SizedBox(
-                                            width:
-                                                8), // Adding some space between elements
-                                        Container(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  8), // Adding some space between elements
+                                          Container(
                                             width: screenWidth * 0.25,
-                                            child: Text(category['Category'])),
-                                        SizedBox(width: 8),
-                                        Container(
-                                          width: screenWidth * 0.2,
-                                          child: Text(CurrencyFormatter.format(
-                                              category['Amount']
-                                                  .toDouble(), //hott el amount fi blast el 1000
-                                              DinarSettings)),
-                                        ), // Convert the amount to String if it's a number
-                                        SizedBox(width: 8),
-                                        category['prioritie'] ==
-                                                true // Assuming 'prioritie' is a boolean
-                                            ? Container(
-                                                width: screenWidth * 0.25,
-                                                color: TColors.primary,
-                                                padding: EdgeInsets.all(
-                                                    5), // Padding for better UI
-                                                child: Text(
-                                                    'High Priority', // Replace with actual priority text
-                                                    style: TextStyle(
-                                                      color: TColors.white,
-                                                    )),
-                                              )
-                                            : Container(
-                                                width: screenWidth * 0.25,
-                                                color: TColors.accent,
-                                                padding: EdgeInsets.all(5),
-                                                child: Text(
-                                                  'Low Priority', // Replace with actual priority text
-                                                  style: TextStyle(
-                                                    color: TColors.white,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              )
-                                      ],
-                                    ),
-                                  ],
+                                            child: Text(
+                                              "Goal Title",
+                                              style: TextStyle(
+                                                  color: TColors.primary,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                          Container(
+                                            width: screenWidth * 0.25,
+                                            child: Text(
+                                              "Goal Price",
+                                              style: TextStyle(
+                                                  color: TColors.primary,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w700),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ), // Convert the amount to String if it's a number
+                                          SizedBox(width: 8),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      }).toList()
-                    ],
-                  )));
+                            ],
+                          ),
+                          ...categorList.map((category) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 10),
+                                Center(
+                                  child: Container(
+                                    width: screenWidth * 0.9,
+                                    padding: EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(0, 0, 0, 0.16),
+                                          blurRadius: 4,
+                                          spreadRadius: 0,
+                                          offset: Offset(
+                                            0,
+                                            1,
+                                          ),
+                                        )
+                                      ],
+                                      color: TColors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: screenWidth * 0.15,
+                                              child: Icon(
+                                                category['Icon'],
+                                                color: TColors.accent,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                                width:
+                                                    8), // Adding some space between elements
+                                            Container(
+                                              width: screenWidth * 0.25,
+                                              child: Text(
+                                                category['GoalTitle'],
+                                                style: TextStyle(
+                                                    color: TColors.primary,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                            SizedBox(width: 8),
+                                            Container(
+                                              width: screenWidth * 0.25,
+                                              child: Text(
+                                                CurrencyFormatter.format(
+                                                    category['Amount']
+                                                        .toDouble(), //hott el amount fi blast el 1000
+                                                    DinarSettings),
+                                                style: TextStyle(
+                                                    color: TColors.primary,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ), // Convert the amount to String if it's a number
+                                            SizedBox(width: 8),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList()
+                        ],
+                      )
+                    : Container()
+          ]),
+        ));
   }
 
   void _showAddCategoryDialog(
@@ -276,7 +417,7 @@ class _PrioritiesState extends State<Priorities> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Add a New Category",
+                        "Add a Saving Goal",
                         style: TextStyle(
                           color: TColors.primary,
                           fontSize: 24,
@@ -288,12 +429,12 @@ class _PrioritiesState extends State<Priorities> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Category Name",
+                            "Goal Title",
                             style: TextStyle(
                               color: TColors.primary,
                               fontSize: 12.5,
                               fontFamily: "poppins",
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -348,12 +489,12 @@ class _PrioritiesState extends State<Priorities> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Category Amount",
+                            "Goal Amount",
                             style: TextStyle(
                               color: TColors.primary,
                               fontSize: 12.5,
                               fontFamily: "poppins",
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -408,85 +549,12 @@ class _PrioritiesState extends State<Priorities> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "what's the priority of this category ? ",
-                            style: TextStyle(
-                              color: TColors.primary,
-                              fontSize: 13.5,
-                              fontFamily: "poppins",
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            width: screenWidth * 0.90,
-                            height: screenHeight * 0.08,
-                            decoration: BoxDecoration(),
-                            child: AnimatedToggleSwitch<bool>.size(
-                                current: SwitchPrimary,
-                                values: const [true, false],
-                                indicatorSize: Size.fromWidth(300),
-                                customIconBuilder: (context, local, global) =>
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 4.0),
-                                          child: Text(
-                                              local.value
-                                                  ? "High Priority"
-                                                  : "Low Priority",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
-                                                color: Color.lerp(
-                                                    TColors.primary,
-                                                    TColors.white,
-                                                    local.animationValue),
-                                              ),
-                                              textAlign: TextAlign.center),
-                                        ),
-                                      ],
-                                    ),
-                                borderWidth: 5.0,
-                                iconAnimationType: AnimationType.onHover,
-                                style: ToggleStyle(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(0, 0, 0, 0.16),
-                                      blurRadius: 4,
-                                      spreadRadius: 0,
-                                      offset: Offset(
-                                        0,
-                                        1,
-                                      ),
-                                    )
-                                  ],
-                                  indicatorColor: TColors.secondary,
-                                  backgroundColor: Colors.white,
-                                  borderColor: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                selectedIconScale: 1.0,
-                                onChanged: (value) {
-                                  setState(() {
-                                    SwitchPrimary = value;
-                                  });
-                                }),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
                             "Choose one of these icons ",
                             style: TextStyle(
                               color: TColors.primary,
                               fontSize: 12.5,
                               fontFamily: "poppins",
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           SizedBox(height: 5),
@@ -625,16 +693,15 @@ class _PrioritiesState extends State<Priorities> {
                                   dropdownValue != null) {
                                 setState(() {
                                   categorList.add({
-                                    'Category': categoryName,
+                                    'GoalTitle': categoryName,
                                     'Amount': categoryAmount,
                                     'Icon': dropdownValue,
-                                    'prioritie': SwitchPrimary,
                                   });
                                 });
                                 myStateSetter();
                                 // Handle saving the new category with the selected values
                                 print(
-                                    "Category: $categoryName, Amount: $categoryAmount, Icon: Iconsax.$dropdownValue, Debt: $SwitchPrimary");
+                                    "Category: $categoryName, Amount: $categoryAmount, Icon: $dropdownValue");
                                 Navigator.of(context).pop();
                               } else {
                                 // You can show an error message or validation here

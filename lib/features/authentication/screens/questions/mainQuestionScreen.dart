@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:saveit/common/widgets/loaders/animation_loader.dart';
+import 'package:saveit/common/widgets/snackBars/loaders.dart';
+import 'package:saveit/features/authentication/screens/questions/Savings.dart';
 import 'package:saveit/features/authentication/screens/questions/priorities.dart';
+import 'package:saveit/features/authentication/screens/signup/Success.dart';
 
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -26,11 +31,7 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
   List<Widget> pages = [
     MangeBudget(), // Your ManageBudget page
     Priorities(), // Your ManageBudget page
-    Priorities(), // Your ManageBudget page
-    // Your ManageBudget page
-    // Your ManageBudget page
-    // Your ManageBudget page
-    // Add more pages here
+    Savings(), // Your ManageBudget page
   ];
   List<String> Captions = [
     "Managing Your Budget", // Your ManageBudget page
@@ -102,7 +103,7 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                   textAlign: TextAlign.left,
                 ),
                 Transform.scale(
-                  scale: 0.6,
+                  scale: 0.8,
                   child: Container(
                     width: screenWidth * 0.16,
                     decoration: BoxDecoration(
@@ -146,9 +147,35 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
             ),
           ),
           ElevatedButton(
-            onPressed: _nextPage,
-            child: Text('Next (${currentProgress + 1}/${pages.length})'),
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size(200.35, 54.04),
+                backgroundColor: TColors.secondary,
+                elevation: 0,
+                textStyle: const TextStyle(
+                    fontFamily: "nunito",
+                    fontWeight: FontWeight.w600,
+                    fontSize: TSizes.fontMd,
+                    color: TColors.white)),
+            onPressed: currentProgress < pages.length - 1
+                ? () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AnimationLoaderWidget(
+                                text: "Loading Your data",
+                                animation: "assets/animations/checkmark.json",
+                              )),
+                    );
+                  }
+                : _nextPage,
+            child: Text(
+              'Continue',
+              style: TextStyle(
+                color: TColors.white,
+              ),
+            ),
           ),
+          SizedBox(height: 20),
         ],
       ),
     );
