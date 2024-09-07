@@ -9,6 +9,8 @@ import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 /* import 'package:saveit/features/authentication/screens/login/verifyEmail.dart'; */
 import 'package:saveit/features/authentication/screens/onboarding.dart';
+import 'package:saveit/features/authentication/screens/questions/mainQuestionScreen.dart';
+import 'package:saveit/features/authentication/screens/questions/ManageBudget.dart';
 import 'package:saveit/features/authentication/screens/settings/Languge.dart';
 import 'package:saveit/features/authentication/screens/settings/notification.dart';
 import 'package:saveit/navigation_menu.dart';
@@ -39,7 +41,7 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
-        Get.offAll(() => const NavigationMenu());
+        Get.offAll(() => const QuestionConcerns());
       } else {
         Get.offAll(() => VerifyemailPage(email: _auth.currentUser?.email));
       }
