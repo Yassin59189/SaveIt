@@ -13,10 +13,51 @@ import 'package:saveit/features/authentication/screens/home/notification_bottom_
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:carousel_slider/carousel_slider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+List<Map<String, dynamic>> VideoList = [
+  {
+    "title": "Saving and Investing",
+    "time": "2h,30mins",
+    "numberLesson": "6 Lessons",
+    "tier": "free",
+    "thumbnail": "assets/images/home/vid1.png",
+    "profile": "assets/images/home/vid1Maker.jpg",
+    "Name": "Jhon",
+    "Exprence": "Financial Expert",
+  },
+  {
+    "title": "Money Mangment",
+    "time": "1h,30mins",
+    "numberLesson": "3 Lessons",
+    "tier": "free",
+    "thumbnail": "assets/images/home/vid2.png",
+    "profile": "assets/images/home/vid2Maker.jpg",
+    "Name": "Mohamed ben Romdan",
+    "Exprence": "Accountant",
+  },
+  {
+    "title": "Debt Mangment",
+    "time": "3h,30mins",
+    "numberLesson": "9 Lessons",
+    "tier": "Premuim",
+    "thumbnail": "assets/images/home/vid3.png",
+    "profile": "assets/images/home/vid3Maker.jpg",
+    "Name": "Rania ben Amor",
+    "Exprence": "Financial Analyst and teacher ",
+  }
+];
+
+String selectedButton = "All";
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
@@ -417,6 +458,390 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   //History content
+                  SizedBox(
+                    height: 20,
+                  ),
+                  //Videos start
+                  Container(
+                    width: MediaQuery.of(context).size.width - 35,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 35,
+                          child: Text(
+                            "Upcoming courses ",
+                            style: TextStyle(
+                                color: TColors.primary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                            width: MediaQuery.of(context).size.width - 45,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Set the radius here
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      selectedButton == "All"
+                                          ? TColors.accent
+                                          : TColors.white,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedButton = "All";
+                                      // Set the selected button
+                                    });
+                                  },
+                                  child: Text(
+                                    "All",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: selectedButton == "All"
+                                            ? TColors.white
+                                            : Colors.grey.shade500),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Set the radius here
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      selectedButton == "Debt"
+                                          ? TColors.accent
+                                          : TColors.white,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedButton = "Debt";
+                                      // Set the selected button
+                                    });
+                                  },
+                                  child: Text(
+                                    "Debt",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: selectedButton == "Debt"
+                                            ? TColors.white
+                                            : Colors.grey.shade500),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Set the radius here
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      selectedButton == "Savings"
+                                          ? TColors.accent
+                                          : TColors.white,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedButton = "Savings";
+                                      // Set the selected button
+                                    });
+                                  },
+                                  child: Text(
+                                    "Savings",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: selectedButton == "Savings"
+                                            ? TColors.white
+                                            : Colors.grey.shade500),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            8), // Set the radius here
+                                      ),
+                                    ),
+                                    backgroundColor: MaterialStateProperty.all(
+                                      selectedButton == "Budget"
+                                          ? TColors.accent
+                                          : TColors.white,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedButton = "Budget";
+                                      // Set the selected button
+                                    });
+                                  },
+                                  child: Text(
+                                    "Budget",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: selectedButton == "Budget"
+                                            ? TColors.white
+                                            : Colors.grey.shade500),
+                                  ),
+                                ),
+                              ],
+                            )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              height: 300,
+                              enlargeCenterPage: true,
+                              autoPlay: false,
+                              autoPlayInterval: const Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 500),
+                              autoPlayCurve: Curves.easeInSine,
+                              viewportFraction: 0.64,
+                            ),
+                            items: VideoList.map((i) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Transform.translate(
+                                    offset: Offset(-60, 0),
+                                    child: Transform.scale(
+                                      scale: 0.96,
+                                      child: Container(
+                                        width: screenWidth * 0.6,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromRGBO(
+                                                    9, 30, 66, 0.25),
+                                                blurRadius: 8,
+                                                spreadRadius: -2,
+                                                offset: Offset(
+                                                  0,
+                                                  4,
+                                                ),
+                                              ),
+                                              BoxShadow(
+                                                color: Color.fromRGBO(
+                                                    9, 30, 66, 0.08),
+                                                blurRadius: 0,
+                                                spreadRadius: 1,
+                                                offset: Offset(
+                                                  0,
+                                                  0,
+                                                ),
+                                              ),
+                                            ],
+                                            borderRadius:
+                                                BorderRadius.circular(24),
+                                            image: DecorationImage(
+                                              image: AssetImage(i["thumbnail"]),
+                                              fit: BoxFit.cover,
+                                            )),
+                                        child: Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 16.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: screenWidth * 0.4,
+                                                child: Text(
+                                                  i["title"],
+                                                  style: TextStyle(
+                                                      color: TColors.white,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 22),
+                                                ),
+                                              ),
+                                              Container(
+                                                width: screenWidth * 0.4,
+                                                child: Row(
+                                                  children: [
+                                                    Transform.scale(
+                                                      scale: 0.6,
+                                                      child: Icon(
+                                                        Iconsax.timer_1,
+                                                        color: Colors
+                                                            .grey.shade500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      i["time"],
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade500,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 12),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Container(
+                                                width: screenWidth * 0.4,
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.all(2.5),
+                                                      decoration: BoxDecoration(
+                                                          color:
+                                                              TColors.secondary,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
+                                                      child: Text(
+                                                        i["numberLesson"],
+                                                        style: TextStyle(
+                                                            color:
+                                                                TColors.white,
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.all(2.5),
+                                                      decoration: BoxDecoration(
+                                                          color: i["tier"] ==
+                                                                  "free"
+                                                              ? TColors
+                                                                  .secondary
+                                                              : TColors.accent,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5)),
+                                                      child: Text(
+                                                        i["tier"],
+                                                        style: TextStyle(
+                                                            color:
+                                                                TColors.white,
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    height: 30,
+                                                    width: 30,
+                                                    decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: Colors
+                                                                .grey.shade500
+                                                                .withOpacity(
+                                                                    0.3),
+                                                            spreadRadius: 1,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                const Offset(
+                                                                    0, 0),
+                                                          ),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(360),
+                                                        image: DecorationImage(
+                                                          image: AssetImage(
+                                                              i["profile"]),
+                                                          fit: BoxFit.cover,
+                                                        )),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        i["Name"],
+                                                        style: TextStyle(
+                                                            color:
+                                                                TColors.white,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontSize: 12),
+                                                      ),
+                                                      Text(
+                                                        i["Exprence"],
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 10),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 16,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  //videos End
                 ],
               ),
             ),
