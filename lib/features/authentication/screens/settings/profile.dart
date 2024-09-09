@@ -205,9 +205,9 @@ class _ProfileState extends State<Profile> {
                                                 )),
                                             ElevatedButton(
                                                 onPressed: () {
-                                                  AuthenticationRepository
+                                                  /*  AuthenticationRepository
                                                       .instance
-                                                      .logout();
+                                                      .logout(); */
                                                 },
                                                 style: mdPrimary,
                                                 child: Text(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:saveit/features/authentication/screens/questions/question_region.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -48,7 +47,7 @@ class paymentdone extends StatelessWidget {
                         height: 54.04,
                         child: ElevatedButton(
                             onPressed: () {
-                              Get.to(const QuestionRegion());
+                              /*    Get.to(const QuestionRegion()); */
                             },
                             style: buttonPrimary,
                             child: const Text(

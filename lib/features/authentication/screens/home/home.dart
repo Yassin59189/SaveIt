@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return showModalBottomSheet(
           context: context,
           builder: (context) => SizedBox(
-                height: 500,
+                height: 700,
                 child: test(),
               ));
     }
@@ -299,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Transform.scale(
-                                  scale: 0.8,
+                                  scale: 0.6,
                                   child: const CircleAvatar(
                                     radius: 40,
                                     backgroundColor: TColors.primary,
@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 Transform.translate(
-                                  offset: Offset(-screenWidth * 0.09, 0),
+                                  offset: Offset(-screenWidth * 0.1, 0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,

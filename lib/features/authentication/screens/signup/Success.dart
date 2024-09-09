@@ -58,11 +58,10 @@ class Success extends StatelessWidget {
                   width: 206.35,
                   height: 54.04,
                   child: ElevatedButton(
-                      onPressed: () {
-                        /*                               Get.to();
+                      onPressed: onPressed,
+                      /*                               Get.to();
              */
-                        onPressed();
-                      },
+
                       style: buttonPrimary,
                       child: const Text(
                         "Continue",
