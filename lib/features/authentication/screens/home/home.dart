@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -8,17 +7,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/common/widgets/loaders/shimmer.dart';
-import 'package:saveit/data/repositories/authentication/authentication.dart';
-import 'package:saveit/data/repositories/savings_repository.dart';
-import 'package:saveit/data/repositories/transaction_repository.dart';
 import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
 import 'package:saveit/features/authentication/controllers/user/user_controller.dart';
-import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
-import 'package:saveit/features/authentication/screens/home/savings_carousel.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
-import 'package:saveit/features/models/savings_model.dart';
 import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -31,85 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<SavingGoal>> _savingsGoalsFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      _savingsGoalsFuture = fetchSavingGoals(user.uid);
-    } else {
-      _savingsGoalsFuture = Future.error('User not logged in');
-    }
-  }
-
-  void _showAddGoalDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        final titleController = TextEditingController();
-        final progressController = TextEditingController();
-        final goalPriceController = TextEditingController();
-
-        return AlertDialog(
-          title: Text('Add New Saving Goal'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: titleController,
-                decoration: InputDecoration(labelText: 'Title'),
-              ),
-              TextField(
-                controller: progressController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Current Progress'),
-              ),
-              TextField(
-                controller: goalPriceController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Goal Price'),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () async {
-                final title = titleController.text;
-                final progress = double.tryParse(progressController.text) ?? 0;
-                final goalPrice =
-                    double.tryParse(goalPriceController.text) ?? 0;
-
-                final user = FirebaseAuth.instance.currentUser;
-                if (user != null) {
-                  await addSavingGoal(
-                      user.uid,
-                      SavingGoal(
-                        title: title,
-                        progress: progress,
-                        goalPrice: goalPrice,
-                      ));
-                  setState(() {
-                    _savingsGoalsFuture = fetchSavingGoals(user.uid);
-                  });
-                  Navigator.of(context).pop();
-                }
-              },
-              child: Text('Add'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
@@ -140,9 +54,75 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<TransactionModel> allTransactions = transactionController.transactions;
 
-    // Controllers for the input fields in the popup
+    List<Map<String, dynamic>> savingsGoals = [
+      {"title": "Travel", "amountSaved": 0, "goalAmount": 500},
+      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
+      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
+    ];
+
     final TextEditingController _titleController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
+
+    void _openAddSavingsGoalDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Saving Goal'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                  ),
+                ),
+                TextField(
+                  controller: _amountController,
+                  decoration: InputDecoration(
+                    labelText: 'Goal Amount',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_titleController.text.isNotEmpty &&
+                      _amountController.text.isNotEmpty) {
+                    setState(() {
+                      final newGoal = {
+                        "title": _titleController.text,
+                        "amountSaved": 0,
+                        "goalAmount": int.parse(_amountController.text),
+                      };
+                      print("Adding new goal: $newGoal");
+                      savingsGoals.add(newGoal);
+                      print("New goal added: $newGoal");
+                    });
+
+                    _titleController.clear();
+                    _amountController.clear();
+                    Navigator.of(context).pop();
+                  } else {
+                    print("Please enter a valid title and goal amount.");
+                  }
+                },
+                child: Text('Confirm'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       endDrawer: Container(
@@ -151,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
             topLeft: Radius.circular(20),
             bottomLeft: Radius.circular(20),
           ),
-          color: Colors.white, // Set background color here
+          color: Colors.white,
         ),
         child: Drawer(
           child: ListView(
@@ -494,49 +474,72 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SingleChildScrollView(
+
+            Container(
+              width: screenWidth - 35,
+              decoration: BoxDecoration(
+                  color: TColors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                      blurRadius: 3,
+                      spreadRadius: 0,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    ),
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                      blurRadius: 2,
+                      spreadRadius: 0,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    ),
+                  ]),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView.builder(
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        TransactionModel transaction = allTransactions[index];
-                        return HistoryContent(
-                          title: transaction.category,
-                          amount: CurrencyFormatter.format(
-                              transaction.amount, DinarSettings),
-                          type: transaction.isExpense ? "expense" : "income",
-                          date: transaction.date,
-                        );
-                      },
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Savings',
+                          style: TextStyle(
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold,
+                              color: TColors.primary),
+                        ),
+                        IconButton(
+                            onPressed: _openAddSavingsGoalDialog,
+                            icon: Icon(Icons.add_circle_outline),
+                            iconSize: 32,
+                            color: TColors.accent),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: FutureBuilder<List<SavingGoal>>(
-                      future: _savingsGoalsFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${snapshot.error}'));
-                        } else if (!snapshot.hasData ||
-                            snapshot.data!.isEmpty) {
-                          return Center(child: Text('No savings goals found.'));
-                        } else {
-                          final savingsGoals = snapshot.data!;
-                          return SavingsCarousel(savingsGoals: savingsGoals);
-                        }
-                      },
+                  CarouselSlider.builder(
+                    options: CarouselOptions(
+                      height: 150,
+                      enableInfiniteScroll: false,
+                      enlargeCenterPage: true,
                     ),
+                    itemCount: savingsGoals.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SavingCard(
+                          title: savingsGoals[index]['title'],
+                          amountSaved: savingsGoals[index]['amountSaved'],
+                          goalAmount: savingsGoals[index]['goalAmount'],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -549,9 +552,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class SavingCard extends StatelessWidget {
-  final String title; // Title of the savings goal (e.g., "Travel")
-  final int amountSaved; // Current amount saved towards the goal
-  final int goalAmount; // Total goal amount for this savings goal
+  final String title;
+  final int amountSaved;
+  final int goalAmount;
 
   SavingCard({
     required this.title,
@@ -561,19 +564,19 @@ class SavingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double progress = amountSaved / goalAmount; // Calculate progress percentage
+    double progress = amountSaved / goalAmount;
 
     return Container(
-      width: 200, // Width of the card
+      width: 300,
       decoration: BoxDecoration(
-        color: Colors.white, // Card background color
-        borderRadius: BorderRadius.circular(16), // Rounded corners for the card
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2), // Soft shadow for depth
+            color: Colors.grey.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3), // Shadow offset
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -582,16 +585,10 @@ class SavingCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Row containing the title and an icon for the savings goal
             Row(
               children: [
-                Icon(
-                  Icons.flight_takeoff, // Example icon (can be customized)
-                  color: Colors.orange, // Icon color
-                ),
-                SizedBox(width: 8), // Space between icon and text
                 Text(
-                  title, // Display the savings goal title
+                  title,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -599,31 +596,25 @@ class SavingCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10), // Space between title and progress bar
-            // Progress bar indicating the percentage of the goal saved
+            SizedBox(height: 10),
             LinearProgressIndicator(
-              value: progress, // Value of progress bar (0 to 1)
-              backgroundColor:
-                  Colors.grey[300], // Background color of progress bar
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(Colors.blue), // Progress color
+              value: progress,
+              backgroundColor: Colors.grey[300],
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
             ),
-            SizedBox(height: 10), // Space between progress bar and amounts
-            // Row showing the current saved amount and goal amount
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Current saved amount
                 Text(
-                  '${amountSaved}DT', // Display the amount saved
+                  '${amountSaved}DT',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                // Goal amount
                 Text(
-                  '${goalAmount}DT', // Display the goal amount
+                  '${goalAmount}DT',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
