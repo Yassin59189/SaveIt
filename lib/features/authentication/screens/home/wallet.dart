@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
+import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
+import 'package:saveit/features/authentication/controllers/user/user_controller.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/edit_wallet.dart';
+import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -29,8 +32,38 @@ String filterType = "all";
 class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
+    final TransactionController transactionController =
+        Get.put(TransactionController());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    List<TransactionModel> allTransactions = transactionController.transactions;
+
+    double totalExpenseAmount = allTransactions.fold(0, (sum, transaction) {
+      if (transaction.isExpense) {
+        return sum + transaction.amount;
+      }
+      return sum;
+    });
+
+    double totalIncomeAmount = allTransactions.fold(0, (sum, transaction) {
+      if (!transaction.isExpense) {
+        return sum + transaction.amount;
+      }
+      return sum;
+    });
+
+    List<TransactionModel> filteredTransactions =
+        transactionController.transactions.where((transaction) {
+      if (filterType == 'all') {
+        return true;
+      } else if (filterType == 'income') {
+        return !transaction.isExpense;
+      } else if (filterType == 'expense') {
+        return transaction.isExpense;
+      }
+      return false;
+    }).toList();
 
     return Scaffold(
       endDrawer: Drawer(
@@ -117,7 +150,8 @@ class _WalletState extends State<Wallet> {
                   //Balance
                   Text(
                     CurrencyFormatter.format(
-                        358500, //hott el blance fi blast el number
+                        controller.user.value
+                            .budget, //hott el blance fi blast el number
                         DinarSettings),
                     style: TextStyle(
                         fontFamily: 'Poppins',
@@ -135,7 +169,7 @@ class _WalletState extends State<Wallet> {
                       color: Colors.white,
                     ),
                     width: MediaQuery.of(context).size.width - 40,
-                    height: 229,
+                    height: 200,
                     child: Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -235,7 +269,7 @@ class _WalletState extends State<Wallet> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
-                                          "000.00DT",
+                                          totalIncomeAmount.toString(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: TColors.primary,
@@ -270,7 +304,7 @@ class _WalletState extends State<Wallet> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
-                                          "000.00DT",
+                                          totalExpenseAmount.toString(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: TColors.primary,
@@ -294,17 +328,6 @@ class _WalletState extends State<Wallet> {
                                 border: Border(
                                     top: BorderSide(
                                         width: 2, color: TColors.secondary))),
-                            child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  shadowColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius
-                                        .zero, // Set all radii to zero
-                                  ),
-                                ),
-                                child: const Text("SHOW CHART")),
                           ),
                         ],
                       ),
@@ -438,33 +461,27 @@ class _WalletState extends State<Wallet> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     //content
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: HistoryContent(
-                          type: "expense", //inome or expense
-                          amount: CurrencyFormatter.format(
-                              10000, //hott el amount fi blast el 1000
-                              DinarSettings),
-                          title: "Lorem Ipsum",
-                          date: DateTime.now().subtract(Duration(
-                              days:
-                                  2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                        )),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: HistoryContent(
-                          type: "income", //inome or expense
-                          amount: CurrencyFormatter.format(
-                              10000, //hott el amount fi blast el 1000
-                              DinarSettings),
-                          title: "Lorem IpsumT",
-                          date: DateTime.now().subtract(Duration(
-                              days:
-                                  2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                        )),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredTransactions.length,
+                        itemBuilder: (context, index) {
+                          TransactionModel transaction =
+                              filteredTransactions[index];
+                          return HistoryContent(
+                            title: transaction.category,
+                            amount: CurrencyFormatter.format(
+                                transaction
+                                    .amount, // hot el amount fi blast el 1000
+                                DinarSettings),
+                            type: transaction.isExpense ? "expense" : "income",
+                            date: transaction.date,
+                          );
+                        },
+                      ),
+                    )
                   ],
                 ),
               ),

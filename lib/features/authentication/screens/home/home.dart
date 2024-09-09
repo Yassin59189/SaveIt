@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,20 +7,29 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:saveit/common/widgets/appbar/appbar.dart';
 import 'package:saveit/common/widgets/loaders/shimmer.dart';
-import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
 import 'package:saveit/features/authentication/controllers/user/user_controller.dart';
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
+import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
+    final TransactionController transactionController =
+        Get.put(TransactionController());
+
     Future NotificationBottomSheet(BuildContext context) {
       return showModalBottomSheet(
           context: context,
@@ -41,6 +51,79 @@ class HomeScreen extends StatelessWidget {
     String formattedDate = DateFormat('MMM d, yyyy').format(now);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    List<TransactionModel> allTransactions = transactionController.transactions;
+
+    List<Map<String, dynamic>> savingsGoals = [
+      {"title": "Travel", "amountSaved": 0, "goalAmount": 500},
+      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
+      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
+    ];
+
+    final TextEditingController _titleController = TextEditingController();
+    final TextEditingController _amountController = TextEditingController();
+
+    void _openAddSavingsGoalDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Add New Saving Goal'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: _titleController,
+                  decoration: InputDecoration(
+                    labelText: 'Title',
+                  ),
+                ),
+                TextField(
+                  controller: _amountController,
+                  decoration: InputDecoration(
+                    labelText: 'Goal Amount',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_titleController.text.isNotEmpty &&
+                      _amountController.text.isNotEmpty) {
+                    setState(() {
+                      final newGoal = {
+                        "title": _titleController.text,
+                        "amountSaved": 0,
+                        "goalAmount": int.parse(_amountController.text),
+                      };
+                      print("Adding new goal: $newGoal");
+                      savingsGoals.add(newGoal);
+                      print("New goal added: $newGoal");
+                    });
+
+                    _titleController.clear();
+                    _amountController.clear();
+                    Navigator.of(context).pop();
+                  } else {
+                    print("Please enter a valid title and goal amount.");
+                  }
+                },
+                child: Text('Confirm'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       endDrawer: Container(
         decoration: const BoxDecoration(
@@ -48,7 +131,7 @@ class HomeScreen extends StatelessWidget {
             topLeft: Radius.circular(20),
             bottomLeft: Radius.circular(20),
           ),
-          color: Colors.white, // Set background color here
+          color: Colors.white,
         ),
         child: Drawer(
           child: ListView(
@@ -71,7 +154,7 @@ class HomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 onTap: () {
-                  Get.to(const Wallet());
+                  Get.to(Wallet());
                 },
               ),
               ListTile(
@@ -362,53 +445,24 @@ class HomeScreen extends StatelessWidget {
                             height: 10,
                           ),
                           SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "expense", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem Ipsum",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
+                            height: 200, // Set a fixed height here
+                            child: ListView.builder(
+                              itemCount: 4,
+                              itemBuilder: (context, index) {
+                                TransactionModel transaction =
+                                    allTransactions[index];
+                                return HistoryContent(
+                                  title: transaction.category,
+                                  amount: CurrencyFormatter.format(
+                                      transaction.amount, DinarSettings),
+                                  type: transaction.isExpense
+                                      ? "expense"
+                                      : "income",
+                                  date: transaction.date,
+                                );
+                              },
+                            ),
+                          ),
                           SizedBox(
                             height: 10,
                           )
@@ -419,6 +473,154 @@ class HomeScreen extends StatelessWidget {
                   //History content
                 ],
               ),
+            ),
+
+            Container(
+              width: screenWidth - 35,
+              decoration: BoxDecoration(
+                  color: TColors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                      blurRadius: 3,
+                      spreadRadius: 0,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    ),
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                      blurRadius: 2,
+                      spreadRadius: 0,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    ),
+                  ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Savings',
+                          style: TextStyle(
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold,
+                              color: TColors.primary),
+                        ),
+                        IconButton(
+                            onPressed: _openAddSavingsGoalDialog,
+                            icon: Icon(Icons.add_circle_outline),
+                            iconSize: 32,
+                            color: TColors.accent),
+                      ],
+                    ),
+                  ),
+                  CarouselSlider.builder(
+                    options: CarouselOptions(
+                      height: 150,
+                      enableInfiniteScroll: false,
+                      enlargeCenterPage: true,
+                    ),
+                    itemCount: savingsGoals.length,
+                    itemBuilder: (context, index, realIndex) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SavingCard(
+                          title: savingsGoals[index]['title'],
+                          amountSaved: savingsGoals[index]['amountSaved'],
+                          goalAmount: savingsGoals[index]['goalAmount'],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SavingCard extends StatelessWidget {
+  final String title;
+  final int amountSaved;
+  final int goalAmount;
+
+  SavingCard({
+    required this.title,
+    required this.amountSaved,
+    required this.goalAmount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    double progress = amountSaved / goalAmount;
+
+    return Container(
+      width: 300,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            LinearProgressIndicator(
+              value: progress,
+              backgroundColor: Colors.grey[300],
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${amountSaved}DT',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  '${goalAmount}DT',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

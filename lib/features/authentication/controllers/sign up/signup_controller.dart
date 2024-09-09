@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saveit/common/widgets/snackBars/loaders.dart';
@@ -16,13 +18,16 @@ class SignupController extends GetxController {
   final password = TextEditingController();
   final budget = "0";
   final verifPassword = TextEditingController();
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   // Sign up
   Future<void> signup() async {
     try {
       // Loading
-      FullScreenLoader.openLoadingDialog(
-          'We are processing your information...');
+/*       FullScreenLoader.openLoadingDialog(
+          'We are processing your information...'); */
       // Check Internet
       /* final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
@@ -50,7 +55,14 @@ class SignupController extends GetxController {
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(NewUser);
-
+      User? user = userCredential.user;
+      if (user != null) {
+        await _firestore.collection('savings').doc(user.uid).set({
+          'goals': [] // Initialize with an empty array of savings goals
+        });
+      } else {
+        print("User is null. Savings document cannot be created.");
+      }
       // Success message
       Loaders.successSnackBar(
           title: 'Congratulations',

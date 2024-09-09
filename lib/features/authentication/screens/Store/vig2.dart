@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_const
 
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -47,7 +46,7 @@ class _mainStoreState extends State<VigStore2> {
                     textAlign: TextAlign.center,
                   ),
                   onTap: () {
-                    Get.to(const Wallet());
+                    Get.to(Wallet());
                   },
                 ),
                 ListTile(
@@ -140,7 +139,8 @@ class _mainStoreState extends State<VigStore2> {
                 cursorWidth: 1,
                 minLines: 1,
                 maxLines: 1,
-                style: const TextStyle(color: Colors.white, fontSize: TSizes.fontMd),
+                style: const TextStyle(
+                    color: Colors.white, fontSize: TSizes.fontMd),
                 decoration: const InputDecoration(
                   fillColor: TColors.secondary,
                   filled: true,
@@ -245,8 +245,7 @@ class _mainStoreState extends State<VigStore2> {
                               ),
                             ],
                             color: TColors.primary,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30)),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           child: Column(
                             children: [
@@ -362,8 +361,7 @@ class _mainStoreState extends State<VigStore2> {
                               ),
                             ],
                             color: TColors.primary,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30)),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
                           child: Column(
                             children: [

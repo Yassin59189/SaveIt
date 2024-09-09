@@ -9,7 +9,9 @@ import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
 import 'package:saveit/utils/helpers/helper_functions.dart';
-  bool isPressed4 = false;
+
+bool isPressed4 = false;
+
 class claimcode extends StatefulWidget {
   const claimcode({super.key});
 
@@ -42,7 +44,8 @@ class _mainStoreState extends State<claimcode> {
                     textAlign: TextAlign.center,
                   ),
                   onTap: () {
-                    Get.to(const Wallet());                 },
+                    Get.to(Wallet());
+                  },
                 ),
                 ListTile(
                   title: const Text(
@@ -190,19 +193,19 @@ class _mainStoreState extends State<claimcode> {
                       height: TSizes.spaceBtwitems,
                     ),
                     SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isPressed4 = !isPressed4;
-                          });
-                        },
-                        style: isPressed4
-                            ? buttonanContinueSecondary
-                            : buttonquestionSelected,
-                        child: const Text(
-                        "Claim code",
-                          style: TextStyle(color: TColors.white),
-                        ))),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                isPressed4 = !isPressed4;
+                              });
+                            },
+                            style: isPressed4
+                                ? buttonanContinueSecondary
+                                : buttonquestionSelected,
+                            child: const Text(
+                              "Claim code",
+                              style: TextStyle(color: TColors.white),
+                            ))),
                   ],
                 ),
               ),

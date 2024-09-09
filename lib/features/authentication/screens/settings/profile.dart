@@ -291,7 +291,7 @@ class _settings_buttonState extends State<settings_button> {
       height: widget.height,
       child: ElevatedButton(
           onPressed: widget.onPressed,
-          style: ButtonStyle(
+          /* style: ButtonStyle(
               backgroundColor:
                   WidgetStateProperty.all<Color>(Colors.transparent),
               elevation: WidgetStateProperty.all<double>(0),
@@ -302,7 +302,7 @@ class _settings_buttonState extends State<settings_button> {
               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
-              ))),
+              ))), */
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

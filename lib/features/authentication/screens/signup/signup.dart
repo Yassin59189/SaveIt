@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:saveit/data/repositories/category_repository.dart';
 import 'package:saveit/features/authentication/controllers/sign%20up/signup_controller.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -186,3 +188,18 @@ class SignupForm extends StatelessWidget {
     );
   }
 }
+
+/* void addPredefinedCategories() async {
+  final userId = FirebaseAuth.instance.currentUser?.uid;
+  if (userId != null) {
+    final categoryRepository = CategoryRepository();
+    try {
+      await categoryRepository.addPredefinedCategories(userId);
+      print('Predefined categories added successfully');
+    } catch (e) {
+      print('Error adding predefined categories: $e');
+    }
+  } else {
+    print('User is not authenticated');
+  }
+} */
