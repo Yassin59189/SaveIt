@@ -13,7 +13,10 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/data/repositories/category_repository.dart';
+import 'package:saveit/features/authentication/controllers/category_controller.dart';
 import 'package:saveit/features/authentication/controllers/user/transaction_controller.dart';
+import 'package:saveit/features/models/category_model.dart';
 import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -30,9 +33,28 @@ class NewTransaction extends StatefulWidget {
 class _NewTransaction extends State<NewTransaction> {
   final transactionController = Get.put(TransactionController());
 
+  final CategoryController categoryController = Get.put(CategoryController());
+  List<CategoryModel> _categories = [];
+  CategoryModel? _selectedCategory;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    final userId =
+        FirebaseAuth.instance.currentUser?.uid; // Replace with actual user ID
+    await categoryController.loadCategories(userId!);
+    setState(() {
+      _categories = categoryController.categories.toList();
+    });
+  }
+
   bool switchExpenseIncom = false;
   String? errorText;
-  String backCategory = '';
+  late CategoryModel backCategory;
 
   bool ExpenseButtonState = true;
   CurrencyFormat DinarSettings = CurrencyFormat(
@@ -71,7 +93,7 @@ class _NewTransaction extends State<NewTransaction> {
       id: DateTime.now().toString(),
       userId: FirebaseAuth.instance.currentUser?.uid ?? '',
       amount: amount,
-      category: backCategory,
+      category: backCategory.toString(),
       date: _selectedDate,
       isRepeating: isReapting,
       isExpense: switchExpenseIncom,
@@ -384,21 +406,25 @@ class _NewTransaction extends State<NewTransaction> {
                                                 builder:
                                                     (BuildContext context) {
                                                   return CategoryBottomSheet(
-                                                    list:
-                                                        categorList, //lista t3 el catergoies hika decalria el fo9 juste ka test
+                                                    list: categoryController
+                                                        .categories, // Ensure this is List<CategoryModel>
                                                     category:
-                                                        category, //hethi el selected
+                                                        _selectedCategory, // Ensure this is of type CategoryModel?
                                                     oncategorychange:
-                                                        (selectedcategory) {
+                                                        (selectedCategory) {
                                                       setState(() {
-                                                        category =
-                                                            selectedcategory;
+                                                        _selectedCategory =
+                                                            selectedCategory;
                                                         backCategory =
-                                                            selectedcategory;
+                                                            selectedCategory; // Ensure `backCategory` is also of type CategoryModel?
                                                       });
                                                     },
                                                     onAddCategory:
-                                                        addCategory, //hethi tzidlk category li lista ahyka fonction lfou9
+                                                        (newCategory) {
+                                                      // Make sure `addCategory` is a function that accepts a CategoryModel
+                                                      addCategory(newCategory
+                                                          .toString());
+                                                    },
                                                   );
                                                 });
                                           },
@@ -564,28 +590,28 @@ class _NewTransaction extends State<NewTransaction> {
 }
 
 class CategoryBottomSheet extends StatefulWidget {
-  final List list;
-  final Function(String) oncategorychange;
-  final Function(String) onAddCategory;
-  String category;
+  final List<CategoryModel> list;
+  final CategoryModel? category;
+  final Function(CategoryModel) oncategorychange;
+  final Function(CategoryModel) onAddCategory;
+
   CategoryBottomSheet({
     required this.list,
-    required this.category,
+    this.category,
     required this.oncategorychange,
     required this.onAddCategory,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<CategoryBottomSheet> createState() => _CategoryBottomSheet();
+  State<CategoryBottomSheet> createState() => _CategoryBottomSheetState();
 }
 
-bool isAdding = false;
-String? errorText;
+class _CategoryBottomSheetState extends State<CategoryBottomSheet> {
+  bool isAdding = false;
+  String? errorText;
+  final TextEditingController _controller = TextEditingController();
 
-final TextEditingController _controller = TextEditingController();
-
-class _CategoryBottomSheet extends State<CategoryBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -595,116 +621,121 @@ class _CategoryBottomSheet extends State<CategoryBottomSheet> {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Container(
-              constraints: new BoxConstraints(minHeight: 400),
+              constraints: BoxConstraints(minHeight: 400),
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/images/home/bg_newTransaction.png"),
                   fit: BoxFit.cover,
                 ),
               ),
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    Text(
-                      "Categories",
-                      style: TextStyle(
-                          color: TColors.primary,
-                          fontSize: TSizes.fontLg * 1.5,
-                          fontWeight: FontWeight.bold),
+              child: Column(
+                children: [
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      color: TColors.primary,
+                      fontSize: TSizes.fontLg * 1.5,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ...widget.list.map((i) {
-                      return Column(
-                        children: [
-                          listOfGategorys(
-                            text: i['name'],
-                            onPressed: () {
-                              widget.oncategorychange(i['name']);
-                              Navigator.pop(context); // Close the bottom sheet
-                            },
-                            icon: i['icon'],
-                          ),
-                          SizedBox(
-                            height: 20,
+                  ),
+                  SizedBox(height: 20),
+                  ...widget.list.map((i) {
+                    return Column(
+                      children: [
+                        ListOfCategories(
+                          text: i.name, // Use the name property
+                          onPressed: () {
+                            widget.oncategorychange(i);
+                            Navigator.pop(context); // Close the bottom sheet
+                          },
+                          icon: i.icon, // Use the icon property
+                        ),
+                        SizedBox(height: 20),
+                      ],
+                    );
+                  }).toList(),
+                  if (isAdding)
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.86,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 2), // changes position of shadow
                           ),
                         ],
-                      );
-                    }).toList(),
-                    if (isAdding)
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.86,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.4),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset:
-                                    Offset(0, 2), // changes position of shadow
-                              ),
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: TextField(
-                                      controller: _controller,
-                                      decoration: InputDecoration(
-                                        hintText: "New Category",
-                                        border: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        errorText: errorText,
-                                      ),
-                                      onChanged: (text) {
-                                        setState(() {
-                                          if (text.length > 20) {
-                                            errorText =
-                                                'Category name cannot be more than 20 characters';
-                                          } else {
-                                            errorText = null;
-                                          }
-                                        });
-                                      })),
-                              IconButton(
-                                icon: Icon(Iconsax.add_circle),
-                                onPressed: () {
-                                  if (_controller.text.isNotEmpty &&
-                                      errorText == null) {
-                                    widget.onAddCategory(_controller.text);
-                                    setState(() {
-                                      isAdding = false;
-                                    });
-                                    _controller.clear();
-                                  }
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _controller,
+                                decoration: InputDecoration(
+                                  hintText: "New Category",
+                                  border: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  errorText: errorText,
+                                ),
+                                onChanged: (text) {
+                                  setState(() {
+                                    if (text.length > 20) {
+                                      errorText =
+                                          'Category name cannot be more than 20 characters';
+                                    } else {
+                                      errorText = null;
+                                    }
+                                  });
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                            IconButton(
+                              icon: Icon(Iconsax.add_circle),
+                              onPressed: () {
+                                if (_controller.text.isNotEmpty &&
+                                    errorText == null) {
+                                  final newCategory = CategoryModel(
+                                    id: '', // Generate a new ID or leave empty
+                                    name: _controller.text,
+                                    priority: false,
+                                    icon: Iconsax
+                                        .category, // Use a default icon or add a way to choose
+                                    amount: 0,
+                                  );
+                                  widget.onAddCategory(newCategory);
+                                  setState(() {
+                                    isAdding = false;
+                                  });
+                                  _controller.clear();
+                                }
+                              },
+                            ),
+                          ],
                         ),
-                      )
-                    else
-                      listOfGategorys(
-                        text: 'Add',
-                        onPressed: () {
-                          setState(() {
-                            isAdding = true;
-                          });
-                        },
-                        icon: Iconsax.add,
                       ),
-                  ],
-                ),
+                    )
+                  else
+                    ListOfCategories(
+                      text: 'Add',
+                      onPressed: () {
+                        setState(() {
+                          isAdding = true;
+                        });
+                      },
+                      icon: Iconsax.add,
+                    ),
+                ],
               ),
             ),
           ),
@@ -714,29 +745,29 @@ class _CategoryBottomSheet extends State<CategoryBottomSheet> {
   }
 }
 
-class listOfGategorys extends StatefulWidget {
+class ListOfCategories extends StatefulWidget {
   final String text;
   final IconData icon;
   final VoidCallback onPressed;
-  const listOfGategorys({
-    super.key,
+
+  const ListOfCategories({
+    Key? key,
     required this.text,
     required this.onPressed,
     required this.icon,
-  });
+  }) : super(key: key);
+
   @override
-  State<listOfGategorys> createState() => _listOfGategorys();
+  State<ListOfCategories> createState() => _ListOfCategoriesState();
 }
 
-class _listOfGategorys extends State<listOfGategorys> {
-  bool isSwitched = false;
-
+class _ListOfCategoriesState extends State<ListOfCategories> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Container(
         height: 50,
-        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ElevatedButton(
           style: ButtonStyle(
             overlayColor:
@@ -752,14 +783,17 @@ class _listOfGategorys extends State<listOfGategorys> {
           child: Row(
             children: [
               Transform.scale(
-                  scale: 0.8, child: Icon(color: TColors.primary, widget.icon)),
+                scale: 0.8,
+                child: Icon(widget.icon,
+                    color: TColors.primary), // Use the correct icon
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   widget.text,
                   style: TextStyle(color: TColors.primary, fontSize: 18),
                 ),
-              )
+              ),
             ],
           ),
         ),

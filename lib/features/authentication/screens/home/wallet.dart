@@ -37,6 +37,21 @@ class _WalletState extends State<Wallet> {
         Get.put(TransactionController());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    List<TransactionModel> allTransactions = transactionController.transactions;
+
+    double totalExpenseAmount = allTransactions.fold(0, (sum, transaction) {
+      if (transaction.isExpense) {
+        return sum + transaction.amount;
+      }
+      return sum;
+    });
+
+    double totalIncomeAmount = allTransactions.fold(0, (sum, transaction) {
+      if (!transaction.isExpense) {
+        return sum + transaction.amount;
+      }
+      return sum;
+    });
 
     List<TransactionModel> filteredTransactions =
         transactionController.transactions.where((transaction) {
@@ -254,7 +269,7 @@ class _WalletState extends State<Wallet> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
-                                          "000.00DT",
+                                          totalIncomeAmount.toString(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: TColors.primary,
@@ -289,7 +304,7 @@ class _WalletState extends State<Wallet> {
                                               fontWeight: FontWeight.w600),
                                         ),
                                         Text(
-                                          "000.00DT",
+                                          totalExpenseAmount.toString(),
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
                                               color: TColors.primary,
