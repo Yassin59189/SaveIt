@@ -53,7 +53,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
             destinations: const [
               NavigationDestination(
                 icon: Icon(
-                  Icons.shopping_cart_rounded,
+                  Iconsax.coin_15,
                   color: TColors.primary,
                 ),
                 label: 'Penny',
