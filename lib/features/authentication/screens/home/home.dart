@@ -75,16 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<Map<String, dynamic>> categorList = [
       {
-        "GoalTitle": "test",
-        "SavedAmount": 0,
-        "Amount": 500,
-        "Icon": Iconsax.activity
+        "GoalTitle": "Gym subscription",
+        "SavedAmount": 34,
+        "Amount": 220,
+        "Icon": Iconsax.weight_15
       },
       {
-        "GoalTitle": "test",
+        "GoalTitle": "Trip with friends",
         "SavedAmount": 0,
-        "Amount": 500,
-        "Icon": Iconsax.activity
+        "Amount": 130,
+        "Icon": Iconsax.airplane5
       }
     ];
 
@@ -983,13 +983,19 @@ class SavingCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon),
+                Icon(
+                  icon,
+                  color: TColors.primary,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: TColors.primary),
                 ),
               ],
             ),
