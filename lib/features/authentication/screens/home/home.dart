@@ -446,16 +446,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
                           SizedBox(
                             height: 200, // Set a fixed height here
-                            child: ListView.builder(
-                              itemCount: allTransactions.length,
-                              itemBuilder: (context, index) {
-                                TransactionModel transaction =
-                                    allTransactions[index];
+                            child: ListView(
+                              children: allTransactions.map((transaction) {
                                 return HistoryContent(
                                   title: transaction.category,
                                   amount: CurrencyFormatter.format(
@@ -465,7 +459,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : "income",
                                   date: transaction.date,
                                 );
-                              },
+                              }).toList(),
                             ),
                           ),
                           SizedBox(

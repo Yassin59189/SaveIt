@@ -67,15 +67,22 @@ class _MessagewidgetState extends State<Messagewidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                             )
-                          : TypeWriterText(
-                              text: Text(
-                                widget.text + "\n",
-                                style: TextStyle(
-                                  color: Colors.grey.shade900,
-                                  fontWeight: FontWeight.w500,
+                          : Column(
+                              children: [
+                                TypeWriterText(
+                                  text: Text(
+                                    widget.text,
+                                    style: TextStyle(
+                                      color: Colors.grey.shade900,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  duration: const Duration(milliseconds: 10),
                                 ),
-                              ),
-                              duration: const Duration(milliseconds: 10),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                              ],
                             ),
                     ],
                   ),

@@ -48,7 +48,7 @@ class _Penny extends State<Penny> {
     _sendSystemPrompt();
   }
 
-  double Balance = 1330.0;
+  double Balance = 1437.0;
   double expense = 430.0;
   double Savings = 730.0;
   double Monthly = 1000;
