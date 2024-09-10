@@ -56,7 +56,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
                   Icons.shopping_cart_rounded,
                   color: TColors.primary,
                 ),
-                label: 'E-Shop',
+                label: 'Penny',
               ),
               NavigationDestination(
                 icon: Padding(
