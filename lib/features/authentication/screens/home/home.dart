@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:currency_formatter/currency_formatter.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import 'package:saveit/features/authentication/controllers/user/user_controller.
 import 'package:saveit/features/authentication/screens/Store/claimcode.dart';
 import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_bottom_sheet.dart';
 import 'package:saveit/features/authentication/screens/home/wallet.dart';
+import 'package:saveit/features/authentication/screens/questions/priorities.dart';
 import 'package:saveit/features/models/transaction_model.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -26,9 +29,28 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    void myStateSetter() {
+      setState(() {});
+    }
+
     final controller = Get.put(UserController());
     final TransactionController transactionController =
         Get.put(TransactionController());
+
+    List<Map<String, dynamic>> categorList = [
+      {
+        "GoalTitle": "test",
+        "SavedAmount": 0,
+        "Amount": 500,
+        "Icon": Iconsax.activity
+      },
+      {
+        "GoalTitle": "test",
+        "SavedAmount": 0,
+        "Amount": 500,
+        "Icon": Iconsax.activity
+      }
+    ];
 
     Future NotificationBottomSheet(BuildContext context) {
       return showModalBottomSheet(
@@ -38,6 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: test(),
               ));
     }
+
+/*     void addCategory(String newCategoryName) {
+      setState(() {
+        categorList.add({
+          'name': newCategoryName,
+          'icon': Iconsax.empty_wallet,
+          'onPressed': () {},
+        });
+      });
+    } */ //hethi list t3 items li fi wst gategory
 
     CurrencyFormat DinarSettings = CurrencyFormat(
       code: 'dt',
@@ -54,75 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<TransactionModel> allTransactions = transactionController.transactions;
 
-    List<Map<String, dynamic>> savingsGoals = [
-      {"title": "Travel", "amountSaved": 0, "goalAmount": 500},
-      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
-      {"title": "Emergency Fund", "amountSaved": 0, "goalAmount": 300},
-    ];
-
     final TextEditingController _titleController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
-
-    void _openAddSavingsGoalDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Add New Saving Goal'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    labelText: 'Title',
-                  ),
-                ),
-                TextField(
-                  controller: _amountController,
-                  decoration: InputDecoration(
-                    labelText: 'Goal Amount',
-                  ),
-                  keyboardType: TextInputType.number,
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_titleController.text.isNotEmpty &&
-                      _amountController.text.isNotEmpty) {
-                    setState(() {
-                      final newGoal = {
-                        "title": _titleController.text,
-                        "amountSaved": 0,
-                        "goalAmount": int.parse(_amountController.text),
-                      };
-                      print("Adding new goal: $newGoal");
-                      savingsGoals.add(newGoal);
-                      print("New goal added: $newGoal");
-                    });
-
-                    _titleController.clear();
-                    _amountController.clear();
-                    Navigator.of(context).pop();
-                  } else {
-                    print("Please enter a valid title and goal amount.");
-                  }
-                },
-                child: Text('Confirm'),
-              ),
-            ],
-          );
-        },
-      );
-    }
 
     return Scaffold(
       endDrawer: Container(
@@ -447,7 +412,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 200, // Set a fixed height here
                             child: ListView.builder(
-                              itemCount: 4,
+                              itemCount: 10,
                               itemBuilder: (context, index) {
                                 TransactionModel transaction =
                                     allTransactions[index];
@@ -516,30 +481,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: TColors.primary),
                         ),
                         IconButton(
-                            onPressed: _openAddSavingsGoalDialog,
+                            onPressed: () {
+                              _showAddCategoryDialog(
+                                  context, categorList, myStateSetter);
+                              print(categorList);
+                            },
                             icon: Icon(Icons.add_circle_outline),
                             iconSize: 32,
                             color: TColors.accent),
                       ],
                     ),
                   ),
-                  CarouselSlider.builder(
+                  CarouselSlider(
                     options: CarouselOptions(
                       height: 150,
                       enableInfiniteScroll: false,
                       enlargeCenterPage: true,
                     ),
-                    itemCount: savingsGoals.length,
-                    itemBuilder: (context, index, realIndex) {
+                    items: categorList.map((category) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SavingCard(
-                          title: savingsGoals[index]['title'],
-                          amountSaved: savingsGoals[index]['amountSaved'],
-                          goalAmount: savingsGoals[index]['goalAmount'],
+                          title: category['GoalTitle'],
+                          amountSaved: category['SavedAmount'],
+                          goalAmount: category['Amount'],
+                          icon: category['Icon'],
                         ),
                       );
-                    },
+                    }).toList(),
                   ),
                 ],
               ),
@@ -555,17 +524,17 @@ class SavingCard extends StatelessWidget {
   final String title;
   final int amountSaved;
   final int goalAmount;
+  final IconData icon;
 
-  SavingCard({
-    required this.title,
-    required this.amountSaved,
-    required this.goalAmount,
-  });
+  SavingCard(
+      {required this.title,
+      required this.amountSaved,
+      required this.goalAmount,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
     double progress = amountSaved / goalAmount;
-
     return Container(
       width: 300,
       decoration: BoxDecoration(
@@ -587,6 +556,7 @@ class SavingCard extends StatelessWidget {
           children: [
             Row(
               children: [
+                Icon(icon),
                 Text(
                   title,
                   style: TextStyle(
@@ -702,4 +672,341 @@ class _HistoryContentState extends State<HistoryContent> {
       ),
     );
   }
+}
+
+void _showAddCategoryDialog(
+    BuildContext context, categorList, Function myStateSetter) {
+  // Function to display the Add Category popupvoid _showAddCategoryDialog(BuildContext context) {
+  String? categoryName;
+  double? categoryAmount;
+  IconData dropdownValue = Iconsax.house5; // Use non-nullable string here
+
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: SingleChildScrollView(
+              child: Container(
+                width: screenWidth * 0.9, // 90% of screen width
+                height: screenHeight * 0.6, // 50% of screen height
+                padding: EdgeInsets.all(25),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Add a Saving Goal",
+                      style: TextStyle(
+                        color: TColors.primary,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 25),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Goal Title",
+                          style: TextStyle(
+                            color: TColors.primary,
+                            fontSize: 12.5,
+                            fontFamily: "poppins",
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: TColors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: TColors.secondary.withOpacity(0.2),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          width: screenWidth * 0.9,
+                          child: TextField(
+                            maxLines: 1,
+                            minLines: 1,
+                            style: TextStyle(
+                                color: TColors.primary, fontSize: 13.5),
+                            keyboardType: TextInputType.text,
+                            cursorColor: TColors.secondary,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 2.0, horizontal: 12.0),
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              hintText: 'Enter Name of the category',
+                              hintStyle: TextStyle(
+                                color: TColors.primary.withOpacity(0.3),
+                                fontSize: 13.5,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              categoryName = value;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Goal Amount",
+                          style: TextStyle(
+                            color: TColors.primary,
+                            fontSize: 12.5,
+                            fontFamily: "poppins",
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: TColors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: TColors.secondary.withOpacity(0.2),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          width: screenWidth * 0.9,
+                          child: TextField(
+                            maxLines: 1,
+                            minLines: 1,
+                            style: TextStyle(
+                                color: TColors.primary, fontSize: 13.5),
+                            keyboardType: TextInputType.number,
+                            cursorColor: TColors.secondary,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 2.0, horizontal: 12.0),
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              hintText: 'Enter Amount',
+                              hintStyle: TextStyle(
+                                color: TColors.primary.withOpacity(0.3),
+                                fontSize: 13.5,
+                              ),
+                            ),
+                            onChanged: (value) {
+                              categoryAmount = double.tryParse(value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Choose one of these icons ",
+                          style: TextStyle(
+                            color: TColors.primary,
+                            fontSize: 12.5,
+                            fontFamily: "poppins",
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          width: screenWidth * 0.9,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Theme(
+                              data: Theme.of(context).copyWith(
+                                canvasColor: TColors.white,
+                              ),
+                              child: DropdownButton<IconData>(
+                                value: dropdownValue,
+                                icon: Transform.scale(
+                                  scale: 0.6,
+                                  child: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: TColors.primary,
+                                  ),
+                                ),
+                                style: TextStyle(
+                                  color: TColors.primary,
+                                ),
+                                onChanged: (IconData? newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue!;
+                                  });
+                                },
+                                items: [
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.house5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.house5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("House"),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.airplane5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.airplane5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("Traveling"),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.car5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.car5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("Car"),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.cake5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.cake5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("Food"),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.music5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.music5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("Music"),
+                                      ],
+                                    ),
+                                  ),
+                                  DropdownMenuItem<IconData>(
+                                    value: Iconsax.shopping_cart5,
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Iconsax.shopping_cart5,
+                                          color: TColors.primary,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text("Shopping"),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          child: Text("Cancel"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        SizedBox(width: 10),
+                        ElevatedButton(
+                          child: Text("Save"),
+                          onPressed: () {
+                            if (categoryName != null &&
+                                categoryAmount != null &&
+                                SwitchPrimary != null &&
+                                dropdownValue != null) {
+                              setState(() {
+                                categorList.add({
+                                  'GoalTitle': categoryName,
+                                  'SavedAmount': 0,
+                                  'Amount': categoryAmount,
+                                  'Icon': dropdownValue,
+                                });
+                                print("dsqjsjfkdsjfdskfjsdkfjdskjfksdjfds");
+                                print(categorList);
+                              });
+
+                              myStateSetter();
+                              // Handle saving the new category with the selected values
+                              print(
+                                  "Category: $categoryName, Amount: $categoryAmount, Icon: $dropdownValue");
+                              Navigator.of(context).pop();
+                            } else {
+                              // You can show an error message or validation here
+                              print("Please fill in all fields.");
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
 }
