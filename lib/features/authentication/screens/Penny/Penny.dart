@@ -152,7 +152,7 @@ Your task is to provide clear, accurate answers to their financial questions bas
             ),
             Center(
               child: Text(
-                "Penny",
+                "Penny 2.0",
                 style: TextStyle(
                     color: TColors.white,
                     fontSize: TSizes.lg,
