@@ -477,7 +477,84 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   //History content
                   SizedBox(
-                    height: 20,
+                    height: 40,
+                  ),
+                  // Savings section
+                  Container(
+                    width: screenWidth - 35,
+                    decoration: BoxDecoration(
+                        color: TColors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.1),
+                            blurRadius: 3,
+                            spreadRadius: 0,
+                            offset: Offset(
+                              0,
+                              1,
+                            ),
+                          ),
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.1),
+                            blurRadius: 2,
+                            spreadRadius: 0,
+                            offset: Offset(
+                              0,
+                              1,
+                            ),
+                          ),
+                        ]),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Savings',
+                                style: TextStyle(
+                                    fontSize: 21,
+                                    fontWeight: FontWeight.bold,
+                                    color: TColors.primary),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    _showAddCategoryDialog(
+                                        context, categorList, myStateSetter);
+                                    print(categorList);
+                                  },
+                                  icon: Icon(Icons.add_circle_outline),
+                                  iconSize: 32,
+                                  color: TColors.accent),
+                            ],
+                          ),
+                        ),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: 150,
+                            enableInfiniteScroll: false,
+                            enlargeCenterPage: true,
+                          ),
+                          items: categorList.map((category) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SavingCard(
+                                title: category['GoalTitle'],
+                                amountSaved: category['SavedAmount'],
+                                goalAmount: category['Amount'],
+                                icon: category['Icon'],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
                   ),
                   //Videos start
                   Container(
@@ -860,80 +937,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                   //videos End
-                ],
-              ),
-            ),
-
-            Container(
-              width: screenWidth - 35,
-              decoration: BoxDecoration(
-                  color: TColors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.1),
-                      blurRadius: 3,
-                      spreadRadius: 0,
-                      offset: Offset(
-                        0,
-                        1,
-                      ),
-                    ),
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.1),
-                      blurRadius: 2,
-                      spreadRadius: 0,
-                      offset: Offset(
-                        0,
-                        1,
-                      ),
-                    ),
-                  ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Savings',
-                          style: TextStyle(
-                              fontSize: 21,
-                              fontWeight: FontWeight.bold,
-                              color: TColors.primary),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              _showAddCategoryDialog(
-                                  context, categorList, myStateSetter);
-                              print(categorList);
-                            },
-                            icon: Icon(Icons.add_circle_outline),
-                            iconSize: 32,
-                            color: TColors.accent),
-                      ],
-                    ),
-                  ),
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: 150,
-                      enableInfiniteScroll: false,
-                      enlargeCenterPage: true,
-                    ),
-                    items: categorList.map((category) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SavingCard(
-                          title: category['GoalTitle'],
-                          amountSaved: category['SavedAmount'],
-                          goalAmount: category['Amount'],
-                          icon: category['Icon'],
-                        ),
-                      );
-                    }).toList(),
-                  ),
                 ],
               ),
             ),
