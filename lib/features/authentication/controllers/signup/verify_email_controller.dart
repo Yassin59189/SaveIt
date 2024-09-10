@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:saveit/common/widgets/snackBars/loaders.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/screens/questions/mainQuestionScreen.dart';
 import 'package:saveit/features/authentication/screens/signup/Success.dart';
 
 import 'package:saveit/utils/constants/colors.dart';
@@ -25,8 +26,8 @@ class VerifyEmailController extends GetxController {
             title: 'Email Verified',
             subtitle: 'You can now login with your email and password',
             onPressed: () => {
-              /* AuthenticationRepository.instance.screenRedirect() */
-              /*    Get.offAll(() => const Question3()) */
+              AuthenticationRepository.instance.screenRedirect(),
+              Get.offAll(() => const QuestionConcerns())
             },
           ));
     }
@@ -59,8 +60,8 @@ setTimerOrAutoRedirect() {
             title: 'Email Verified',
             subtitle: 'You can now login with your email and password',
             onPressed: () => {
-              /* AuthenticationRepository.instance.screenRedirect() */
-              /* Get.offAll(() => const Question3()) */
+              AuthenticationRepository.instance.screenRedirect(),
+              Get.offAll(() => const QuestionConcerns())
             },
           ));
     }

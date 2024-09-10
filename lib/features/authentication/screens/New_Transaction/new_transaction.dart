@@ -63,19 +63,19 @@ class _NewTransaction extends State<NewTransaction> {
   bool IncomButtonState = false;
   final List<Map<String, dynamic>> categorList = [
     {
-      'name': 'helloSSS',
+      'name': 'House',
       'icon': Iconsax.empty_wallet,
     },
     {
-      'name': 'hello',
+      'name': 'Entertainment',
       'icon': Iconsax.empty_wallet,
     },
     {
-      'name': 'hello',
+      'name': 'Shoppping',
       'icon': Iconsax.empty_wallet,
     },
     {
-      'name': 'hello',
+      'name': 'Travel',
       'icon': Iconsax.empty_wallet,
     },
   ];
@@ -85,7 +85,7 @@ class _NewTransaction extends State<NewTransaction> {
       id: DateTime.now().toString(),
       userId: FirebaseAuth.instance.currentUser?.uid ?? '',
       amount: amount,
-      category: _selectedCategory.toString(),
+      category: category,
       date: _selectedDate,
       isRepeating: isReapting,
       isExpense: switchExpenseIncom,

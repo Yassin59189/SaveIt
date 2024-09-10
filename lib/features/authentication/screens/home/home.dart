@@ -313,35 +313,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Transform.translate(
                                   offset: Offset(-screenWidth * 0.1, 0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text(
-                                        "Hello!",
-                                        style: TextStyle(
-                                            color: TColors.secondary,
-                                            fontFamily: 'Poppins',
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      Obx(() {
-                                        if (controller.profileLoading.value) {
-                                          return ShimmerEffect(
-                                              width: 80, height: 15);
-                                        } else {
-                                          return Text(
-                                            controller.user.value.fullName,
-                                            style: const TextStyle(
-                                                color: TColors.secondary,
-                                                fontFamily: 'Poppins',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w500),
-                                          );
-                                        }
-                                      }),
-                                    ],
+                                  child: Container(
+                                    width: screenWidth * 0.35,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Hello!",
+                                          style: TextStyle(
+                                              color: TColors.secondary,
+                                              fontFamily: 'Poppins',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        Obx(() {
+                                          if (controller.profileLoading.value) {
+                                            return ShimmerEffect(
+                                                width: 80, height: 15);
+                                          } else {
+                                            return Text(
+                                              controller.user.value.fullName,
+                                              style: const TextStyle(
+                                                  color: TColors.secondary,
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500),
+                                            );
+                                          }
+                                        }),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 //Notification button
@@ -448,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 200, // Set a fixed height here
                             child: ListView.builder(
-                              itemCount: 10,
+                              itemCount: allTransactions.length,
                               itemBuilder: (context, index) {
                                 TransactionModel transaction =
                                     allTransactions[index];
@@ -464,42 +468,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: HistoryContent(
-                                type: "income", //inome or expense
-                                amount: CurrencyFormatter.format(
-                                    10000, //hott el amount fi blast el 1000
-                                    DinarSettings),
-                                title: "Lorem IpsumT",
-                                date: DateTime.now().subtract(Duration(
-                                    days:
-                                        2)), //hot el date fi blast "DateTime.now().subtract(Duration(days: 2)),"
-                              )),
                           SizedBox(
                             height: 10,
                           )

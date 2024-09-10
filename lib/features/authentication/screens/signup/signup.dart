@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:saveit/data/repositories/category_repository.dart';
 import 'package:saveit/features/authentication/controllers/sign%20up/signup_controller.dart';
 import 'package:saveit/features/authentication/screens/login/login.dart';
+import 'package:saveit/features/authentication/screens/questions/mainQuestionScreen.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/validators/validation.dart';
 
@@ -170,7 +171,8 @@ class SignupForm extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.signup();
+                    /* controller.signup(); */
+                    Get.to(QuestionConcerns());
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: TColors.primary),

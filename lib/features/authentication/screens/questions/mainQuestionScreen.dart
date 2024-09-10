@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:saveit/common/widgets/loaders/animation_loader.dart';
 import 'package:saveit/common/widgets/snackBars/loaders.dart';
+import 'package:saveit/features/authentication/screens/login/login.dart';
 import 'package:saveit/features/authentication/screens/questions/Savings.dart';
 import 'package:saveit/features/authentication/screens/questions/priorities.dart';
 import 'package:saveit/features/authentication/screens/signup/Success.dart';
@@ -159,10 +160,13 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                     color: TColors.white)),
             onPressed: currentProgress > pages.length - 2
                 ? () {
-                    Navigator.push(
+/*                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => NavigationMenu()));
+                            builder: (context) => NavigationMenu())); */
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   }
                 : _nextPage,
             child: Text(

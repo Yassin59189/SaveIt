@@ -268,13 +268,19 @@ class _WalletState extends State<Wallet> {
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        Text(
-                                          totalIncomeAmount.toString(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: TColors.primary,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600),
+                                        Container(
+                                          width: screenWidth * 0.2,
+                                          child: Text(
+                                            CurrencyFormatter.format(
+                                                totalIncomeAmount, //hott el blance fi blast el number
+                                                DinarSettings),
+                                            /* totalIncomeAmount.toString(), */
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: TColors.primary,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -303,13 +309,19 @@ class _WalletState extends State<Wallet> {
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        Text(
-                                          totalExpenseAmount.toString(),
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              color: TColors.primary,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w600),
+                                        Container(
+                                          width: screenWidth * 0.2,
+                                          child: Text(
+                                            CurrencyFormatter.format(
+                                                totalExpenseAmount, //hott el blance fi blast el number
+                                                DinarSettings),
+                                            /* totalExpenseAmount.toString(), */
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                color: TColors.primary,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w600),
+                                          ),
                                         )
                                       ],
                                     ),

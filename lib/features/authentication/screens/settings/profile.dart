@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:saveit/data/repositories/authentication/authentication.dart';
+import 'package:saveit/features/authentication/screens/home/notification_bottom_sheet/notification_data.dart';
+import 'package:saveit/features/authentication/screens/settings/Languge.dart';
+import 'package:saveit/features/authentication/screens/settings/notification.dart';
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/utils/constants/sizes.dart';
@@ -102,7 +106,12 @@ class _ProfileState extends State<Profile> {
                       text: 'Notifications',
                       icon: Iconsax.notification,
                       width: screenWidth * 0.8,
-                      onPressed: () {},
+                      onPressed: () {
+                        /* Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Notifi)); */
+                      },
                       height: screenHeight * 0.06),
                   const SizedBox(
                     height: 10,
@@ -121,7 +130,10 @@ class _ProfileState extends State<Profile> {
                   settings_button(
                       text: 'Account Settings',
                       icon: Iconsax.key,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      },
                       width: screenWidth * 0.8,
                       height: screenHeight * 0.06),
                   const SizedBox(
@@ -141,7 +153,10 @@ class _ProfileState extends State<Profile> {
                   settings_button(
                       text: 'Language',
                       icon: Iconsax.global,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Languge()));
+                      },
                       width: screenWidth * 0.8,
                       height: screenHeight * 0.06),
                   const SizedBox(
