@@ -27,17 +27,13 @@ class Penny extends StatefulWidget {
   State<Penny> createState() => _Penny();
 }
 
-double expense = 0.0;
-double Income = 0.0;
-
-bool inputStatus = false;
-
 class _Penny extends State<Penny> {
   late final GenerativeModel _model;
-  late final ChatSession _chatSession;
+  late ChatSession _chatSession; // Changed to non-final to allow reset
   final TextEditingController _controller = TextEditingController();
   final FocusNode _textFieldFocus = FocusNode();
   final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -47,32 +43,47 @@ class _Penny extends State<Penny> {
     );
 
     _chatSession = _model.startChat();
+
+    // Send the system prompt once when initializing the chat session
+    _sendSystemPrompt();
   }
 
-  double Income = 330.0;
-  double expense = 130.0;
+  double Balance = 1330.0;
+  double expense = 430.0;
+  double Savings = 730.0;
+  double Monthly = 1000;
   bool loading = false;
+  Future<void> _sendSystemPrompt() async {
+    final systemPrompt = '''
+You are an AI model named Penny 2.0, designed to help users manage their personal finances with a focus on clarity, efficiency, and accuracy. You will receive user-specific financial data, including:
+
+Balance: The amount of money currently in their main account, denoted as $Balance.
+Monthly Income: The recurring monthly income, denoted as $Monthly. 20% of this income is automatically saved.
+Savings: The user’s current savings, denoted as $Savings.
+Expenses: The user’s monthly expenditures, denoted as $expense.
+Currency: All amounts are in Tunisian Dinar (DT).
+Your specific responsibilities are:
+
+Budget Allocation: Whenever users inquire about spending money on non-essential items (e.g., traveling, shopping), advise them to only use their savings for these expenses. Do not allow spending from their balance for non-essential purposes.
+Spending Insights: Offer concise, accurate financial advice, focusing on optimizing the user’s budget, ensuring financial goals are met.
+User Interaction: Start each session by introducing yourself as Penny 2.0. Welcome the user warmly, and maintain a friendly tone throughout, incorporating emojis to enhance the user experience.
+Your guidance should be brief, to the point, and actionable, prioritizing the user’s financial health by offering practical advice without delving into unnecessary detail. and always add \n in the end of your reponse
+''';
+
+    await _chatSession.sendMessage(
+      Content.text(systemPrompt),
+    );
+  }
+
   Future<void> _sendChatMessage(String message) async {
+    if (message.isEmpty) return; // Don't send empty messages
+
     setState(() {
       loading = true;
     });
 
     try {
-      // Define the system prompt to include in every message
-      final systemPrompt = '''
-You are an AI model named Penny 2.0, designed to help people manage their personal finances. You will receive data about users' income, expenses, and financial goals all in Tunisian Dinar (DT). Here is the data for each user:
-- Income: {{$Income}}
-- Expenses: {{$expense}}
-
-Your task is to provide clear, accurate answers to their financial questions based on the information provided. Your responses should be brief, concise, and focused, aiming for high accuracy while minimizing unnecessary detail. You are known for being efficient and effective in your guidance, providing users with the most relevant financial insights in as few words as possible.
-''';
-      // Combine the system prompt with the user message
-      final prompt = '$systemPrompt\n\nUser Question: $message';
-
-      final response = await _chatSession.sendMessage(
-        Content.text(prompt),
-      );
-
+      final response = await _chatSession.sendMessage(Content.text(message));
       final text = response.text;
 
       if (text == null) {
@@ -86,18 +97,12 @@ Your task is to provide clear, accurate answers to their financial questions bas
       });
     } catch (e) {
       showError(e.toString());
-
       setState(() {
         loading = false;
       });
     } finally {
-      _controller.clear();
-
-      setState(() {
-        loading = false;
-      });
-
-      _textFieldFocus.requestFocus();
+      _controller.clear(); // Clear input after sending
+      _textFieldFocus.requestFocus(); // Focus back to the input field
     }
   }
 
@@ -133,63 +138,73 @@ Your task is to provide clear, accurate answers to their financial questions bas
     );
   }
 
+  void _resetChatSession() {
+    setState(() {
+      _chatSession = _model.startChat(); // Reset chat session
+      _sendSystemPrompt(); // Re-send system prompt after resetting
+    });
+  }
+
   bool switchExpenseIncom = false;
-  String? errorText;
-  bool ExpenseButtonState = true;
+  bool inputStatus = false;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Container(
+      body: SingleChildScrollView(
+        child: Container(
           height: screenHeight * 0.91,
           decoration: const BoxDecoration(color: TColors.primary),
-          child: Column(children: [
-            SizedBox(
-              height: screenHeight * 0.05,
-            ),
-            Center(
-              child: Text(
-                "Penny",
-                style: TextStyle(
+          child: Column(
+            children: [
+              SizedBox(height: screenHeight * 0.05),
+              Center(
+                child: Text(
+                  "Penny 2.0",
+                  style: TextStyle(
                     color: TColors.white,
                     fontSize: TSizes.lg,
-                    fontWeight: FontWeight.w900),
-                textAlign: TextAlign.center,
+                    fontWeight: FontWeight.w900,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
+              const SizedBox(height: 15),
+              Container(
                 width: screenWidth * 0.9,
                 height: screenHeight * 0.7,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     repeat: ImageRepeat.repeat,
                     scale: 0.6,
                     image:
                         AssetImage("assets/images/home/bg_newTransaction.png"),
                     fit: BoxFit.fitWidth,
                   ),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
                   color: TColors.white.withOpacity(0.8),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: _chatSession.history.length,
+                        itemCount: _chatSession.history.length > 2
+                            ? _chatSession.history.length - 2
+                            : 0,
                         controller: _scrollController,
                         itemBuilder: (context, index) {
+                          if (_chatSession.history.length <= 2) {
+                            return Container();
+                          }
+
                           final Content content =
-                              _chatSession.history.toList()[index];
+                              _chatSession.history.toList()[index + 2];
                           final text = content.parts
                               .whereType<TextPart>()
                               .map((e) => e.text)
@@ -200,79 +215,61 @@ Your task is to provide clear, accurate answers to their financial questions bas
                               loading: loading);
                         },
                       ),
-                    ),
+                    )
                   ],
-                )),
-            Container(
-              width: screenWidth * 0.9,
-              height: screenHeight * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-                color: TColors.white,
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: screenWidth * 0.65,
-                    decoration: BoxDecoration(
+              Container(
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.08,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  color: TColors.white,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: screenWidth * 0.65,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.15),
+                            color: const Color.fromRGBO(0, 0, 0, 0.15),
                             blurRadius: 2.6,
                             spreadRadius: 0,
-                            offset: Offset(
-                              1.95,
-                              1.95,
-                            ),
+                            offset: const Offset(1.95, 1.95),
                           ),
-                        ]),
-                    child: TextField(
+                        ],
+                      ),
+                      child: TextField(
                         onSubmitted: _sendChatMessage,
                         focusNode: _textFieldFocus,
                         controller: _controller,
-                        onChanged: (value) => {
-                              setState(() {
-                                value.length == 0
-                                    ? inputStatus = false
-                                    : inputStatus = true;
-                                print(inputStatus);
-                              })
-                            },
-                        autofocus: false,
+                        onChanged: (value) {
+                          setState(() {
+                            inputStatus = value.isNotEmpty;
+                          });
+                        },
                         style: TextStyle(
                           fontSize: TSizes.md,
                           fontWeight: FontWeight.w400,
                           color: Colors.grey.shade900,
                         ),
                         decoration: InputDecoration(
-                          suffixIcon: Material(
-                            color: Colors
-                                .transparent, // Make sure the background is transparent
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(
-                                  360), // Control the shape and size of ripple
-                              splashColor: Colors.grey.withOpacity(
-                                  0.2), // Optional: Set a faint splash color
-                              customBorder:
-                                  CircleBorder(), // Defines the shape of the ripple effect
-                              radius:
-                                  10, // Reduce the size of the splash effect
-                              onTap: () {},
-                              child: Padding(
-                                padding: EdgeInsets.all(
-                                    4), // Reduce the padding around the icon
-                                child: Icon(
-                                  Icons.send,
-                                  color: inputStatus
-                                      ? TColors.secondary
-                                      : Colors.grey.shade500,
-                                ),
-                              ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.send,
+                              color: inputStatus
+                                  ? TColors.secondary
+                                  : Colors.grey.shade500,
                             ),
+                            onPressed: () {
+                              _sendChatMessage(_controller.text);
+                            },
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
@@ -280,60 +277,65 @@ Your task is to provide clear, accurate answers to their financial questions bas
                           ),
                           filled: true,
                           fillColor: Colors.grey.shade300,
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
                           hintText: "Message Penny",
                           hintStyle: TextStyle(
-                              color: Colors.grey.shade500,
-                              fontSize: TSizes.md,
-                              fontWeight: FontWeight.w400),
-                        )),
-                  ),
-                  Container(
-                    width: screenWidth * 0.11,
-                    height: screenWidth * 0.11,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(360),
-                    ),
-                    child: PopupMenuButton<String>(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.grey.shade700,
+                            color: Colors.grey.shade500,
+                            fontSize: TSizes.md,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
-                      onSelected: (value) {
-                        setState(() {
-                          value == 'new_conversation'
-                              ? ""
-                              : Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Profile()));
-                        });
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: 'new_conversation',
-                          child: ListTile(
-                            leading: Icon(Icons.chat),
-                            title: Text('Start new conversation'),
-                          ),
-                        ),
-                        PopupMenuItem(
-                          value: 'More_settings',
-                          child: ListTile(
-                            leading: Icon(Icons.settings),
-                            title: Text('Settings'),
-                          ),
-                        ),
-                      ],
                     ),
-                  )
-                ],
-              ),
-            ),
-          ])),
-    ));
+                    Container(
+                      width: screenWidth * 0.11,
+                      height: screenWidth * 0.11,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(360),
+                      ),
+                      child: PopupMenuButton<String>(
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.grey.shade700,
+                        ),
+                        onSelected: (value) {
+                          if (value == 'new_conversation') {
+                            _resetChatSession();
+                          } else if (value == 'More_settings') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Profile()),
+                            );
+                          }
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: 'new_conversation',
+                            child: ListTile(
+                              leading: Icon(Iconsax.message_add),
+                              title: Text('Start new conversation'),
+                            ),
+                          ),
+                          const PopupMenuItem(
+                            value: 'More_settings',
+                            child: ListTile(
+                              leading: Icon(Iconsax.setting_2),
+                              title: Text('More Settings'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
