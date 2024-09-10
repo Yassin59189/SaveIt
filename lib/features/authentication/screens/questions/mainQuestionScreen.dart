@@ -5,6 +5,7 @@ import 'package:saveit/common/widgets/snackBars/loaders.dart';
 import 'package:saveit/features/authentication/screens/questions/Savings.dart';
 import 'package:saveit/features/authentication/screens/questions/priorities.dart';
 import 'package:saveit/features/authentication/screens/signup/Success.dart';
+import 'package:saveit/navigation_menu.dart';
 
 import 'package:saveit/utils/constants/buttons.dart';
 import 'package:saveit/utils/constants/colors.dart';
@@ -156,16 +157,12 @@ class _QuestionConcernsState extends State<QuestionConcerns> {
                     fontWeight: FontWeight.w600,
                     fontSize: TSizes.fontMd,
                     color: TColors.white)),
-            onPressed: currentProgress < pages.length - 1
+            onPressed: currentProgress > pages.length - 2
                 ? () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AnimationLoaderWidget(
-                                text: "Loading Your data",
-                                animation: "assets/animations/checkmark.json",
-                              )),
-                    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NavigationMenu()));
                   }
                 : _nextPage,
             child: Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:saveit/features/authentication/screens/Penny/Penny.dart';
 import 'package:saveit/utils/constants/colors.dart';
 import 'package:saveit/features/authentication/screens/New_Transaction/new_transaction.dart';
 import 'package:saveit/features/authentication/screens/Store/mainpage.dart';
@@ -101,7 +102,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
         ),
       ),
       body: [
-        const mainStore(),
+        const Penny(),
         const Wallet(),
         const HomeScreen(),
         const NewTransaction(),
